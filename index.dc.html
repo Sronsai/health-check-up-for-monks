@@ -180,12 +180,12 @@ a{color:#9A520F}a:hover{color:#6E3A08}
           <sc-if value="{{ has.dob }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.dob }}</div></sc-if>
         </div>
         <div data-field="fatherName" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:6px">
-          <label style="font:600 14px 'Sarabun',sans-serif">ชื่อ-นามสกุล บิดา <span style="font-weight:400;color:#6F5A4A">(ไม่บังคับ)</span></label>
+          <label style="font:600 14px 'Sarabun',sans-serif">ชื่อ-นามสกุล บิดา</label>
           <input value="{{ f.fatherName }}" onChange="{{ on.fatherName }}" placeholder="ชื่อ นามสกุล" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid {{ bc.fatherName }};background:#fff;font:500 16px 'Sarabun',sans-serif;color:#2B1D12;outline:none">
           <sc-if value="{{ has.fatherName }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.fatherName }}</div></sc-if>
         </div>
         <div data-field="motherName" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:6px">
-          <label style="font:600 14px 'Sarabun',sans-serif">ชื่อ-นามสกุล มารดา <span style="font-weight:400;color:#6F5A4A">(ไม่บังคับ)</span></label>
+          <label style="font:600 14px 'Sarabun',sans-serif">ชื่อ-นามสกุล มารดา</label>
           <input value="{{ f.motherName }}" onChange="{{ on.motherName }}" placeholder="ชื่อ นามสกุล" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid {{ bc.motherName }};background:#fff;font:500 16px 'Sarabun',sans-serif;color:#2B1D12;outline:none">
           <sc-if value="{{ has.motherName }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.motherName }}</div></sc-if>
         </div>
