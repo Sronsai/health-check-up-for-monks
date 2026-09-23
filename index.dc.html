@@ -352,7 +352,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
   <div style="position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:80;max-width:calc(100% - 32px);padding:12px 18px;border-radius:14px;background:#2B1D12;color:#F7F1E6;font:500 14px 'IBM Plex Sans Thai',sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.4);animation:pop .2s ease-out">{{ toast }}</div>
 </sc-if>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;useDemoData&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;ข้อมูล&quot;},&quot;requireIdChecksum&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;ข้อมูล&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;useDemoData&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;ข้อมูล&quot;}}">
 const LS = 'pakchom-hc-v1';
 // วาง Apps Script Web App URL (ลงท้าย /exec) และ Token ที่นี่ เพื่อให้ทุกเครื่องเชื่อมต่อ Google Sheet อัตโนมัติ
 const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbymHzhKrvOun1rR3IMwRXWWPCNP_jl5V8qmgzGQQAg_4xGvtGwPGv8O0qxeffYWwyNZeQ/exec';
@@ -523,7 +523,6 @@ class Component extends DCLogic {
     const e = {}; const all = this.all();
     if (!f.idCard) e.idCard = 'กรุณากรอกเลขประจำตัวประชาชน';
     else if (f.idCard.length !== 13) e.idCard = 'ต้องมี 13 หลัก (กรอกแล้ว ' + f.idCard.length + ' หลัก)';
-    else if (this.props.requireIdChecksum !== false && !checksumOK(f.idCard)) e.idCard = 'เลขประจำตัวไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง';
     else if (all.some(r => r.idCard === f.idCard)) e.idCard = 'เลขประจำตัวนี้ลงทะเบียนไว้แล้ว';
     if (!f.title) e.title = 'กรุณาเลือกสถานะ / คำนำหน้า';
     const nm = (f.name || '').trim();
