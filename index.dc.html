@@ -283,7 +283,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
         <div style="font:700 24px/1.2 'Anuphan',sans-serif">รายชื่อผู้ลงทะเบียน</div>
         <button onClick="{{ exportCsv }}" style="height:38px;padding:0 14px;border-radius:999px;border:1.5px solid #E6D8C3;background:#FFFDF8;font:600 13px 'IBM Plex Sans Thai',sans-serif;color:#2B1D12">ส่งออก CSV</button>
       </div>
-      <input value="{{ search }}" onChange="{{ on.search }}" placeholder="ค้นหาชื่อ, เลขบัตร, เลขคิว, ตำบล" style="height:48px;padding:0 16px;border-radius:14px;border:1.5px solid #E6D8C3;background:#FFFDF8;font:500 15px 'IBM Plex Sans Thai',sans-serif;outline:none;color:#2B1D12">
+      <input value="{{ search }}" onChange="{{ on.search }}" placeholder="ค้นหาชื่อ, เลขบัตร, ตำบล" style="height:48px;padding:0 16px;border-radius:14px;border:1.5px solid #E6D8C3;background:#FFFDF8;font:500 15px 'IBM Plex Sans Thai',sans-serif;outline:none;color:#2B1D12">
       <div style="display:flex;gap:8px;overflow-x:auto;margin:0 -20px;padding:0 20px">
         <sc-for list="{{ catChips }}" as="c" hint-placeholder-count="5">
           <button onClick="{{ c.on }}" style="flex:none;height:36px;padding:0 12px;border-radius:999px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:600 13px 'IBM Plex Sans Thai',sans-serif">{{ c.label }}</button>
@@ -430,6 +430,12 @@ function maskSplit(v, mask) { let a = '', i = 0, k = 0; for (; k < mask.length; 
 function catOf(r) { return CAT_COLORS[r.title] && r.title !== 'อื่น ๆ' ? r.title : 'อื่น ๆ'; }
 function prefixOf(t) { const x = TITLES.find(y => y.label === t); return x ? x.prefix : ''; }
 function fullName(r) { return prefixOf(r.title) + (r.name || ''); }
+function maskName(r) {
+  const parts = String(r.name || '').trim().split(/\s+/);
+  if (parts.length > 1) { const s = parts[parts.length - 1]; parts[parts.length - 1] = (s.length > 3 ? s.slice(0, -3) : '') + 'xxx'; }
+  return prefixOf(r.title) + parts.join(' ');
+}
+const CAT_SHORT = { 'พระภิกษุ': 'พระ', 'สามเณร': 'เณร', 'แม่ชี': 'ชี', 'อื่น ๆ': 'ทั่วไป' };
 function ageOf(r) { if (!r.dobY || !r.dobM || !r.dobD) return null; const b = new Date(r.dobY - 543, r.dobM - 1, r.dobD); const n = new Date(); let a = n.getFullYear() - b.getFullYear(); if (n < new Date(n.getFullYear(), b.getMonth(), b.getDate())) a--; return a; }
 function dobStr(r) { return r.dobD ? String(r.dobD).padStart(2, '0') + '/' + String(r.dobM).padStart(2, '0') + '/' + r.dobY : ''; }
 function blank() { return { idCard: '', title: '', name: '', gender: '', dobD: '', dobM: '', dobY: '', nationality: 'ไทย', blood: '', address: '', province: 'เลย', amphoe: '', tambon: '', phone: '' }; }
@@ -543,7 +549,7 @@ class Component extends DCLogic {
   save() {
     const all = this.all(); const f = this.state.form;
     const rec = { ...f, name: f.name.trim(), address: f.address.trim(), ts: new Date().toISOString(), queue: 'PC-' + String(all.length + 1).padStart(4, '0'), sync: 'pending', uid: 'u' + Date.now() };
-    this.setState(s => ({ records: [...s.records, rec], form: blank(), touched: false, screen: 'dash', catFilter: 'all' }), () => { this.push([rec]); window.scrollTo(0, 0); this.showToast('ลงทะเบียนเรียบร้อย · ' + fullName(rec) + ' · เลขคิว ' + rec.queue, 5000); });
+    this.setState(s => ({ records: [...s.records, rec], form: blank(), touched: false, screen: 'dash', catFilter: 'all' }), () => { this.push([rec]); window.scrollTo(0, 0); this.showToast('ลงทะเบียนเรียบร้อย · ' + maskName(rec), 4000); });
     return rec;
   }
   push(recs) {
@@ -645,7 +651,7 @@ class Component extends DCLogic {
   rowView(r) {
     const a = ageOf(r); const cat = catOf(r);
     return {
-      q: (r.queue || '').replace('PC-', ''), color: CAT_COLORS[cat], name: fullName(r),
+      q: CAT_SHORT[cat], color: CAT_COLORS[cat], name: maskName(r),
       meta: [a != null ? 'อายุ ' + a : null, r.blood ? 'หมู่เลือด ' + r.blood : null, r.tambon ? 'ต.' + r.tambon : null].filter(Boolean).join(' · '),
       time: r.ts ? new Date(r.ts).toLocaleString('th-TH', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '',
       syncLabel: r.demo ? 'ตัวอย่าง' : r.sync === 'synced' ? 'ส่งแล้ว' : 'รอส่ง',
@@ -736,7 +742,7 @@ class Component extends DCLogic {
     const d = s.detail;
     const detail = d ? {
       ...this.rowView(d), cat: catOf(d), sync: d.demo ? 'ข้อมูลตัวอย่าง' : d.sync === 'synced' ? 'บันทึกใน Google Sheet แล้ว' : 'รอส่งเข้า Google Sheet',
-      rows: [['Timestamp', new Date(d.ts).toLocaleString('th-TH')], ['เลขคิว', d.queue], ['เลขประจำตัวประชาชน', fmtId(d.idCard)], ['เพศ', d.gender], ['วัน/เดือน/ปี เกิด', dobStr(d) + (ageOf(d) != null ? ' (อายุ ' + ageOf(d) + ' ปี)' : '')], ['สัญชาติ', d.nationality], ['หมู่เลือด', d.blood], ['ที่อยู่ปัจจุบัน', d.address], ['ตำบล', d.tambon], ['อำเภอ', d.amphoe], ['จังหวัด', d.province], ['โทรศัพท์', fmtPhone(d.phone || '')]].map(([k, v]) => ({ k, v: v || '—' }))
+      rows: [['Timestamp', new Date(d.ts).toLocaleString('th-TH')], ['เลขประจำตัวประชาชน', fmtId(d.idCard)], ['เพศ', d.gender], ['วัน/เดือน/ปี เกิด', dobStr(d) + (ageOf(d) != null ? ' (อายุ ' + ageOf(d) + ' ปี)' : '')], ['สัญชาติ', d.nationality], ['หมู่เลือด', d.blood], ['ที่อยู่ปัจจุบัน', d.address], ['ตำบล', d.tambon], ['อำเภอ', d.amphoe], ['จังหวัด', d.province], ['โทรศัพท์', fmtPhone(d.phone || '')]].map(([k, v]) => ({ k, v: v || '—' }))
     } : { rows: [] };
 
     const connected = !!s.settings.scriptUrl;
