@@ -179,6 +179,16 @@ a{color:#9A520F}a:hover{color:#6E3A08}
           <sc-if value="{{ hasAge }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#2F6B4F">อายุ {{ ageText }}</div></sc-if>
           <sc-if value="{{ has.dob }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.dob }}</div></sc-if>
         </div>
+        <div data-field="fatherName" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:6px">
+          <label style="font:600 14px 'Sarabun',sans-serif">ชื่อ-นามสกุล บิดา <span style="font-weight:400;color:#6F5A4A">(ไม่บังคับ)</span></label>
+          <input value="{{ f.fatherName }}" onChange="{{ on.fatherName }}" placeholder="ชื่อ นามสกุล" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid {{ bc.fatherName }};background:#fff;font:500 16px 'Sarabun',sans-serif;color:#2B1D12;outline:none">
+          <sc-if value="{{ has.fatherName }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.fatherName }}</div></sc-if>
+        </div>
+        <div data-field="motherName" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:6px">
+          <label style="font:600 14px 'Sarabun',sans-serif">ชื่อ-นามสกุล มารดา <span style="font-weight:400;color:#6F5A4A">(ไม่บังคับ)</span></label>
+          <input value="{{ f.motherName }}" onChange="{{ on.motherName }}" placeholder="ชื่อ นามสกุล" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid {{ bc.motherName }};background:#fff;font:500 16px 'Sarabun',sans-serif;color:#2B1D12;outline:none">
+          <sc-if value="{{ has.motherName }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.motherName }}</div></sc-if>
+        </div>
       </div>
 
       <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:16px">
@@ -364,9 +374,9 @@ function csvToRows(text) {
   const t = parseCsv(text.replace(/^\ufeff/, '')); if (t.length < 2) return [];
   const H = t[0].map(x => x.trim());
   const col = (names, fb) => { for (const n of names) { const i = H.indexOf(n); if (i >= 0) return i; } return fb; };
-  const c = { ts: col(['Timestamp'], 0), queue: col(['เลขคิว'], -1), id: col(['เลขประจำตัวประชาชน'], 2), name: col(['ชื่อ-นามสกุล'], 3), gender: col(['เพศ'], 4), dob: col(['วัน/เดือน/ปี เกิด', 'วัน/เดือน/ปีเกิด'], 5), nat: col(['สัญชาติ'], 6), blood: col(['หมู่เลือด'], 7), addr: col(['ข้อมูลที่อยู่(ปัจจุบัน)', 'ที่อยู่ปัจจุบัน', 'ข้อมูลที่อยู่'], 8), prov: col(['จังหวัด'], 9), amph: col(['อำเภอ'], 10), tam: col(['ตำบล'], 11), phone: col(['หมายเลขโทรศัพท์'], 12) };
+  const c = { ts: col(['Timestamp'], 0), queue: col(['เลขคิว'], -1), id: col(['เลขประจำตัวประชาชน'], 2), name: col(['ชื่อ-นามสกุล'], 3), gender: col(['เพศ'], 4), dob: col(['วัน/เดือน/ปี เกิด', 'วัน/เดือน/ปีเกิด'], 5), nat: col(['สัญชาติ'], 6), blood: col(['หมู่เลือด'], 7), addr: col(['ข้อมูลที่อยู่(ปัจจุบัน)', 'ที่อยู่ปัจจุบัน', 'ข้อมูลที่อยู่'], 8), prov: col(['จังหวัด'], 9), amph: col(['อำเภอ'], 10), father: col(['ชื่อบิดา'], 13), mother: col(['ชื่อมารดา'], 14), tam: col(['ตำบล'], 11), phone: col(['หมายเลขโทรศัพท์'], 12) };
   const g = (r, i) => (i >= 0 && r[i] != null ? String(r[i]).trim().replace(/^'/, '') : '');
-  return t.slice(1).filter(r => g(r, c.id)).map(r => ({ timestamp: parseTs(g(r, c.ts)), queue: g(r, c.queue), idCard: g(r, c.id), fullName: g(r, c.name), gender: g(r, c.gender), dob: g(r, c.dob), nationality: g(r, c.nat), blood: g(r, c.blood), address: g(r, c.addr), province: g(r, c.prov), amphoe: g(r, c.amph), tambon: g(r, c.tam), phone: g(r, c.phone) }));
+  return t.slice(1).filter(r => g(r, c.id)).map(r => ({ timestamp: parseTs(g(r, c.ts)), queue: g(r, c.queue), idCard: g(r, c.id), fullName: g(r, c.name), gender: g(r, c.gender), dob: g(r, c.dob), nationality: g(r, c.nat), blood: g(r, c.blood), address: g(r, c.addr), province: g(r, c.prov), amphoe: g(r, c.amph), tambon: g(r, c.tam), phone: g(r, c.phone), fatherName: g(r, c.father), motherName: g(r, c.mother) }));
 }
 const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1iyxRCc532s3NlFGmMoEkWqnautD9RrXQz4nvPUEY9pc/edit';
 const EVENT = new Date(2026, 11, 12);
@@ -406,6 +416,7 @@ function maskSplit(v, mask) { let a = '', i = 0, k = 0; for (; k < mask.length; 
 function catOf(r) { return CAT_COLORS[r.title] && r.title !== 'อื่น ๆ' ? r.title : 'อื่น ๆ'; }
 function prefixOf(t) { const x = TITLES.find(y => y.label === t); return x ? x.prefix : ''; }
 function fullName(r) { return prefixOf(r.title) + (r.name || ''); }
+function maskPlain(n) { const p = String(n || '').trim().split(/\s+/); if (p.length > 1) { const s = p[p.length - 1]; p[p.length - 1] = (s.length > 3 ? s.slice(0, -3) : '') + 'xxx'; } return p.join(' '); }
 function maskName(r) {
   const parts = String(r.name || '').trim().split(/\s+/);
   if (parts.length > 1) { const s = parts[parts.length - 1]; parts[parts.length - 1] = (s.length > 3 ? s.slice(0, -3) : '') + 'xxx'; }
@@ -422,7 +433,7 @@ const CAT_ICON_SRC = {
 const CAT_SHORT = { 'พระภิกษุ': 'พระ', 'สามเณร': 'เณร', 'แม่ชี': 'ชี', 'อื่น ๆ': 'ทั่วไป' };
 function ageOf(r) { if (!r.dobY || !r.dobM || !r.dobD) return null; const b = new Date(r.dobY - 543, r.dobM - 1, r.dobD); const n = new Date(); let a = n.getFullYear() - b.getFullYear(); if (n < new Date(n.getFullYear(), b.getMonth(), b.getDate())) a--; return a; }
 function dobStr(r) { return r.dobD ? String(r.dobD).padStart(2, '0') + '/' + String(r.dobM).padStart(2, '0') + '/' + r.dobY : ''; }
-function blank() { return { idCard: '', title: '', name: '', gender: '', dobD: '', dobM: '', dobY: '', nationality: 'ไทย', blood: '', address: '', province: 'เลย', amphoe: '', tambon: '', phone: '' }; }
+function blank() { return { idCard: '', title: '', name: '', gender: '', dobD: '', dobM: '', dobY: '', nationality: 'ไทย', blood: '', address: '', province: 'เลย', amphoe: '', tambon: '', fatherName: '', motherName: '', phone: '' }; }
 function rng(seed) { return () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }; }
 function makeId(r) { const d = [r() < .6 ? 3 : 1]; for (let i = 1; i < 12; i++) d.push(Math.floor(r() * 10)); let s = 0; for (let i = 0; i < 12; i++) s += d[i] * (13 - i); d.push((11 - s % 11) % 10); return d.join(''); }
 function makeDemo() {
@@ -456,13 +467,13 @@ function makeDemo() {
 }
 function loadSaved() { try { if (/[?&]reset=1/.test(location.search)) { localStorage.removeItem(LS); history.replaceState(null, '', location.pathname); } } catch (e) {} try { return JSON.parse(localStorage.getItem(LS) || '{}'); } catch (e) { return {}; } }
 function toRow(r, token) {
-  return { token, action: r.editOf ? 'update' : 'add', originalId: r.editOf || '', timestamp: r.ts, queue: r.queue, idCard: r.idCard, fullName: fullName(r), gender: r.gender, dob: dobStr(r), nationality: r.nationality, blood: r.blood, address: r.address, province: r.province, amphoe: r.amphoe, tambon: r.tambon, phone: r.phone };
+  return { fatherName: r.fatherName || '', motherName: r.motherName || '', token, action: r.editOf ? 'update' : 'add', originalId: r.editOf || '', timestamp: r.ts, queue: r.queue, idCard: r.idCard, fullName: fullName(r), gender: r.gender, dob: dobStr(r), nationality: r.nationality, blood: r.blood, address: r.address, province: r.province, amphoe: r.amphoe, tambon: r.tambon, phone: r.phone };
 }
 function fromRow(x) {
   const fn = x.fullName || ''; let title = 'อื่น ๆ', name = fn;
   for (const t of TITLES) if (t.prefix && fn.startsWith(t.prefix)) { title = t.label; name = fn.slice(t.prefix.length); break; }
   const d = String(x.dob || '').split('/');
-  return { uid: 'r' + x.idCard, remote: true, sync: 'synced', ts: x.timestamp, queue: x.queue || '', idCard: String(x.idCard || '').replace(/\D/g, ''), title, name, gender: x.gender, dobD: +d[0] || '', dobM: +d[1] || '', dobY: +d[2] || '', nationality: x.nationality, blood: x.blood, address: x.address, province: x.province, amphoe: x.amphoe, tambon: x.tambon, phone: String(x.phone || '').replace(/\D/g, '') };
+  return { fatherName: x.fatherName || '', motherName: x.motherName || '', uid: 'r' + x.idCard, remote: true, sync: 'synced', ts: x.timestamp, queue: x.queue || '', idCard: String(x.idCard || '').replace(/\D/g, ''), title, name, gender: x.gender, dobD: +d[0] || '', dobM: +d[1] || '', dobY: +d[2] || '', nationality: x.nationality, blood: x.blood, address: x.address, province: x.province, amphoe: x.amphoe, tambon: x.tambon, phone: String(x.phone || '').replace(/\D/g, '') };
 }
 const saved = loadSaved();
 
@@ -533,7 +544,7 @@ class Component extends DCLogic {
   }
 
   scrollToErr(e) {
-    const order = ['idCard', 'title', 'name', 'gender', 'dob', 'nationality', 'blood', 'address', 'geo-province', 'geo-amphoe', 'geo-tambon', 'phone'];
+    const order = ['idCard', 'title', 'name', 'gender', 'dob', 'fatherName', 'motherName', 'nationality', 'blood', 'address', 'geo-province', 'geo-amphoe', 'geo-tambon', 'phone'];
     const key = order.find(k => e[k.replace('geo-', '')]); if (!key) return;
     setTimeout(() => {
       const el = document.querySelector('[data-field="' + key + '"]'); if (!el) return;
@@ -543,7 +554,7 @@ class Component extends DCLogic {
     }, 60);
   }
   startEdit(r) {
-    const keys = ['idCard', 'title', 'name', 'gender', 'dobD', 'dobM', 'dobY', 'nationality', 'blood', 'address', 'province', 'amphoe', 'tambon', 'phone'];
+    const keys = ['idCard', 'title', 'name', 'gender', 'dobD', 'dobM', 'dobY', 'fatherName', 'motherName', 'nationality', 'blood', 'address', 'province', 'amphoe', 'tambon', 'phone'];
     const form = blank(); keys.forEach(k => { if (r[k] != null && r[k] !== '') form[k] = r[k]; });
     form.province = 'เลย';
     this.setState({ form, touched: false, detail: null, screen: 'form', editing: { origId: r.editOf || r.idCard, ts: r.ts, queue: r.queue, demo: !!r.demo, uid: r.uid, name: maskName(r) } });
@@ -551,7 +562,7 @@ class Component extends DCLogic {
   }
   saveEdit() {
     const s = this.state; const ed = s.editing; const f = s.form;
-    const rec = { ...f, name: f.name.trim(), address: f.address.trim(), ts: ed.ts, queue: ed.queue, sync: 'pending', uid: 'e' + Date.now(), editOf: ed.origId, updatedAt: new Date().toISOString() };
+    const rec = { ...f, name: f.name.trim(), address: f.address.trim(), fatherName: (f.fatherName || '').trim(), motherName: (f.motherName || '').trim(), ts: ed.ts, queue: ed.queue, sync: 'pending', uid: 'e' + Date.now(), editOf: ed.origId, updatedAt: new Date().toISOString() };
     if (ed.demo) { const i = this.demo.findIndex(r => r.uid === ed.uid); if (i >= 0) this.demo[i] = { ...this.demo[i], ...rec, uid: ed.uid, demo: true, sync: 'synced', editOf: undefined }; }
     this.setState(st => ({
       records: ed.demo ? st.records : [...st.records.filter(r => r.uid !== ed.uid && r.editOf !== ed.origId && !(r.idCard === ed.origId && !r.editOf && r.sync !== 'synced')), rec],
@@ -561,7 +572,7 @@ class Component extends DCLogic {
   save() {
     if (this.state.editing) return this.saveEdit();
     const all = this.all(); const f = this.state.form;
-    const rec = { ...f, name: f.name.trim(), address: f.address.trim(), ts: new Date().toISOString(), queue: 'PC-' + String(all.length + 1).padStart(4, '0'), sync: 'pending', uid: 'u' + Date.now() };
+    const rec = { ...f, name: f.name.trim(), address: f.address.trim(), fatherName: (f.fatherName || '').trim(), motherName: (f.motherName || '').trim(), ts: new Date().toISOString(), queue: 'PC-' + String(all.length + 1).padStart(4, '0'), sync: 'pending', uid: 'u' + Date.now() };
     this.setState(s => ({ records: [...s.records, rec], form: blank(), touched: false, screen: 'dash', catFilter: 'all' }), () => { this.push([rec]); window.scrollTo(0, 0); this.showToast('ลงทะเบียนเรียบร้อย · ' + maskName(rec), 4000); });
     return rec;
   }
@@ -655,9 +666,9 @@ class Component extends DCLogic {
     this.setState({ csvOpen: false, csvPw: '', csvErr: false }); this.exportCsv(); this.showToast('กำลังดาวน์โหลดไฟล์ CSV');
   }
   exportCsv() {
-    const H = ['Timestamp','เลขคิว','เลขประจำตัวประชาชน','ชื่อ-นามสกุล','เพศ','วัน/เดือน/ปี เกิด','สัญชาติ','หมู่เลือด','ที่อยู่ปัจจุบัน','จังหวัด','อำเภอ','ตำบล','หมายเลขโทรศัพท์'];
+    const H = ['Timestamp','เลขคิว','เลขประจำตัวประชาชน','ชื่อ-นามสกุล','เพศ','วัน/เดือน/ปี เกิด','สัญชาติ','หมู่เลือด','ที่อยู่ปัจจุบัน','จังหวัด','อำเภอ','ตำบล','หมายเลขโทรศัพท์','ชื่อบิดา','ชื่อมารดา'];
     const esc = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
-    const rows = this.all().map(r => [new Date(r.ts).toLocaleString('th-TH'), r.queue, "'" + r.idCard, fullName(r), r.gender, dobStr(r), r.nationality, r.blood, r.address, r.province, r.amphoe, r.tambon, "'" + r.phone].map(esc).join(','));
+    const rows = this.all().map(r => [new Date(r.ts).toLocaleString('th-TH'), r.queue, "'" + r.idCard, fullName(r), r.gender, dobStr(r), r.nationality, r.blood, r.address, r.province, r.amphoe, r.tambon, "'" + r.phone, r.fatherName, r.motherName].map(esc).join(','));
     const blob = new Blob(['\ufeff' + [H.map(esc).join(','), ...rows].join('\n')], { type: 'text/csv;charset=utf-8' });
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'pakchom-health-2569.csv'; a.click();
   }
@@ -682,7 +693,7 @@ class Component extends DCLogic {
     const errs = s.touched ? this.validate(f) : {};
     const kErrsAll = s.kTouched ? this.validate(f) : {};
     const kErr = {}; this.kFields(s.kStep).forEach(k => { if (kErrsAll[k]) kErr[k] = kErrsAll[k]; });
-    const keys = ['idCard', 'title', 'name', 'gender', 'dob', 'nationality', 'blood', 'address', 'province', 'amphoe', 'tambon', 'phone'];
+    const keys = ['idCard', 'title', 'name', 'gender', 'dob', 'fatherName', 'motherName', 'nationality', 'blood', 'address', 'province', 'amphoe', 'tambon', 'phone'];
     const has = {}, bc = {}, kHas = {}, kbc = {};
     keys.forEach(k => { has[k] = !!errs[k]; bc[k] = errs[k] ? '#B3261E' : '#E6D8C3'; kHas[k] = !!kErr[k]; kbc[k] = kErr[k] ? '#B3261E' : '#E6D8C3'; });
 
@@ -761,7 +772,7 @@ class Component extends DCLogic {
     const d = s.detail;
     const detail = d ? {
       ...this.rowView(d), edit: () => this.startEdit(d), cat: catOf(d), sync: d.demo ? 'ข้อมูลตัวอย่าง' : d.sync === 'synced' ? 'บันทึกใน Google Sheet แล้ว' : 'รอส่งเข้า Google Sheet',
-      rows: [['วันที่ลงทะเบียน', new Date(d.ts).toLocaleString('th-TH')], ['เลขประจำตัวประชาชน', fmtId(String(d.idCard || '').slice(0, -3) + 'xxx')], ['เพศ', d.gender], ['วัน/เดือน/ปี เกิด', dobStr(d) + (ageOf(d) != null ? ' (อายุ ' + ageOf(d) + ' ปี)' : '')], ['สัญชาติ', d.nationality], ['หมู่เลือด', d.blood], ['ที่อยู่ปัจจุบัน', d.address], ['ตำบล', d.tambon], ['อำเภอ', d.amphoe], ['จังหวัด', d.province], ['โทรศัพท์', d.phone ? fmtPhone(String(d.phone).slice(0, -3) + 'xxx') : '']].map(([k, v]) => ({ k, v: v || '—' }))
+      rows: [['วันที่ลงทะเบียน', new Date(d.ts).toLocaleString('th-TH')], ['เลขประจำตัวประชาชน', fmtId(String(d.idCard || '').slice(0, -3) + 'xxx')], ['เพศ', d.gender], ['ชื่อบิดา', maskPlain(d.fatherName)], ['ชื่อมารดา', maskPlain(d.motherName)], ['วัน/เดือน/ปี เกิด', dobStr(d) + (ageOf(d) != null ? ' (อายุ ' + ageOf(d) + ' ปี)' : '')], ['สัญชาติ', d.nationality], ['หมู่เลือด', d.blood], ['ที่อยู่ปัจจุบัน', d.address], ['ตำบล', d.tambon], ['อำเภอ', d.amphoe], ['จังหวัด', d.province], ['โทรศัพท์', d.phone ? fmtPhone(String(d.phone).slice(0, -3) + 'xxx') : '']].map(([k, v]) => ({ k, v: v || '—' }))
     } : { rows: [] };
 
     const connected = !!s.settings.scriptUrl;
@@ -781,6 +792,8 @@ class Component extends DCLogic {
       on: {
         idCard: e => this.setF('idCard', e.target.value.replace(/\D/g, '').slice(0, 13)),
         name: e => this.setF('name', e.target.value),
+        fatherName: e => this.setF('fatherName', e.target.value),
+        motherName: e => this.setF('motherName', e.target.value),
         address: e => this.setF('address', e.target.value),
         phone: e => this.setF('phone', e.target.value.replace(/\D/g, '').slice(0, 10)),
         search: e => this.setState({ search: e.target.value }),
