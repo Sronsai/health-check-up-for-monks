@@ -594,7 +594,7 @@ class Component extends DCLogic {
         .then(r => r.json())
         .then(j => {
           if (j.ok || (j.error === 'duplicate' && !rec.editOf)) this.setState(s => ({ records: s.records.map(r => r.uid === rec.uid ? { ...r, sync: 'synced' } : r), pushErr: '' }));
-          else this.setState({ pushErr: j.error === 'invalid token' ? 'Token ไม่ตรงกับใน Apps Script' : (j.error || 'Apps Script ตอบกลับผิดพลาด') });
+          else this.setState({ pushErr: j.error === 'invalid token' ? 'Token ไม่ตรงกับใน Apps Script' : (j.error === 'duplicate' && rec.editOf) ? 'Apps Script ยังเป็นเวอร์ชันเก่า กรุณาวาง Code.gs ใหม่และทำให้ใช้งานได้เป็นเวอร์ชันใหม่ (หรือเลขบัตรใหม่ซ้ำกับผู้อื่น)' : j.error === 'duplicate' ? 'เลขบัตรนี้มีใน Sheet แล้ว' : (j.error || 'Apps Script ตอบกลับผิดพลาด') });
         })
         .catch(() => this.setState({ pushErr: 'ส่งเข้า Sheet ไม่สำเร็จ — ตรวจ URL /exec และสิทธิ์ "ทุกคน"' }));
     });
