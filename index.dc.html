@@ -11,9 +11,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ลงทะเบียนตรวจสุขภาพพระสงฆ์ สามเณร แม่ชี · รพ.ปากชม</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pridi:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-body{margin:0;background:#EDE3D2;font-family:'IBM Plex Sans Thai',sans-serif;color:#2B1D12;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#EDE3D2;font-family:'Sarabun',sans-serif;color:#2B1D12;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
 *{box-sizing:border-box}
 button{font-family:inherit;cursor:pointer}
 input,textarea{font-family:inherit}
@@ -27,74 +27,74 @@ a{color:#9A520F}a:hover{color:#6E3A08}
   <div style="padding:18px 20px 6px;display:flex;align-items:center;gap:12px">
     <div style="width:46px;height:46px;flex:none;border-radius:14px;background:#D9822B;color:#fff;display:grid;place-items:center;font:400 30px/1 'Segoe UI Symbol','Noto Sans Symbols','DejaVu Sans',sans-serif;color:#FFFFFF">☸︎</div>
     <div style="flex:1;min-width:0">
-      <div style="font:500 12px/1.4 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">โรงพยาบาลปากชม · จังหวัดเลย</div>
-      <div style="font:700 16px/1.3 'Anuphan',sans-serif;color:#2B1D12;text-wrap:pretty">ตรวจสุขภาพพระสงฆ์ สามเณร แม่ชี</div>
+      <div style="font:500 12px/1.4 'Sarabun',sans-serif;color:#6F5A4A">โรงพยาบาลปากชม · จังหวัดเลย</div>
+      <div style="font:700 16px/1.3 'Pridi',sans-serif;color:#2B1D12;text-wrap:pretty">ตรวจสุขภาพพระสงฆ์ สามเณร แม่ชี</div>
     </div>
-    <button onClick="{{ goForm }}" style="flex:none;height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #2B1D12;background:#2B1D12;color:#F7F1E6;font:600 14px 'Anuphan',sans-serif" style-hover="background:#4A3322">ลงทะเบียน</button>
+    <button onClick="{{ goForm }}" style="flex:none;height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #2B1D12;background:#2B1D12;color:#F7F1E6;font:600 14px 'Pridi',sans-serif" style-hover="background:#4A3322">ลงทะเบียน</button>
   </div>
 
   <sc-if value="{{ isDash }}" hint-placeholder-val="{{ true }}">
     <div style="padding:12px 20px 0;display:flex;flex-direction:column;gap:14px">
       <sc-if value="{{ writeWarnOn }}" hint-placeholder-val="{{ false }}">
         <div style="background:#FDECEA;border:1.5px solid #B3261E;border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:2px">
-          <div style="font:700 14px 'Anuphan',sans-serif;color:#8C1D18">ข้อมูลยังไม่ถูกบันทึกเข้า Google Sheet</div>
-          <div style="font:500 13px/1.5 'IBM Plex Sans Thai',sans-serif;color:#5E1411">{{ writeWarn }} · ค้างในเครื่องนี้ {{ kpi.pending }} รายการ</div>
+          <div style="font:700 14px 'Pridi',sans-serif;color:#8C1D18">ข้อมูลยังไม่ถูกบันทึกเข้า Google Sheet</div>
+          <div style="font:500 13px/1.5 'Sarabun',sans-serif;color:#5E1411">{{ writeWarn }} · ค้างในเครื่องนี้ {{ kpi.pending }} รายการ</div>
         </div>
       </sc-if>
 
       <div style="background:#2B1D12;color:#F7F1E6;border-radius:24px;padding:20px;display:flex;gap:16px;align-items:stretch">
         <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px">
-          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#E8C9A3;letter-spacing:.04em"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">📅</span> วันตรวจสุขภาพ</div>
-          <div style="font:700 26px/1.15 'Anuphan',sans-serif">12 ธันวาคม 2569</div>
-          <div style="font:400 13px/1.5 'IBM Plex Sans Thai',sans-serif;color:#E6D8C3">ณ โรงพยาบาลปากชม อ.ปากชม จ.เลย</div>
-          <div style="margin-top:6px;display:flex;align-items:center;gap:8px;font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#E6D8C3">
+          <div style="font:500 12px 'Sarabun',sans-serif;color:#E8C9A3;letter-spacing:.04em"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">📅</span> วันตรวจสุขภาพ</div>
+          <div style="font:700 26px/1.15 'Pridi',sans-serif">12 ธันวาคม 2569</div>
+          <div style="font:400 13px/1.5 'Sarabun',sans-serif;color:#E6D8C3">ณ โรงพยาบาลปากชม อ.ปากชม จ.เลย</div>
+          <div style="margin-top:6px;display:flex;align-items:center;gap:8px;font:500 12px 'Sarabun',sans-serif;color:#E6D8C3">
             <span style="width:8px;height:8px;border-radius:50%;background:{{ sheetDot }}"></span>{{ sheetStatus }}
           </div>
         </div>
         <div style="flex:none;width:92px;border-radius:18px;background:#D9822B;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#fff">
-          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif">อีก</div>
-          <div style="font:700 36px/1 'Anuphan',sans-serif">{{ daysLeft }}</div>
-          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif">วัน</div>
+          <div style="font:500 12px 'Sarabun',sans-serif">อีก</div>
+          <div style="font:700 36px/1 'Pridi',sans-serif">{{ daysLeft }}</div>
+          <div style="font:500 12px 'Sarabun',sans-serif">วัน</div>
         </div>
       </div>
 
       <div style="display:flex;gap:5px">
         <sc-for list="{{ catChips }}" as="c" hint-placeholder-count="5">
-          <button onClick="{{ c.on }}" style="flex:1 1 auto;min-width:0;height:36px;padding:0 6px;border-radius:999px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:600 12.5px 'IBM Plex Sans Thai',sans-serif;display:flex;align-items:center;justify-content:center;gap:4px;white-space:nowrap"><span style="width:7px;height:7px;flex:none;border-radius:50%;background:{{ c.dot }}"></span>{{ c.label }}</button>
+          <button onClick="{{ c.on }}" style="flex:1 1 auto;min-width:0;height:36px;padding:0 6px;border-radius:999px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:600 12.5px 'Sarabun',sans-serif;display:flex;align-items:center;justify-content:center;gap:4px;white-space:nowrap"><span style="width:7px;height:7px;flex:none;border-radius:50%;background:{{ c.dot }}"></span>{{ c.label }}</button>
         </sc-for>
       </div>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
         <button onClick="{{ kpiAll }}" style="text-align:left;background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:14px;display:flex;flex-direction:column" style-hover="border-color:#D9822B">
-          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">🧘</span> ลงทะเบียนแล้ว</div>
-          <div style="font:700 34px/1.1 'Anuphan',sans-serif;color:#2B1D12;margin-top:4px">{{ kpi.total }}</div>
-          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#2F6B4F;margin-top:2px">+{{ kpi.today }} วันนี้</div>
-          <div style="font:600 12px 'IBM Plex Sans Thai',sans-serif;color:#C4661A;margin-top:6px">ดูรายชื่อ ›</div>
+          <div style="font:500 12px 'Sarabun',sans-serif;color:#6F5A4A"><svg width="16" height="16" viewBox="0 0 24 24" style="display:inline-block;vertical-align:-3px;flex:none" aria-label="นักบวช"><circle cx="12" cy="6.5" r="4" fill="#E8C9A3" stroke="#6E3A08" stroke-width="1.2"></circle><path d="M4 22c0-6 3.6-9.5 8-9.5s8 3.5 8 9.5z" fill="#D9822B" stroke="#6E3A08" stroke-width="1.2" stroke-linejoin="round"></path><path d="M8.2 13.4L16.5 22" stroke="#9A520F" stroke-width="2.2" stroke-linecap="round"></path></svg> ลงทะเบียนแล้ว</div>
+          <div style="font:700 34px/1.1 'Pridi',sans-serif;color:#2B1D12;margin-top:4px">{{ kpi.total }}</div>
+          <div style="font:500 12px 'Sarabun',sans-serif;color:#2F6B4F;margin-top:2px">+{{ kpi.today }} วันนี้</div>
+          <div style="font:600 12px 'Sarabun',sans-serif;color:#C4661A;margin-top:6px">ดูรายชื่อ ›</div>
         </button>
         <button onClick="{{ kpiSenior }}" style="text-align:left;background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:14px;display:flex;flex-direction:column" style-hover="border-color:#D9822B">
-          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">👴</span> อายุ 60+</div>
-          <div style="font:700 34px/1.1 'Anuphan',sans-serif;color:#2B1D12;margin-top:4px">{{ kpi.senior }}</div>
-          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A;margin-top:2px">{{ kpi.seniorPct }}% ของทั้งหมด</div>
-          <div style="font:600 12px 'IBM Plex Sans Thai',sans-serif;color:#C4661A;margin-top:6px">ดูรายชื่อ ›</div>
+          <div style="font:500 12px 'Sarabun',sans-serif;color:#6F5A4A"><svg width="16" height="16" viewBox="0 0 24 24" style="display:inline-block;vertical-align:-3px;flex:none" aria-label="นักบวช"><circle cx="12" cy="6.5" r="4" fill="#E8C9A3" stroke="#6E3A08" stroke-width="1.2"></circle><path d="M4 22c0-6 3.6-9.5 8-9.5s8 3.5 8 9.5z" fill="#D9822B" stroke="#6E3A08" stroke-width="1.2" stroke-linejoin="round"></path><path d="M8.2 13.4L16.5 22" stroke="#9A520F" stroke-width="2.2" stroke-linecap="round"></path></svg><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">🧓</span> อายุ 60+</div>
+          <div style="font:700 34px/1.1 'Pridi',sans-serif;color:#2B1D12;margin-top:4px">{{ kpi.senior }}</div>
+          <div style="font:500 12px 'Sarabun',sans-serif;color:#6F5A4A;margin-top:2px">{{ kpi.seniorPct }}% ของทั้งหมด</div>
+          <div style="font:600 12px 'Sarabun',sans-serif;color:#C4661A;margin-top:6px">ดูรายชื่อ ›</div>
         </button>
       </div>
 
       <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:600 16px 'Anuphan',sans-serif"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">📊</span> สัดส่วนผู้ลงทะเบียน</div><div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">ทั้งหมด {{ allTotal }} รูป/คน</div></div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:600 16px 'Pridi',sans-serif"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">📊</span> สัดส่วนผู้ลงทะเบียน</div><div style="font:500 12px 'Sarabun',sans-serif;color:#6F5A4A">ทั้งหมด {{ allTotal }} รูป/คน</div></div>
         <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
-          <div style="width:150px;height:150px;flex:none;border-radius:50%;background:{{ catDonut }};display:grid;place-items:center;margin:0 auto">
-            <div style="width:96px;height:96px;border-radius:50%;background:#FFFDF8;display:flex;flex-direction:column;align-items:center;justify-content:center">
-              <div style="font:700 28px/1 'Anuphan',sans-serif;color:#2B1D12">{{ donutNum }}</div>
-              <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A;margin-top:4px">{{ donutLabel }}</div>
+          <div style="width:176px;height:176px;flex:none;border-radius:50%;background:{{ catDonut }};display:grid;place-items:center;margin:0 auto;position:relative;box-shadow:0 0 0 1.5px #D5C6B0">
+            <div style="width:104px;height:104px;border-radius:50%;box-shadow:0 0 0 1.5px #D5C6B0;background:#FFFDF8;display:flex;flex-direction:column;align-items:center;justify-content:center">
+              <div style="font:700 28px/1 'Pridi',sans-serif;color:#2B1D12">{{ donutNum }}</div>
+              <div style="font:500 12px 'Sarabun',sans-serif;color:#6F5A4A;margin-top:4px">{{ donutLabel }}</div>
             </div>
           </div>
           <div style="flex:1;min-width:150px;display:flex;flex-direction:column;gap:12px">
             <sc-for list="{{ cats }}" as="c" hint-placeholder-count="4">
               <button onClick="{{ c.on }}" style="display:flex;align-items:center;gap:8px;background:none;border:none;padding:0;text-align:left;opacity:{{ c.op }}">
-                <span style="width:10px;height:10px;border-radius:3px;background:{{ c.color }};flex:none"></span>
-                <span style="flex:1;font:500 14px 'IBM Plex Sans Thai',sans-serif;color:#2B1D12">{{ c.label }}</span>
-                <span style="font:700 15px 'Anuphan',sans-serif;color:#2B1D12">{{ c.count }}</span>
-                <span style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A;width:34px;text-align:right">{{ c.pct }}%</span>
+                <span style="width:10px;height:10px;border-radius:3px;background:{{ c.sq }};border:1px solid {{ c.sqBd }};flex:none"></span><span style="width:20px;height:20px;flex:none;background-image:{{ c.iconBg }};background-position:center;background-size:contain;background-repeat:no-repeat"></span>
+                <span style="flex:1;font:500 14px 'Sarabun',sans-serif;color:#2B1D12">{{ c.label }}</span>
+                <span style="font:700 15px 'Pridi',sans-serif;color:#2B1D12">{{ c.count }}</span>
+                <span style="font:500 12px 'Sarabun',sans-serif;color:#6F5A4A;width:34px;text-align:right">{{ c.pct }}%</span>
               </button>
             </sc-for>
           </div>
@@ -105,13 +105,22 @@ a{color:#9A520F}a:hover{color:#6E3A08}
 
 
       <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:12px">
-        <div style="font:600 16px 'Anuphan',sans-serif"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">📍</span> พื้นที่ (ตำบล) สูงสุด</div>
-        <sc-for list="{{ areas }}" as="a" hint-placeholder-count="5">
-          <div style="display:flex;flex-direction:column;gap:5px">
-            <div style="display:flex;justify-content:space-between;gap:8px"><span style="font:500 14px 'IBM Plex Sans Thai',sans-serif">{{ a.label }} <span style="color:#6F5A4A;font-size:12px">{{ a.sub }}</span></span><span style="font:700 14px 'Anuphan',sans-serif">{{ a.count }}</span></div>
+        <div style="font:600 16px 'Pridi',sans-serif"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">📍</span> พื้นที่ (อำเภอ / ตำบล)</div>
+        <sc-for list="{{ areas }}" as="a" hint-placeholder-count="3">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;align-items:flex-start;gap:8px">
+              <div style="flex:1;min-width:0;display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px">
+                <span style="font:700 15px 'Pridi',sans-serif;color:#2B1D12;margin-right:2px">{{ a.label }}</span>
+                <sc-for list="{{ a.tambons }}" as="t" hint-placeholder-count="2">
+                  <span style="display:inline-flex;align-items:center;gap:3px;padding:1px 7px;border-radius:999px;background:#F7F1E6;border:1px solid #E6D8C3;font:500 11.5px/1.5 'Sarabun',sans-serif;color:#4A3322;white-space:nowrap"><span>ต.{{ t.label }}</span><b style="font:700 11.5px 'Pridi',sans-serif;color:#2F6B4F">{{ t.count }}</b></span>
+                </sc-for>
+              </div>
+              <span style="flex:none;font:700 16px 'Pridi',sans-serif;color:#2B1D12">{{ a.count }} <span style="font:500 12px 'Sarabun',sans-serif;color:#6F5A4A">{{ a.pct }}%</span></span>
+            </div>
             <div style="height:8px;border-radius:999px;background:#EFE6D6;overflow:hidden"><div style="height:100%;width:{{ a.w }}%;background:#2F6B4F;border-radius:999px"></div></div>
           </div>
         </sc-for>
+        <sc-if value="{{ areasEmpty }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#6F5A4A">ยังไม่มีข้อมูล</div></sc-if>
       </div>
 
     </div>
@@ -120,106 +129,106 @@ a{color:#9A520F}a:hover{color:#6E3A08}
   <sc-if value="{{ isForm }}" hint-placeholder-val="{{ false }}">
     <div style="padding:12px 20px 0;display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;flex-direction:column;gap:8px">
-        <div style="font:700 24px/1.2 'Anuphan',sans-serif">{{ formTitle }}</div>
+        <div style="font:700 24px/1.2 'Pridi',sans-serif">{{ formTitle }}</div>
         <sc-if value="{{ isEditing }}" hint-placeholder-val="{{ false }}">
           <div style="display:flex;align-items:center;gap:10px;background:#FBE9D2;border:1.5px solid #D9822B;border-radius:14px;padding:10px 12px">
-            <div style="flex:1;min-width:0;font:500 13px/1.5 'IBM Plex Sans Thai',sans-serif;color:#4A3322">กำลังแก้ไขข้อมูลของ <b>{{ editingName }}</b></div>
-            <button onClick="{{ cancelEdit }}" style="flex:none;height:36px;padding:0 12px;border-radius:999px;border:1.5px solid #D9822B;background:#FFFDF8;color:#6E3A08;font:600 13px 'IBM Plex Sans Thai',sans-serif">ยกเลิกการแก้ไข</button>
+            <div style="flex:1;min-width:0;font:500 13px/1.5 'Sarabun',sans-serif;color:#4A3322">กำลังแก้ไขข้อมูลของ <b>{{ editingName }}</b></div>
+            <button onClick="{{ cancelEdit }}" style="flex:none;height:36px;padding:0 12px;border-radius:999px;border:1.5px solid #D9822B;background:#FFFDF8;color:#6E3A08;font:600 13px 'Sarabun',sans-serif">ยกเลิกการแก้ไข</button>
           </div>
         </sc-if>
-        <div style="display:flex;align-items:center;gap:10px"><div style="flex:1;height:6px;border-radius:999px;background:#E6D8C3;overflow:hidden"><div style="height:100%;width:{{ progress }}%;background:#D9822B;border-radius:999px;transition:width .3s"></div></div><div style="font:600 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ progress }}%</div></div>
+        <div style="display:flex;align-items:center;gap:10px"><div style="flex:1;height:6px;border-radius:999px;background:#E6D8C3;overflow:hidden"><div style="height:100%;width:{{ progress }}%;background:#D9822B;border-radius:999px;transition:width .3s"></div></div><div style="font:600 12px 'Sarabun',sans-serif;color:#6F5A4A">{{ progress }}%</div></div>
       </div>
 
       <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:16px">
-        <div style="font:600 13px 'IBM Plex Sans Thai',sans-serif;color:#9A520F;letter-spacing:.04em"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">🧘</span> 1 · ข้อมูลส่วนตัว</div>
+        <div style="font:600 13px 'Sarabun',sans-serif;color:#9A520F;letter-spacing:.04em"><svg width="18" height="18" viewBox="0 0 24 24" style="display:inline-block;vertical-align:-3px;flex:none" aria-label="นักบวช"><circle cx="12" cy="6.5" r="4" fill="#E8C9A3" stroke="#6E3A08" stroke-width="1.2"></circle><path d="M4 22c0-6 3.6-9.5 8-9.5s8 3.5 8 9.5z" fill="#D9822B" stroke="#6E3A08" stroke-width="1.2" stroke-linejoin="round"></path><path d="M8.2 13.4L16.5 22" stroke="#9A520F" stroke-width="2.2" stroke-linecap="round"></path></svg> 1 · ข้อมูลส่วนตัว</div>
         <div style="display:flex;flex-direction:column;gap:6px">
-          <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">เลขประจำตัวประชาชน <span style="color:#B3261E">*</span></label>
-          <input inputMode="numeric" value="{{ fv.idCard }}" onChange="{{ on.idCard }}" placeholder="X-XXXX-XXXXX-XX-X" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid {{ bc.idCard }};background:#fff;font:600 18px 'Anuphan',sans-serif;letter-spacing:.06em;color:#2B1D12;outline:none">
-          <sc-if value="{{ has.idCard }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">{{ err.idCard }}</div></sc-if>
+          <label style="font:600 14px 'Sarabun',sans-serif">เลขประจำตัวประชาชน <span style="color:#B3261E">*</span></label>
+          <input inputMode="numeric" value="{{ fv.idCard }}" onChange="{{ on.idCard }}" placeholder="X-XXXX-XXXXX-XX-X" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid {{ bc.idCard }};background:#fff;font:600 18px 'Pridi',sans-serif;letter-spacing:.06em;color:#2B1D12;outline:none">
+          <sc-if value="{{ has.idCard }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.idCard }}</div></sc-if>
         </div>
         <div style="display:flex;flex-direction:column;gap:8px">
-          <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">สถานะ / คำนำหน้า <span style="color:#B3261E">*</span></label>
+          <label style="font:600 14px 'Sarabun',sans-serif">สถานะ / คำนำหน้า <span style="color:#B3261E">*</span></label>
           <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
             <sc-for list="{{ titleChips }}" as="c" hint-placeholder-count="4">
-              <button onClick="{{ c.on }}" style="height:44px;border-radius:12px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:600 14px 'IBM Plex Sans Thai',sans-serif">{{ c.label }}</button>
+              <button onClick="{{ c.on }}" style="height:44px;border-radius:12px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:600 14px 'Sarabun',sans-serif">{{ c.label }}</button>
             </sc-for>
           </div>
-          <sc-if value="{{ has.title }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">{{ err.title }}</div></sc-if>
+          <sc-if value="{{ has.title }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.title }}</div></sc-if>
         </div>
         <div style="display:flex;flex-direction:column;gap:6px">
-          <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">ชื่อ-นามสกุล <span style="color:#B3261E">*</span></label>
+          <label style="font:600 14px 'Sarabun',sans-serif">ชื่อ-นามสกุล <span style="color:#B3261E">*</span></label>
           <div style="display:flex;align-items:center;height:52px;border-radius:14px;border:1.5px solid {{ bc.name }};background:#fff;overflow:hidden">
-            <sc-if value="{{ hasPrefix }}" hint-placeholder-val="{{ false }}"><span style="padding:0 4px 0 16px;font:600 16px 'IBM Plex Sans Thai',sans-serif;color:#9A520F">{{ prefix }}</span></sc-if>
-            <input value="{{ f.name }}" onChange="{{ on.name }}" placeholder="ชื่อ นามสกุล" style="flex:1;min-width:0;height:100%;padding:0 16px 0 8px;border:none;outline:none;background:transparent;font:500 16px 'IBM Plex Sans Thai',sans-serif;color:#2B1D12">
+            <sc-if value="{{ hasPrefix }}" hint-placeholder-val="{{ false }}"><span style="padding:0 4px 0 16px;font:600 16px 'Sarabun',sans-serif;color:#9A520F">{{ prefix }}</span></sc-if>
+            <input value="{{ f.name }}" onChange="{{ on.name }}" placeholder="ชื่อ นามสกุล" style="flex:1;min-width:0;height:100%;padding:0 16px 0 8px;border:none;outline:none;background:transparent;font:500 16px 'Sarabun',sans-serif;color:#2B1D12">
           </div>
-          <sc-if value="{{ has.name }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">{{ err.name }}</div></sc-if>
+          <sc-if value="{{ has.name }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.name }}</div></sc-if>
         </div>
         <div style="display:flex;flex-direction:column;gap:8px">
-          <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">เพศ <span style="color:#B3261E">*</span></label>
+          <label style="font:600 14px 'Sarabun',sans-serif">เพศ <span style="color:#B3261E">*</span></label>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
             <sc-for list="{{ genderChips }}" as="c" hint-placeholder-count="2">
-              <button onClick="{{ c.on }}" style="height:48px;border-radius:12px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:600 15px 'IBM Plex Sans Thai',sans-serif">{{ c.label }}</button>
+              <button onClick="{{ c.on }}" style="height:48px;border-radius:12px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:600 15px 'Sarabun',sans-serif">{{ c.label }}</button>
             </sc-for>
           </div>
-          <sc-if value="{{ has.gender }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">{{ err.gender }}</div></sc-if>
+          <sc-if value="{{ has.gender }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.gender }}</div></sc-if>
         </div>
         <div style="display:flex;flex-direction:column;gap:8px">
-          <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">วัน / เดือน / ปี เกิด (พ.ศ.) <span style="color:#B3261E">*</span></label>
+          <label style="font:600 14px 'Sarabun',sans-serif">วัน / เดือน / ปี เกิด (พ.ศ.) <span style="color:#B3261E">*</span></label>
           <div style="display:grid;grid-template-columns:0.8fr 1.6fr 1fr;gap:8px">
             <sc-for list="{{ dobPickers }}" as="p" hint-placeholder-count="3">
-              <button onClick="{{ p.on }}" style="height:52px;padding:0 12px;border-radius:14px;border:1.5px solid {{ p.bd }};background:#fff;color:{{ p.fg }};font:500 15px 'IBM Plex Sans Thai',sans-serif;display:flex;align-items:center;justify-content:space-between;gap:4px;min-width:0"><span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.display }}</span><span style="color:#9A520F;font-size:11px">▼</span></button>
+              <button onClick="{{ p.on }}" style="height:52px;padding:0 12px;border-radius:14px;border:1.5px solid {{ p.bd }};background:#fff;color:{{ p.fg }};font:500 15px 'Sarabun',sans-serif;display:flex;align-items:center;justify-content:space-between;gap:4px;min-width:0"><span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.display }}</span><span style="color:#9A520F;font-size:11px">▼</span></button>
             </sc-for>
           </div>
-          <sc-if value="{{ hasAge }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#2F6B4F">อายุ {{ ageText }}</div></sc-if>
-          <sc-if value="{{ has.dob }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">{{ err.dob }}</div></sc-if>
+          <sc-if value="{{ hasAge }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#2F6B4F">อายุ {{ ageText }}</div></sc-if>
+          <sc-if value="{{ has.dob }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.dob }}</div></sc-if>
         </div>
       </div>
 
       <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:16px">
-        <div style="font:600 13px 'IBM Plex Sans Thai',sans-serif;color:#9A520F;letter-spacing:.04em"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">🌏</span> 2 · สัญชาติและหมู่เลือด</div>
+        <div style="font:600 13px 'Sarabun',sans-serif;color:#9A520F;letter-spacing:.04em"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">🌏</span> 2 · สัญชาติและหมู่เลือด</div>
         <div style="display:flex;flex-direction:column;gap:8px">
-          <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">สัญชาติ <span style="color:#B3261E">*</span></label>
+          <label style="font:600 14px 'Sarabun',sans-serif">สัญชาติ <span style="color:#B3261E">*</span></label>
           <div style="display:flex;flex-wrap:wrap;gap:6px">
             <sc-for list="{{ natChips }}" as="c" hint-placeholder-count="5">
-              <button onClick="{{ c.on }}" style="height:42px;padding:0 16px;border-radius:999px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:600 14px 'IBM Plex Sans Thai',sans-serif">{{ c.label }}</button>
+              <button onClick="{{ c.on }}" style="height:42px;padding:0 16px;border-radius:999px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:600 14px 'Sarabun',sans-serif">{{ c.label }}</button>
             </sc-for>
           </div>
         </div>
         <div style="display:flex;flex-direction:column;gap:8px">
-          <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">หมู่เลือด <span style="color:#B3261E">*</span></label>
+          <label style="font:600 14px 'Sarabun',sans-serif">หมู่เลือด <span style="color:#B3261E">*</span></label>
           <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px">
             <sc-for list="{{ bloodChips }}" as="c" hint-placeholder-count="5">
-              <button onClick="{{ c.on }}" style="height:48px;border-radius:12px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:700 15px 'Anuphan',sans-serif">{{ c.label }}</button>
+              <button onClick="{{ c.on }}" style="height:48px;border-radius:12px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:700 15px 'Pridi',sans-serif">{{ c.label }}</button>
             </sc-for>
           </div>
-          <sc-if value="{{ has.blood }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">{{ err.blood }}</div></sc-if>
+          <sc-if value="{{ has.blood }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.blood }}</div></sc-if>
         </div>
       </div>
 
       <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:16px">
-        <div style="font:600 13px 'IBM Plex Sans Thai',sans-serif;color:#9A520F;letter-spacing:.04em"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">🛕</span> 3 · ที่อยู่ปัจจุบันและการติดต่อ</div>
+        <div style="font:600 13px 'Sarabun',sans-serif;color:#9A520F;letter-spacing:.04em"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">🛕</span> 3 · ที่อยู่ปัจจุบันและการติดต่อ</div>
         <div style="display:flex;flex-direction:column;gap:6px">
-          <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">ที่อยู่ (บ้านเลขที่ / หมู่ / วัด / สำนักสงฆ์) <span style="color:#B3261E">*</span></label>
-          <textarea value="{{ f.address }}" onChange="{{ on.address }}" rows="2" placeholder="เช่น วัดศรีสุทธาวาส 12 หมู่ 3" style="padding:14px 16px;border-radius:14px;border:1.5px solid {{ bc.address }};background:#fff;font:500 16px/1.5 'IBM Plex Sans Thai',sans-serif;color:#2B1D12;outline:none;resize:none"></textarea>
-          <sc-if value="{{ has.address }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">{{ err.address }}</div></sc-if>
+          <label style="font:600 14px 'Sarabun',sans-serif">ที่อยู่ (บ้านเลขที่ / หมู่ / วัด / สำนักสงฆ์) <span style="color:#B3261E">*</span></label>
+          <textarea value="{{ f.address }}" onChange="{{ on.address }}" rows="2" placeholder="เช่น วัดศรีสุทธาวาส 12 หมู่ 3" style="padding:14px 16px;border-radius:14px;border:1.5px solid {{ bc.address }};background:#fff;font:500 16px/1.5 'Sarabun',sans-serif;color:#2B1D12;outline:none;resize:none"></textarea>
+          <sc-if value="{{ has.address }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.address }}</div></sc-if>
         </div>
         <sc-for list="{{ geoPickers }}" as="p" hint-placeholder-count="3">
           <div style="display:flex;flex-direction:column;gap:6px">
-            <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">{{ p.label }} <span style="color:#B3261E">*</span></label>
-            <button onClick="{{ p.on }}" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid {{ p.bd }};background:#fff;color:{{ p.fg }};opacity:{{ p.op }};font:500 16px 'IBM Plex Sans Thai',sans-serif;display:flex;align-items:center;justify-content:space-between;text-align:left"><span>{{ p.display }}</span><span style="color:#9A520F;font-size:11px;opacity:{{ p.arrow }}">▼</span></button>
-            <sc-if value="{{ p.hasErr }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">{{ p.err }}</div></sc-if>
+            <label style="font:600 14px 'Sarabun',sans-serif">{{ p.label }} <span style="color:#B3261E">*</span></label>
+            <button onClick="{{ p.on }}" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid {{ p.bd }};background:#fff;color:{{ p.fg }};opacity:{{ p.op }};font:500 16px 'Sarabun',sans-serif;display:flex;align-items:center;justify-content:space-between;text-align:left"><span>{{ p.display }}</span><span style="color:#9A520F;font-size:11px;opacity:{{ p.arrow }}">▼</span></button>
+            <sc-if value="{{ p.hasErr }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ p.err }}</div></sc-if>
           </div>
         </sc-for>
         <div style="display:flex;flex-direction:column;gap:6px">
-          <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">หมายเลขโทรศัพท์ <span style="color:#B3261E">*</span></label>
-          <input inputMode="tel" value="{{ fv.phone }}" onChange="{{ on.phone }}" placeholder="08X-XXX-XXXX" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid {{ bc.phone }};background:#fff;font:600 18px 'Anuphan',sans-serif;letter-spacing:.04em;color:#2B1D12;outline:none">
-          <sc-if value="{{ has.phone }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">{{ err.phone }}</div></sc-if>
+          <label style="font:600 14px 'Sarabun',sans-serif">หมายเลขโทรศัพท์ <span style="color:#B3261E">*</span></label>
+          <input inputMode="tel" value="{{ fv.phone }}" onChange="{{ on.phone }}" placeholder="08X-XXX-XXXX" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid {{ bc.phone }};background:#fff;font:600 18px 'Pridi',sans-serif;letter-spacing:.04em;color:#2B1D12;outline:none">
+          <sc-if value="{{ has.phone }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.phone }}</div></sc-if>
         </div>
       </div>
 
       <div style="display:flex;gap:10px">
-        <button onClick="{{ resetForm }}" style="height:56px;padding:0 20px;border-radius:16px;border:1.5px solid #E6D8C3;background:#FFFDF8;color:#6F5A4A;font:600 15px 'IBM Plex Sans Thai',sans-serif">ล้างข้อมูล</button>
-        <button onClick="{{ submitApp }}" style="flex:1;height:56px;border-radius:16px;border:none;background:#D9822B;color:#fff;font:700 17px 'Anuphan',sans-serif" style-hover="background:#C4721F">{{ submitLabel }}</button>
+        <button onClick="{{ resetForm }}" style="height:56px;padding:0 20px;border-radius:16px;border:1.5px solid #E6D8C3;background:#FFFDF8;color:#6F5A4A;font:600 15px 'Sarabun',sans-serif">ล้างข้อมูล</button>
+        <button onClick="{{ submitApp }}" style="flex:1;height:56px;border-radius:16px;border:none;background:#D9822B;color:#fff;font:700 17px 'Pridi',sans-serif" style-hover="background:#C4721F">{{ submitLabel }}</button>
       </div>
     </div>
   </sc-if>
@@ -227,38 +236,38 @@ a{color:#9A520F}a:hover{color:#6E3A08}
   <sc-if value="{{ isList }}" hint-placeholder-val="{{ false }}">
     <div style="padding:12px 20px 0;display:flex;flex-direction:column;gap:12px">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
-        <div style="font:700 24px/1.2 'Anuphan',sans-serif"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">📋</span> รายชื่อผู้ลงทะเบียน</div>
-        <button onClick="{{ exportCsv }}" style="height:38px;padding:0 14px;border-radius:999px;border:1.5px solid #E6D8C3;background:#FFFDF8;font:600 13px 'IBM Plex Sans Thai',sans-serif;color:#2B1D12">ส่งออก CSV</button>
+        <div style="font:700 24px/1.2 'Pridi',sans-serif"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">📋</span> รายชื่อผู้ลงทะเบียน</div>
+        <button onClick="{{ exportCsv }}" style="height:38px;padding:0 14px;border-radius:999px;border:1.5px solid #E6D8C3;background:#FFFDF8;font:600 13px 'Sarabun',sans-serif;color:#2B1D12">ส่งออก CSV</button>
       </div>
-      <input value="{{ search }}" onChange="{{ on.search }}" placeholder="ค้นหาชื่อ, เลขบัตร, เบอร์โทร, ตำบล เพื่อแก้ไข" style="height:48px;padding:0 16px;border-radius:14px;border:1.5px solid #E6D8C3;background:#FFFDF8;font:500 15px 'IBM Plex Sans Thai',sans-serif;outline:none;color:#2B1D12">
+      <input value="{{ search }}" onChange="{{ on.search }}" placeholder="ค้นหาชื่อ, เลขบัตร, เบอร์โทร, ตำบล เพื่อแก้ไข" style="height:48px;padding:0 16px;border-radius:14px;border:1.5px solid #E6D8C3;background:#FFFDF8;font:500 15px 'Sarabun',sans-serif;outline:none;color:#2B1D12">
       <div style="display:flex;gap:5px">
         <sc-for list="{{ catChips }}" as="c" hint-placeholder-count="5">
-          <button onClick="{{ c.on }}" style="flex:1 1 auto;min-width:0;white-space:nowrap;height:36px;padding:0 6px;border-radius:999px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:600 12.5px 'IBM Plex Sans Thai',sans-serif">{{ c.label }}</button>
+          <button onClick="{{ c.on }}" style="flex:1 1 auto;min-width:0;white-space:nowrap;height:36px;padding:0 6px;border-radius:999px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:600 12.5px 'Sarabun',sans-serif">{{ c.label }}</button>
         </sc-for>
       </div>
       <sc-if value="{{ seniorOnly }}" hint-placeholder-val="{{ false }}">
         <div style="display:flex;align-items:center;gap:10px;background:#FBE9D2;border:1.5px solid #D9822B;border-radius:14px;padding:8px 8px 8px 14px">
-          <div style="flex:1;font:600 13px 'IBM Plex Sans Thai',sans-serif;color:#6E3A08">แสดงเฉพาะอายุ 60 ปีขึ้นไป</div>
-          <button onClick="{{ clearSenior }}" style="height:32px;padding:0 12px;border-radius:999px;border:1.5px solid #D9822B;background:#FFFDF8;color:#6E3A08;font:600 12px 'IBM Plex Sans Thai',sans-serif">แสดงทั้งหมด</button>
+          <div style="flex:1;font:600 13px 'Sarabun',sans-serif;color:#6E3A08">แสดงเฉพาะอายุ 60 ปีขึ้นไป</div>
+          <button onClick="{{ clearSenior }}" style="height:32px;padding:0 12px;border-radius:999px;border:1.5px solid #D9822B;background:#FFFDF8;color:#6E3A08;font:600 12px 'Sarabun',sans-serif">แสดงทั้งหมด</button>
         </div>
       </sc-if>
-      <div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">พบ {{ listCount }} รายการ</div>
+      <div style="font:500 13px 'Sarabun',sans-serif;color:#6F5A4A">พบ {{ listCount }} รายการ</div>
       <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;overflow:hidden">
         <sc-for list="{{ listRows }}" as="r" hint-placeholder-count="8">
           <div onClick="{{ r.on }}" style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #F0E6D6;cursor:pointer" style-hover="background:#FBF5EA">
-            <div style="width:40px;height:40px;flex:none;border-radius:12px;background:{{ r.color }};color:{{ r.fg }};border:1.5px solid {{ r.bd }};display:grid;place-items:center;font:700 11px 'Anuphan',sans-serif">{{ r.q }}</div>
-            <div style="flex:1;min-width:0"><div style="font:600 14px 'IBM Plex Sans Thai',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</div><div style="font:400 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ r.meta }}</div><div style="font:600 12px 'IBM Plex Sans Thai',sans-serif;color:#C4661A;margin-top:2px">กดเพื่อแก้ไข</div></div>
-            <div style="flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:4px"><span style="font:500 11px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ r.time }}</span><span style="font:600 11px 'IBM Plex Sans Thai',sans-serif;padding:2px 8px;border-radius:999px;background:{{ r.syncBg }};color:{{ r.syncFg }}">{{ r.syncLabel }}</span></div>
+            <div style="width:40px;height:40px;flex:none;border-radius:12px;background:{{ r.color }};color:{{ r.fg }};border:1.5px solid {{ r.bd }};display:grid;place-items:center;font:700 11px 'Pridi',sans-serif">{{ r.q }}</div>
+            <div style="flex:1;min-width:0"><div style="font:600 14px 'Sarabun',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</div><div style="font:400 12px 'Sarabun',sans-serif;color:#6F5A4A">{{ r.meta }}</div><div style="font:600 12px 'Sarabun',sans-serif;color:#C4661A;margin-top:2px">กดเพื่อแก้ไข</div></div>
+            <div style="flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:4px"><span style="font:500 11px 'Sarabun',sans-serif;color:#6F5A4A">{{ r.time }}</span><span style="font:600 11px 'Sarabun',sans-serif;padding:2px 8px;border-radius:999px;background:{{ r.syncBg }};color:{{ r.syncFg }}">{{ r.syncLabel }}</span></div>
           </div>
         </sc-for>
-        <sc-if value="{{ listEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding:32px;text-align:center;font:500 14px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">ไม่พบรายการที่ค้นหา</div></sc-if>
+        <sc-if value="{{ listEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding:32px;text-align:center;font:500 14px 'Sarabun',sans-serif;color:#6F5A4A">ไม่พบรายการที่ค้นหา</div></sc-if>
       </div>
     </div>
   </sc-if>
 
   <div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;z-index:20;padding:8px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(247,241,230,.94);backdrop-filter:blur(12px);border-top:1px solid #E6D8C3;display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
     <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
-      <button onClick="{{ t.on }}" style="height:54px;border-radius:16px;border:none;background:{{ t.bg }};color:{{ t.fg }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:600 12px 'IBM Plex Sans Thai',sans-serif">
+      <button onClick="{{ t.on }}" style="height:54px;border-radius:16px;border:none;background:{{ t.bg }};color:{{ t.fg }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:600 12px 'Sarabun',sans-serif">
         <span style="width:22px;height:20px;display:grid;place-items:center;overflow:hidden;font:400 17px/1 'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif">{{ t.icon }}</span><span style="line-height:1.2;white-space:nowrap">{{ t.label }}</span>
       </button>
     </sc-for>
@@ -269,15 +278,15 @@ a{color:#9A520F}a:hover{color:#6E3A08}
   <div onClick="{{ closePicker }}" style="position:fixed;inset:0;z-index:60;background:rgba(43,29,18,.5);display:flex;align-items:flex-end;justify-content:center">
     <div onClick="{{ stop }}" style="width:100%;max-width:{{ sheetW }}px;max-height:80vh;background:#FFFDF8;border-radius:28px 28px 0 0;display:flex;flex-direction:column;overflow:hidden;animation:pop .2s ease-out">
       <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px 10px">
-        <div style="font:700 20px 'Anuphan',sans-serif">{{ pickerTitle }}</div>
-        <button onClick="{{ closePicker }}" style="height:40px;padding:0 14px;border-radius:999px;border:1.5px solid #E6D8C3;background:transparent;font:600 14px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">ปิด</button>
+        <div style="font:700 20px 'Pridi',sans-serif">{{ pickerTitle }}</div>
+        <button onClick="{{ closePicker }}" style="height:40px;padding:0 14px;border-radius:999px;border:1.5px solid #E6D8C3;background:transparent;font:600 14px 'Sarabun',sans-serif;color:#6F5A4A">ปิด</button>
       </div>
       <sc-if value="{{ pickerSearchable }}" hint-placeholder-val="{{ false }}">
-        <div style="padding:0 20px 8px"><input value="{{ pickerQ }}" onChange="{{ on.pickerQ }}" placeholder="พิมพ์เพื่อค้นหา" style="width:100%;height:48px;padding:0 16px;border-radius:14px;border:1.5px solid #E6D8C3;background:#fff;font:500 16px 'IBM Plex Sans Thai',sans-serif;outline:none;color:#2B1D12"></div>
+        <div style="padding:0 20px 8px"><input value="{{ pickerQ }}" onChange="{{ on.pickerQ }}" placeholder="พิมพ์เพื่อค้นหา" style="width:100%;height:48px;padding:0 16px;border-radius:14px;border:1.5px solid #E6D8C3;background:#fff;font:500 16px 'Sarabun',sans-serif;outline:none;color:#2B1D12"></div>
       </sc-if>
       <div style="overflow:auto;padding:8px 20px 28px;display:grid;grid-template-columns:{{ pickerCols }};gap:8px">
         <sc-for list="{{ pickerOpts }}" as="o" hint-placeholder-count="8">
-          <button onClick="{{ o.on }}" style="min-height:{{ optH }}px;padding:6px 10px;border-radius:14px;border:1.5px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font:600 {{ optFs }}px 'IBM Plex Sans Thai',sans-serif">{{ o.label }}</button>
+          <button onClick="{{ o.on }}" style="min-height:{{ optH }}px;padding:6px 10px;border-radius:14px;border:1.5px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font:600 {{ optFs }}px 'Sarabun',sans-serif">{{ o.label }}</button>
         </sc-for>
       </div>
     </div>
@@ -288,16 +297,16 @@ a{color:#9A520F}a:hover{color:#6E3A08}
   <div onClick="{{ closeDetail }}" style="position:fixed;inset:0;z-index:55;background:rgba(43,29,18,.5);display:flex;align-items:flex-end;justify-content:center">
     <div onClick="{{ stop }}" style="width:100%;max-width:480px;max-height:85vh;overflow:auto;background:#FFFDF8;border-radius:28px 28px 0 0;padding:20px;display:flex;flex-direction:column;gap:14px;animation:pop .2s ease-out">
       <div style="display:flex;align-items:center;gap:12px">
-        <div style="width:52px;height:52px;border-radius:16px;background:{{ detail.color }};color:{{ detail.fg }};border:1.5px solid {{ detail.bd }};display:grid;place-items:center;font:700 13px 'Anuphan',sans-serif">{{ detail.q }}</div>
-        <div style="flex:1;min-width:0"><div style="font:700 19px/1.3 'Anuphan',sans-serif">{{ detail.name }}</div><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ detail.cat }} · {{ detail.sync }}</div></div>
-        <button onClick="{{ closeDetail }}" style="height:40px;padding:0 14px;border-radius:999px;border:1.5px solid #E6D8C3;background:transparent;font:600 14px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">ปิด</button>
+        <div style="width:52px;height:52px;border-radius:16px;background:{{ detail.color }};color:{{ detail.fg }};border:1.5px solid {{ detail.bd }};display:grid;place-items:center;font:700 13px 'Pridi',sans-serif">{{ detail.q }}</div>
+        <div style="flex:1;min-width:0"><div style="font:700 19px/1.3 'Pridi',sans-serif">{{ detail.name }}</div><div style="font:500 13px 'Sarabun',sans-serif;color:#6F5A4A">{{ detail.cat }} · {{ detail.sync }}</div></div>
+        <button onClick="{{ closeDetail }}" style="height:40px;padding:0 14px;border-radius:999px;border:1.5px solid #E6D8C3;background:transparent;font:600 14px 'Sarabun',sans-serif;color:#6F5A4A">ปิด</button>
       </div>
       <div style="border:1px solid #E6D8C3;border-radius:18px;overflow:hidden">
         <sc-for list="{{ detail.rows }}" as="r" hint-placeholder-count="10">
-          <div style="display:flex;gap:12px;padding:11px 14px;border-bottom:1px solid #F0E6D6"><div style="width:120px;flex:none;font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ r.k }}</div><div style="flex:1;font:600 14px/1.5 'IBM Plex Sans Thai',sans-serif">{{ r.v }}</div></div>
+          <div style="display:flex;gap:12px;padding:11px 14px;border-bottom:1px solid #F0E6D6"><div style="width:120px;flex:none;font:500 13px 'Sarabun',sans-serif;color:#6F5A4A">{{ r.k }}</div><div style="flex:1;font:600 14px/1.5 'Sarabun',sans-serif">{{ r.v }}</div></div>
         </sc-for>
       </div>
-      <button onClick="{{ detail.edit }}" style="height:54px;border-radius:16px;border:none;background:#D9822B;color:#fff;font:700 16px 'Anuphan',sans-serif" style-hover="background:#C4721F">แก้ไขข้อมูล</button>
+      <button onClick="{{ detail.edit }}" style="height:54px;border-radius:16px;border:none;background:#D9822B;color:#fff;font:700 16px 'Pridi',sans-serif" style-hover="background:#C4721F">แก้ไขข้อมูล</button>
     </div>
   </div>
 </sc-if>
@@ -305,20 +314,20 @@ a{color:#9A520F}a:hover{color:#6E3A08}
 <sc-if value="{{ csvOpen }}" hint-placeholder-val="{{ false }}">
   <div onClick="{{ csvClose }}" style="position:fixed;inset:0;z-index:65;background:rgba(43,29,18,.5);display:flex;align-items:center;justify-content:center;padding:24px">
     <div onClick="{{ stop }}" style="width:100%;max-width:360px;background:#FFFDF8;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:12px;animation:pop .2s ease-out">
-      <div style="font:700 19px 'Anuphan',sans-serif">ส่งออกข้อมูล CSV</div>
-      <div style="font:500 14px/1.5 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">กรุณาใส่รหัสผ่านเพื่อดาวน์โหลดข้อมูล</div>
-      <input type="password" inputMode="numeric" value="{{ csvPw }}" onChange="{{ on.csvPw }}" onKeyDown="{{ csvKey }}" placeholder="รหัสผ่าน" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid {{ csvBd }};background:#fff;font:700 20px 'Anuphan',sans-serif;letter-spacing:.2em;outline:none;color:#2B1D12">
-      <sc-if value="{{ csvErr }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">รหัสผ่านไม่ถูกต้อง</div></sc-if>
+      <div style="font:700 19px 'Pridi',sans-serif">ส่งออกข้อมูล CSV</div>
+      <div style="font:500 14px/1.5 'Sarabun',sans-serif;color:#6F5A4A">กรุณาใส่รหัสผ่านเพื่อดาวน์โหลดข้อมูล</div>
+      <input type="password" inputMode="numeric" value="{{ csvPw }}" onChange="{{ on.csvPw }}" onKeyDown="{{ csvKey }}" placeholder="รหัสผ่าน" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid {{ csvBd }};background:#fff;font:700 20px 'Pridi',sans-serif;letter-spacing:.2em;outline:none;color:#2B1D12">
+      <sc-if value="{{ csvErr }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">รหัสผ่านไม่ถูกต้อง</div></sc-if>
       <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:8px;margin-top:4px">
-        <button onClick="{{ csvClose }}" style="height:50px;border-radius:14px;border:1.5px solid #E6D8C3;background:transparent;font:600 15px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">ยกเลิก</button>
-        <button onClick="{{ csvConfirm }}" style="height:50px;border-radius:14px;border:none;background:#D9822B;color:#fff;font:700 15px 'Anuphan',sans-serif">ดาวน์โหลด</button>
+        <button onClick="{{ csvClose }}" style="height:50px;border-radius:14px;border:1.5px solid #E6D8C3;background:transparent;font:600 15px 'Sarabun',sans-serif;color:#6F5A4A">ยกเลิก</button>
+        <button onClick="{{ csvConfirm }}" style="height:50px;border-radius:14px;border:none;background:#D9822B;color:#fff;font:700 15px 'Pridi',sans-serif">ดาวน์โหลด</button>
       </div>
     </div>
   </div>
 </sc-if>
 
 <sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}">
-  <div style="position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:80;max-width:calc(100% - 32px);padding:12px 18px;border-radius:14px;background:#2B1D12;color:#F7F1E6;font:500 14px 'IBM Plex Sans Thai',sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.4);animation:pop .2s ease-out">{{ toast }}</div>
+  <div style="position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:80;max-width:calc(100% - 32px);padding:12px 18px;border-radius:14px;background:#2B1D12;color:#F7F1E6;font:500 14px 'Sarabun',sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.4);animation:pop .2s ease-out">{{ toast }}</div>
 </sc-if>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;useDemoData&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;ข้อมูล&quot;}}">
@@ -405,6 +414,14 @@ function maskName(r) {
   if (parts.length > 1) { const s = parts[parts.length - 1]; parts[parts.length - 1] = (s.length > 3 ? s.slice(0, -3) : '') + 'xxx'; }
   return prefixOf(r.title) + parts.join(' ');
 }
+const svgUri = s => 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">' + s + '</svg>');
+const figure = (robe, edge, sash) => '<circle cx="12" cy="7" r="4" fill="#E8C9A3" stroke="#6E3A08" stroke-width="1.2"/><path d="M4.5 22c0-5.8 3.4-9 7.5-9s7.5 3.2 7.5 9z" fill="' + robe + '" stroke="' + edge + '" stroke-width="1.2" stroke-linejoin="round"/>' + (sash ? '<path d="M8.6 13.8L16 22" stroke="' + sash + '" stroke-width="2.2" stroke-linecap="round"/>' : '');
+const CAT_ICON_SRC = {
+  'พระภิกษุ': svgUri(figure('#D9822B', '#6E3A08', '#9A520F')),
+  'สามเณร': svgUri('<g transform="translate(2.4 3.2) scale(.8)">' + figure('#E8B44E', '#6E3A08', '#B9861F') + '</g>'),
+  'แม่ชี': svgUri(figure('#FFFFFF', '#6F5A4A', '#D5C6B0')),
+  'อื่น ๆ': svgUri('<circle cx="12" cy="7" r="4" fill="#2F6B4F"/><path d="M4.5 22c0-5.8 3.4-9 7.5-9s7.5 3.2 7.5 9z" fill="#2F6B4F"/>')
+};
 const CAT_SHORT = { 'พระภิกษุ': 'พระ', 'สามเณร': 'เณร', 'แม่ชี': 'ชี', 'อื่น ๆ': 'ทั่วไป' };
 function ageOf(r) { if (!r.dobY || !r.dobM || !r.dobD) return null; const b = new Date(r.dobY - 543, r.dobM - 1, r.dobD); const n = new Date(); let a = n.getFullYear() - b.getFullYear(); if (n < new Date(n.getFullYear(), b.getMonth(), b.getDate())) a--; return a; }
 function dobStr(r) { return r.dobD ? String(r.dobD).padStart(2, '0') + '/' + String(r.dobM).padStart(2, '0') + '/' + r.dobY : ''; }
@@ -670,7 +687,7 @@ class Component extends DCLogic {
     const pending = s.records.filter(r => r.sync !== 'synced').length;
 
     const catNames = Object.keys(CAT_COLORS);
-    const cats = catNames.map(c => { const cnt = all.filter(r => catOf(r) === c).length; return { label: c, count: cnt, pct: all.length ? Math.round(cnt / all.length * 100) : 0, color: CAT_COLORS[c], op: s.catFilter === 'all' || s.catFilter === c ? 1 : .35, on: () => this.setState({ catFilter: s.catFilter === c ? 'all' : c }) }; });
+    const cats = catNames.map(c => { const cnt = all.filter(r => catOf(r) === c).length; return { iconBg: 'url("' + CAT_ICON_SRC[c] + '")', sq: c === 'แม่ชี' ? '#FFFFFF' : CAT_COLORS[c], sqBd: c === 'แม่ชี' ? '#A8998A' : CAT_COLORS[c], label: c, count: cnt, pct: all.length ? Math.round(cnt / all.length * 100) : 0, color: CAT_COLORS[c], op: s.catFilter === 'all' || s.catFilter === c ? 1 : .35, on: () => this.setState({ catFilter: s.catFilter === c ? 'all' : c }) }; });
     const CAT_ICON = { 'พระภิกษุ': '🙏', 'สามเณร': '📿', 'แม่ชี': '🌸', 'อื่น ๆ': '👤' };
     const catChips = [{ k: 'all', label: 'ทั้งหมด', dot: '#2B1D12' }, ...catNames.map(c => ({ k: c, label: c, dot: CAT_COLORS[c] }))].map(c => ({ ...this.chip(s.catFilter === c.k, c.label, () => this.setState({ catFilter: c.k }), true), dot: s.catFilter === c.k ? '#F7F1E6' : c.dot }));
 
@@ -689,9 +706,9 @@ class Component extends DCLogic {
     const male = filtered.filter(r => r.gender === 'ชาย').length, female = filtered.filter(r => r.gender === 'หญิง').length;
     const mp = male + female ? Math.round(male / (male + female) * 100) : 0;
 
-    const areaMap = {}; filtered.forEach(r => { if (!r.tambon) return; const k = r.tambon + '|' + r.amphoe; areaMap[k] = (areaMap[k] || 0) + 1; });
-    const areaArr = Object.entries(areaMap).sort((a, b) => b[1] - a[1]).slice(0, 5); const maxA = areaArr.length ? areaArr[0][1] : 1;
-    const areas = areaArr.map(([k, c]) => { const [t, a] = k.split('|'); return { label: 'ต.' + t, sub: 'อ.' + a, count: c, w: Math.round(c / maxA * 100) }; });
+    const amp = {}; filtered.forEach(r => { if (!r.amphoe) return; const x = amp[r.amphoe] || (amp[r.amphoe] = { n: 0, t: {} }); x.n++; if (r.tambon) x.t[r.tambon] = (x.t[r.tambon] || 0) + 1; });
+    const ampArr = Object.entries(amp).sort((a, b) => b[1].n - a[1].n); const maxA = ampArr.length ? ampArr[0][1].n : 1; const totA = ampArr.reduce((z, x) => z + x[1].n, 0) || 1;
+    const areas = ampArr.map(([k, v]) => ({ label: 'อ.' + k, count: v.n, pct: Math.round(v.n / totA * 100), w: Math.round(v.n / maxA * 100), tambons: Object.entries(v.t).sort((a, b) => b[1] - a[1]).map(([t, c]) => ({ label: t, count: c })) }));
 
     const recent = [...filtered].sort((a, b) => String(b.ts).localeCompare(String(a.ts))).slice(0, 5).map(r => this.rowView(r));
 
@@ -803,7 +820,9 @@ class Component extends DCLogic {
       successOpen: !!s.success && !s.kiosk,
       successDash: () => this.setState({ success: null, screen: 'dash' }), successNext: () => this.setState({ success: null, screen: 'form' }),
       toastOn: !!s.toast, toast: s.toast,
-      catDonut: (() => { if (!all.length) return '#EFE6D6'; let acc = 0; const segs = []; cats.forEach(c => { const cnt = c.count; if (!cnt) return; const a = acc / all.length * 100, b = (acc + cnt) / all.length * 100; acc += cnt; const col = s.catFilter === 'all' || s.catFilter === c.label ? c.color : '#EFE6D6'; segs.push(col + ' ' + a + '% ' + b + '%'); }); return 'conic-gradient(' + segs.join(',') + ')'; })(),
+      areasEmpty: areas.length === 0,
+      catDonut: (() => { if (!all.length) return '#EFE6D6'; let acc = 0; const segs = []; cats.forEach(c => { const cnt = c.count; if (!cnt) return; const a = acc / all.length * 100, b = (acc + cnt) / all.length * 100; acc += cnt; const col = s.catFilter === 'all' || s.catFilter === c.label ? (c.label === 'แม่ชี' ? '#FFFFFF' : c.color) : '#EFE6D6'; segs.push(col + ' ' + a + '% ' + b + '%'); }); return 'conic-gradient(' + segs.join(',') + ')'; })(),
+      donutIcons: (() => { if (!all.length) return []; let acc = 0; const out = []; cats.forEach(c => { if (!c.count) return; const mid = (acc + c.count / 2) / all.length; acc += c.count; const ang = mid * 2 * Math.PI - Math.PI / 2; const R = 70; out.push({ bg: 'url("' + CAT_ICON_SRC[c.label] + '")', label: c.label, x: Math.round(88 + R * Math.cos(ang) - 15), y: Math.round(88 + R * Math.sin(ang) - 15), op: s.catFilter === 'all' || s.catFilter === c.label ? 1 : .45 }); }); return out; })(),
       donutNum: s.catFilter === 'all' ? all.length : (cats.find(c => c.label === s.catFilter) || {}).count,
       donutLabel: s.catFilter === 'all' ? 'รูป/คน' : s.catFilter,
       seniorOnly: !!s.seniorOnly, clearSenior: () => this.setState({ seniorOnly: false }),
