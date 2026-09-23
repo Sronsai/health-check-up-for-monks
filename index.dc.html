@@ -138,12 +138,12 @@ a{color:#9A520F}a:hover{color:#6E3A08}
 
       <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:16px">
         <div style="font:600 13px 'Sarabun',sans-serif;color:#9A520F;letter-spacing:.04em"><svg width="18" height="18" viewBox="0 0 24 24" style="display:inline-block;vertical-align:-3px;flex:none" aria-label="นักบวช"><circle cx="12" cy="6.5" r="4" fill="#E8C9A3" stroke="#6E3A08" stroke-width="1.2"></circle><path d="M4 22c0-6 3.6-9.5 8-9.5s8 3.5 8 9.5z" fill="#D9822B" stroke="#6E3A08" stroke-width="1.2" stroke-linejoin="round"></path><path d="M8.2 13.4L16.5 22" stroke="#9A520F" stroke-width="2.2" stroke-linecap="round"></path></svg> 1 · ข้อมูลส่วนตัว</div>
-        <div style="display:flex;flex-direction:column;gap:6px">
+        <div data-field="idCard" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:6px">
           <label style="font:600 14px 'Sarabun',sans-serif">เลขประจำตัวประชาชน <span style="color:#B3261E">*</span></label>
           <input inputMode="numeric" value="{{ fv.idCard }}" onChange="{{ on.idCard }}" placeholder="X-XXXX-XXXXX-XX-X" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid {{ bc.idCard }};background:#fff;font:600 18px 'Pridi',sans-serif;letter-spacing:.06em;color:#2B1D12;outline:none">
           <sc-if value="{{ has.idCard }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.idCard }}</div></sc-if>
         </div>
-        <div style="display:flex;flex-direction:column;gap:8px">
+        <div data-field="title" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:8px">
           <label style="font:600 14px 'Sarabun',sans-serif">สถานะ / คำนำหน้า <span style="color:#B3261E">*</span></label>
           <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
             <sc-for list="{{ titleChips }}" as="c" hint-placeholder-count="4">
@@ -152,7 +152,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
           </div>
           <sc-if value="{{ has.title }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.title }}</div></sc-if>
         </div>
-        <div style="display:flex;flex-direction:column;gap:6px">
+        <div data-field="name" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:6px">
           <label style="font:600 14px 'Sarabun',sans-serif">ชื่อ-นามสกุล <span style="color:#B3261E">*</span></label>
           <div style="display:flex;align-items:center;height:52px;border-radius:14px;border:1.5px solid {{ bc.name }};background:#fff;overflow:hidden">
             <sc-if value="{{ hasPrefix }}" hint-placeholder-val="{{ false }}"><span style="padding:0 4px 0 16px;font:600 16px 'Sarabun',sans-serif;color:#9A520F">{{ prefix }}</span></sc-if>
@@ -160,7 +160,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
           </div>
           <sc-if value="{{ has.name }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.name }}</div></sc-if>
         </div>
-        <div style="display:flex;flex-direction:column;gap:8px">
+        <div data-field="gender" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:8px">
           <label style="font:600 14px 'Sarabun',sans-serif">เพศ <span style="color:#B3261E">*</span></label>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
             <sc-for list="{{ genderChips }}" as="c" hint-placeholder-count="2">
@@ -169,7 +169,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
           </div>
           <sc-if value="{{ has.gender }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.gender }}</div></sc-if>
         </div>
-        <div style="display:flex;flex-direction:column;gap:8px">
+        <div data-field="dob" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:8px">
           <label style="font:600 14px 'Sarabun',sans-serif">วัน / เดือน / ปี เกิด (พ.ศ.) <span style="color:#B3261E">*</span></label>
           <div style="display:grid;grid-template-columns:0.8fr 1.6fr 1fr;gap:8px">
             <sc-for list="{{ dobPickers }}" as="p" hint-placeholder-count="3">
@@ -183,7 +183,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
 
       <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:16px">
         <div style="font:600 13px 'Sarabun',sans-serif;color:#9A520F;letter-spacing:.04em"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">🌏</span> 2 · สัญชาติและหมู่เลือด</div>
-        <div style="display:flex;flex-direction:column;gap:8px">
+        <div data-field="nationality" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:8px">
           <label style="font:600 14px 'Sarabun',sans-serif">สัญชาติ <span style="color:#B3261E">*</span></label>
           <div style="display:flex;flex-wrap:wrap;gap:6px">
             <sc-for list="{{ natChips }}" as="c" hint-placeholder-count="5">
@@ -191,7 +191,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
             </sc-for>
           </div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:8px">
+        <div data-field="blood" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:8px">
           <label style="font:600 14px 'Sarabun',sans-serif">หมู่เลือด <span style="color:#B3261E">*</span></label>
           <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px">
             <sc-for list="{{ bloodChips }}" as="c" hint-placeholder-count="5">
@@ -204,19 +204,19 @@ a{color:#9A520F}a:hover{color:#6E3A08}
 
       <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:16px">
         <div style="font:600 13px 'Sarabun',sans-serif;color:#9A520F;letter-spacing:.04em"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">🛕</span> 3 · ที่อยู่ปัจจุบันและการติดต่อ</div>
-        <div style="display:flex;flex-direction:column;gap:6px">
+        <div data-field="address" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:6px">
           <label style="font:600 14px 'Sarabun',sans-serif">ที่อยู่ (บ้านเลขที่ / หมู่ / วัด / สำนักสงฆ์) <span style="color:#B3261E">*</span></label>
           <textarea value="{{ f.address }}" onChange="{{ on.address }}" rows="2" placeholder="เช่น วัดศรีสุทธาวาส 12 หมู่ 3" style="padding:14px 16px;border-radius:14px;border:1.5px solid {{ bc.address }};background:#fff;font:500 16px/1.5 'Sarabun',sans-serif;color:#2B1D12;outline:none;resize:none"></textarea>
           <sc-if value="{{ has.address }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.address }}</div></sc-if>
         </div>
         <sc-for list="{{ geoPickers }}" as="p" hint-placeholder-count="3">
-          <div style="display:flex;flex-direction:column;gap:6px">
+          <div data-field="geo-{{ p.field }}" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:6px">
             <label style="font:600 14px 'Sarabun',sans-serif">{{ p.label }} <span style="color:#B3261E">*</span></label>
             <button onClick="{{ p.on }}" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid {{ p.bd }};background:#fff;color:{{ p.fg }};opacity:{{ p.op }};font:500 16px 'Sarabun',sans-serif;display:flex;align-items:center;justify-content:space-between;text-align:left"><span>{{ p.display }}</span><span style="color:#9A520F;font-size:11px;opacity:{{ p.arrow }}">▼</span></button>
             <sc-if value="{{ p.hasErr }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ p.err }}</div></sc-if>
           </div>
         </sc-for>
-        <div style="display:flex;flex-direction:column;gap:6px">
+        <div data-field="phone" style="scroll-margin-top:24px;display:flex;flex-direction:column;gap:6px">
           <label style="font:600 14px 'Sarabun',sans-serif">หมายเลขโทรศัพท์ <span style="color:#B3261E">*</span></label>
           <input inputMode="tel" value="{{ fv.phone }}" onChange="{{ on.phone }}" placeholder="08X-XXX-XXXX" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid {{ bc.phone }};background:#fff;font:600 18px 'Pridi',sans-serif;letter-spacing:.04em;color:#2B1D12;outline:none">
           <sc-if value="{{ has.phone }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'Sarabun',sans-serif;color:#B3261E">{{ err.phone }}</div></sc-if>
@@ -532,6 +532,16 @@ class Component extends DCLogic {
     return e;
   }
 
+  scrollToErr(e) {
+    const order = ['idCard', 'title', 'name', 'gender', 'dob', 'nationality', 'blood', 'address', 'geo-province', 'geo-amphoe', 'geo-tambon', 'phone'];
+    const key = order.find(k => e[k.replace('geo-', '')]); if (!key) return;
+    setTimeout(() => {
+      const el = document.querySelector('[data-field="' + key + '"]'); if (!el) return;
+      const y = el.getBoundingClientRect().top + window.pageYOffset - 24;
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      const inp = el.querySelector('input,textarea'); if (inp) setTimeout(() => { try { inp.focus({ preventScroll: true }); } catch (x) {} }, 350);
+    }, 60);
+  }
   startEdit(r) {
     const keys = ['idCard', 'title', 'name', 'gender', 'dobD', 'dobM', 'dobY', 'nationality', 'blood', 'address', 'province', 'amphoe', 'tambon', 'phone'];
     const form = blank(); keys.forEach(k => { if (r[k] != null && r[k] !== '') form[k] = r[k]; });
@@ -722,7 +732,7 @@ class Component extends DCLogic {
     const natChips = NATS.map(x => this.chip(f.nationality === x, x, () => this.setF('nationality', x)));
     const bloodChips = BLOODS.map(x => this.chip(f.blood === x, x, () => this.setF('blood', x)));
 
-    const pk = (field, label, ph, display, enabled, err) => ({ label, display: display || ph, fg: display ? '#2B1D12' : '#9C8878', op: enabled ? 1 : .5, on: () => this.openPicker(field), bd: err ? '#B3261E' : (display ? '#D9C3A3' : '#E6D8C3'), hasErr: !!err, err: err || '', arrow: 1 });
+    const pk = (field, label, ph, display, enabled, err) => ({ field, label, display: display || ph, fg: display ? '#2B1D12' : '#9C8878', op: enabled ? 1 : .5, on: () => this.openPicker(field), bd: err ? '#B3261E' : (display ? '#D9C3A3' : '#E6D8C3'), hasErr: !!err, err: err || '', arrow: 1 });
     const dobPickers = [pk('dobD', 'วัน', 'วัน', f.dobD ? String(f.dobD) : '', true, (s.kiosk ? kErr.dob : errs.dob) && !f.dobD), pk('dobM', 'เดือน', 'เดือน', f.dobM ? MONTHS[f.dobM - 1] : '', true, (s.kiosk ? kErr.dob : errs.dob) && !f.dobM), pk('dobY', 'ปี พ.ศ.', 'ปี พ.ศ.', f.dobY ? String(f.dobY) : '', true, (s.kiosk ? kErr.dob : errs.dob) && !f.dobY)];
     const geoPickers = [{ ...pk('province', 'จังหวัด', 'เลย', 'เลย', true, null), bd: '#E6D8C3', fg: '#6F5A4A', arrow: 0 }, pk('amphoe', 'อำเภอ', 'เลือกอำเภอ', f.amphoe, !!f.province, errs.amphoe), pk('tambon', 'ตำบล', 'เลือกตำบล', f.tambon, !!f.amphoe, errs.tambon)];
     const kGeoPickers = [pk('province', 'จังหวัด', 'แตะเพื่อเลือก', f.province, true, kErr.province), pk('amphoe', 'อำเภอ', 'แตะเพื่อเลือก', f.amphoe, !!f.province, kErr.amphoe), pk('tambon', 'ตำบล', 'แตะเพื่อเลือก', f.tambon, !!f.amphoe, kErr.tambon)];
@@ -782,7 +792,7 @@ class Component extends DCLogic {
       isEditing: !!s.editing, editingName: s.editing ? s.editing.name : '',
       formTitle: s.editing ? '✏️ แก้ไขข้อมูลผู้ลงทะเบียน' : '📝 แบบฟอร์มลงทะเบียน', submitLabel: s.editing ? 'บันทึกการแก้ไข' : 'บันทึกการลงทะเบียน',
       cancelEdit: () => this.setState({ form: blank(), touched: false, editing: null, screen: 'list' }),
-      submitApp: () => { const e = this.validate(f); const c = Object.keys(e).length; if (c) { this.setState({ touched: true }); this.showToast('ยังมีข้อมูลที่ต้องแก้ไข ' + c + ' รายการ'); return; } this.save(); },
+      submitApp: () => { const e = this.validate(f); const c = Object.keys(e).length; if (c) { this.setState({ touched: true }, () => this.scrollToErr(e)); this.showToast('ยังมีข้อมูลที่ต้องแก้ไข ' + c + ' รายการ'); return; } this.save(); },
       listRows, listCount: listAll.length, listEmpty: listAll.length === 0, search: s.search, exportCsv: () => this.setState({ csvOpen: true, csvPw: '', csvErr: false }),
       csvOpen: !!s.csvOpen, csvPw: s.csvPw || '', csvErr: !!s.csvErr, csvBd: s.csvErr ? '#B3261E' : '#E6D8C3',
       csvClose: () => this.setState({ csvOpen: false, csvPw: '', csvErr: false }),
