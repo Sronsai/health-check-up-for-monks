@@ -464,7 +464,7 @@ function makeDemo() {
   out.forEach((o, i) => o.queue = 'PC-' + String(i + 1).padStart(4, '0'));
   return out;
 }
-function loadSaved() { try { return JSON.parse(localStorage.getItem(LS) || '{}'); } catch (e) { return {}; } }
+function loadSaved() { try { if (/[?&]reset=1/.test(location.search)) { localStorage.removeItem(LS); history.replaceState(null, '', location.pathname); } } catch (e) {} try { return JSON.parse(localStorage.getItem(LS) || '{}'); } catch (e) { return {}; } }
 function toRow(r, token) {
   return { token, timestamp: r.ts, queue: r.queue, idCard: r.idCard, fullName: fullName(r), gender: r.gender, dob: dobStr(r), nationality: r.nationality, blood: r.blood, address: r.address, province: r.province, amphoe: r.amphoe, tambon: r.tambon, phone: r.phone };
 }
@@ -565,7 +565,9 @@ class Component extends DCLogic {
       .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
       .then(text => {
         const remote = csvToRows(text).map(fromRow).map((x, k) => ({ ...x, queue: x.queue || 'PC-' + String(k + 1).padStart(4, '0') }));
-        this.setState({ remote, pulling: false, lastSync: new Date().toISOString(), pullErr: false });
+        const ids = new Set(remote.map(r => r.idCard)); const fresh = Date.now() - 10 * 60 * 1000;
+        this.setState(s => ({ remote, pulling: false, lastSync: new Date().toISOString(), pullErr: false,
+          records: s.records.filter(r => r.sync !== 'synced' || (!ids.has(r.idCard) && new Date(r.ts).getTime() > fresh)) }));
         if (!silent) this.showToast('ดึงข้อมูลสำเร็จ ' + remote.length + ' รายการ');
       })
       .catch(err => { this.setState({ pulling: false, pullErr: true }); if (!silent) this.showToast('ดึงข้อมูลไม่สำเร็จ: ' + (err.message || '')); });
