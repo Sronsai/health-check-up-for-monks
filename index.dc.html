@@ -64,22 +64,19 @@ a{color:#9A520F}a:hover{color:#6E3A08}
         </sc-for>
       </div>
 
-      <div style="display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:10px">
-        <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:14px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <button onClick="{{ kpiAll }}" style="text-align:left;background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:14px;display:flex;flex-direction:column" style-hover="border-color:#D9822B">
           <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">ลงทะเบียนแล้ว</div>
           <div style="font:700 34px/1.1 'Anuphan',sans-serif;color:#2B1D12;margin-top:4px">{{ kpi.total }}</div>
           <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#2F6B4F;margin-top:2px">+{{ kpi.today }} วันนี้</div>
-        </div>
-        <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:14px">
+          <div style="font:600 12px 'IBM Plex Sans Thai',sans-serif;color:#C4661A;margin-top:6px">ดูรายชื่อ ›</div>
+        </button>
+        <button onClick="{{ kpiSenior }}" style="text-align:left;background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:14px;display:flex;flex-direction:column" style-hover="border-color:#D9822B">
           <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">อายุ 60+</div>
-          <div style="font:700 28px/1.2 'Anuphan',sans-serif;color:#2B1D12;margin-top:4px">{{ kpi.senior }}</div>
-          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ kpi.seniorPct }}% ของทั้งหมด</div>
-        </div>
-        <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:14px">
-          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">รอส่ง Sheet</div>
-          <div style="font:700 28px/1.2 'Anuphan',sans-serif;color:{{ kpi.pendingColor }};margin-top:4px">{{ kpi.pending }}</div>
-          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">รายการ</div>
-        </div>
+          <div style="font:700 34px/1.1 'Anuphan',sans-serif;color:#2B1D12;margin-top:4px">{{ kpi.senior }}</div>
+          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A;margin-top:2px">{{ kpi.seniorPct }}% ของทั้งหมด</div>
+          <div style="font:600 12px 'IBM Plex Sans Thai',sans-serif;color:#C4661A;margin-top:6px">ดูรายชื่อ ›</div>
+        </button>
       </div>
 
       <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:14px">
@@ -285,11 +282,17 @@ a{color:#9A520F}a:hover{color:#6E3A08}
           <button onClick="{{ c.on }}" style="flex:none;height:36px;padding:0 12px;border-radius:999px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:600 13px 'IBM Plex Sans Thai',sans-serif">{{ c.label }}</button>
         </sc-for>
       </div>
+      <sc-if value="{{ seniorOnly }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:center;gap:10px;background:#FBE9D2;border:1.5px solid #D9822B;border-radius:14px;padding:8px 8px 8px 14px">
+          <div style="flex:1;font:600 13px 'IBM Plex Sans Thai',sans-serif;color:#6E3A08">แสดงเฉพาะอายุ 60 ปีขึ้นไป</div>
+          <button onClick="{{ clearSenior }}" style="height:32px;padding:0 12px;border-radius:999px;border:1.5px solid #D9822B;background:#FFFDF8;color:#6E3A08;font:600 12px 'IBM Plex Sans Thai',sans-serif">แสดงทั้งหมด</button>
+        </div>
+      </sc-if>
       <div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">พบ {{ listCount }} รายการ</div>
       <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;overflow:hidden">
         <sc-for list="{{ listRows }}" as="r" hint-placeholder-count="8">
           <div onClick="{{ r.on }}" style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #F0E6D6;cursor:pointer" style-hover="background:#FBF5EA">
-            <div style="width:40px;height:40px;flex:none;border-radius:12px;background:{{ r.color }};color:#fff;display:grid;place-items:center;font:700 11px 'Anuphan',sans-serif">{{ r.q }}</div>
+            <div style="width:40px;height:40px;flex:none;border-radius:12px;background:{{ r.color }};color:{{ r.fg }};border:1.5px solid {{ r.bd }};display:grid;place-items:center;font:700 11px 'Anuphan',sans-serif">{{ r.q }}</div>
             <div style="flex:1;min-width:0"><div style="font:600 14px 'IBM Plex Sans Thai',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</div><div style="font:400 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ r.meta }}</div><div style="font:600 12px 'IBM Plex Sans Thai',sans-serif;color:#C4661A;margin-top:2px">กดเพื่อแก้ไข</div></div>
             <div style="flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:4px"><span style="font:500 11px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ r.time }}</span><span style="font:600 11px 'IBM Plex Sans Thai',sans-serif;padding:2px 8px;border-radius:999px;background:{{ r.syncBg }};color:{{ r.syncFg }}">{{ r.syncLabel }}</span></div>
           </div>
@@ -331,7 +334,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
   <div onClick="{{ closeDetail }}" style="position:fixed;inset:0;z-index:55;background:rgba(43,29,18,.5);display:flex;align-items:flex-end;justify-content:center">
     <div onClick="{{ stop }}" style="width:100%;max-width:480px;max-height:85vh;overflow:auto;background:#FFFDF8;border-radius:28px 28px 0 0;padding:20px;display:flex;flex-direction:column;gap:14px;animation:pop .2s ease-out">
       <div style="display:flex;align-items:center;gap:12px">
-        <div style="width:52px;height:52px;border-radius:16px;background:{{ detail.color }};color:#fff;display:grid;place-items:center;font:700 13px 'Anuphan',sans-serif">{{ detail.q }}</div>
+        <div style="width:52px;height:52px;border-radius:16px;background:{{ detail.color }};color:{{ detail.fg }};border:1.5px solid {{ detail.bd }};display:grid;place-items:center;font:700 13px 'Anuphan',sans-serif">{{ detail.q }}</div>
         <div style="flex:1;min-width:0"><div style="font:700 19px/1.3 'Anuphan',sans-serif">{{ detail.name }}</div><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ detail.cat }} · {{ detail.sync }}</div></div>
         <button onClick="{{ closeDetail }}" style="height:40px;padding:0 14px;border-radius:999px;border:1.5px solid #E6D8C3;background:transparent;font:600 14px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">ปิด</button>
       </div>
@@ -341,6 +344,21 @@ a{color:#9A520F}a:hover{color:#6E3A08}
         </sc-for>
       </div>
       <button onClick="{{ detail.edit }}" style="height:54px;border-radius:16px;border:none;background:#D9822B;color:#fff;font:700 16px 'Anuphan',sans-serif" style-hover="background:#C4721F">แก้ไขข้อมูล</button>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ csvOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ csvClose }}" style="position:fixed;inset:0;z-index:65;background:rgba(43,29,18,.5);display:flex;align-items:center;justify-content:center;padding:24px">
+    <div onClick="{{ stop }}" style="width:100%;max-width:360px;background:#FFFDF8;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:12px;animation:pop .2s ease-out">
+      <div style="font:700 19px 'Anuphan',sans-serif">ส่งออกข้อมูล CSV</div>
+      <div style="font:500 14px/1.5 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">กรุณาใส่รหัสผ่านเพื่อดาวน์โหลดข้อมูล</div>
+      <input type="password" inputMode="numeric" value="{{ csvPw }}" onChange="{{ on.csvPw }}" onKeyDown="{{ csvKey }}" placeholder="รหัสผ่าน" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid {{ csvBd }};background:#fff;font:700 20px 'Anuphan',sans-serif;letter-spacing:.2em;outline:none;color:#2B1D12">
+      <sc-if value="{{ csvErr }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">รหัสผ่านไม่ถูกต้อง</div></sc-if>
+      <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:8px;margin-top:4px">
+        <button onClick="{{ csvClose }}" style="height:50px;border-radius:14px;border:1.5px solid #E6D8C3;background:transparent;font:600 15px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">ยกเลิก</button>
+        <button onClick="{{ csvConfirm }}" style="height:50px;border-radius:14px;border:none;background:#D9822B;color:#fff;font:700 15px 'Anuphan',sans-serif">ดาวน์โหลด</button>
+      </div>
     </div>
   </div>
 </sc-if>
@@ -355,6 +373,7 @@ const LS = 'pakchom-hc-v1';
 const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbymHzhKrvOun1rR3IMwRXWWPCNP_jl5V8qmgzGQQAg_4xGvtGwPGv8O0qxeffYWwyNZeQ/exec';
 const DEFAULT_TOKEN = '11032';
 const AUTO_SYNC_MS = 30000;
+const EXPORT_PASSWORD = '11032';
 // ลิงก์ Google Sheet ที่เผยแพร่ทางเว็บ (ไฟล์ → แชร์ → เผยแพร่ทางเว็บ) ใช้ดึงข้อมูลแสดงผลแบบ CSV
 const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTAW-i0KiYamtB6joElxBQFZReqBGi0hwnmJsXbLHkW73s8h9ZccKc7d9NWx9wF81UQNFUBdA_hnJjJ/pub?output=csv';
 function parseCsv(text) {
@@ -653,6 +672,10 @@ class Component extends DCLogic {
       }
     }));
   }
+  csvConfirm() {
+    if ((this.state.csvPw || '') !== EXPORT_PASSWORD) { this.setState({ csvErr: true, csvPw: '' }); return; }
+    this.setState({ csvOpen: false, csvPw: '', csvErr: false }); this.exportCsv(); this.showToast('กำลังดาวน์โหลดไฟล์ CSV');
+  }
   exportCsv() {
     const H = ['Timestamp','เลขคิว','เลขประจำตัวประชาชน','ชื่อ-นามสกุล','เพศ','วัน/เดือน/ปี เกิด','สัญชาติ','หมู่เลือด','ที่อยู่ปัจจุบัน','จังหวัด','อำเภอ','ตำบล','หมายเลขโทรศัพท์'];
     const esc = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
@@ -667,7 +690,7 @@ class Component extends DCLogic {
   rowView(r) {
     const a = ageOf(r); const cat = catOf(r);
     return {
-      q: CAT_SHORT[cat], color: CAT_COLORS[cat], name: maskName(r),
+      q: CAT_SHORT[cat], color: cat === 'แม่ชี' ? '#FFFFFF' : CAT_COLORS[cat], bd: cat === 'แม่ชี' ? '#A8998A' : 'transparent', fg: cat === 'อื่น ๆ' ? '#FFFFFF' : '#5A3515', name: maskName(r),
       meta: [a != null ? 'อายุ ' + a : null, r.blood ? 'หมู่เลือด ' + r.blood : null, r.tambon ? 'ต.' + r.tambon : null].filter(Boolean).join(' · '),
       time: r.ts ? new Date(r.ts).toLocaleString('th-TH', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '',
       syncLabel: r.demo ? 'ตัวอย่าง' : r.sync === 'synced' ? 'ส่งแล้ว' : 'รอส่ง',
@@ -718,7 +741,7 @@ class Component extends DCLogic {
     const recent = [...filtered].sort((a, b) => String(b.ts).localeCompare(String(a.ts))).slice(0, 5).map(r => this.rowView(r));
 
     const q = s.search.trim().toLowerCase();
-    const listAll = [...filtered].sort((a, b) => String(b.ts).localeCompare(String(a.ts))).filter(r => !q || [fullName(r), r.idCard, r.queue, r.tambon, r.amphoe, r.phone].join(' ').toLowerCase().includes(q.replace(/-/g, '')) || fullName(r).includes(s.search.trim()));
+    const listAll = [...filtered].filter(r => !s.seniorOnly || ageOf(r) >= 60).sort((a, b) => String(b.ts).localeCompare(String(a.ts))).filter(r => !q || [fullName(r), r.idCard, r.queue, r.tambon, r.amphoe, r.phone].join(' ').toLowerCase().includes(q.replace(/-/g, '')) || fullName(r).includes(s.search.trim()));
     const listRows = listAll.slice(0, 200).map(r => this.rowView(r));
 
     const tabsDef = [['dash', 'ภาพรวม'], ['form', 'ลงทะเบียน'], ['list', 'รายชื่อ']];
@@ -758,7 +781,7 @@ class Component extends DCLogic {
     const d = s.detail;
     const detail = d ? {
       ...this.rowView(d), edit: () => this.startEdit(d), cat: catOf(d), sync: d.demo ? 'ข้อมูลตัวอย่าง' : d.sync === 'synced' ? 'บันทึกใน Google Sheet แล้ว' : 'รอส่งเข้า Google Sheet',
-      rows: [['Timestamp', new Date(d.ts).toLocaleString('th-TH')], ['เลขประจำตัวประชาชน', fmtId(d.idCard)], ['เพศ', d.gender], ['วัน/เดือน/ปี เกิด', dobStr(d) + (ageOf(d) != null ? ' (อายุ ' + ageOf(d) + ' ปี)' : '')], ['สัญชาติ', d.nationality], ['หมู่เลือด', d.blood], ['ที่อยู่ปัจจุบัน', d.address], ['ตำบล', d.tambon], ['อำเภอ', d.amphoe], ['จังหวัด', d.province], ['โทรศัพท์', fmtPhone(d.phone || '')]].map(([k, v]) => ({ k, v: v || '—' }))
+      rows: [['วันที่ลงทะเบียน', new Date(d.ts).toLocaleString('th-TH')], ['เลขประจำตัวประชาชน', fmtId(String(d.idCard || '').slice(0, -3) + 'xxx')], ['เพศ', d.gender], ['วัน/เดือน/ปี เกิด', dobStr(d) + (ageOf(d) != null ? ' (อายุ ' + ageOf(d) + ' ปี)' : '')], ['สัญชาติ', d.nationality], ['หมู่เลือด', d.blood], ['ที่อยู่ปัจจุบัน', d.address], ['ตำบล', d.tambon], ['อำเภอ', d.amphoe], ['จังหวัด', d.province], ['โทรศัพท์', d.phone ? fmtPhone(String(d.phone).slice(0, -3) + 'xxx') : '']].map(([k, v]) => ({ k, v: v || '—' }))
     } : { rows: [] };
 
     const connected = !!s.settings.scriptUrl;
@@ -781,6 +804,7 @@ class Component extends DCLogic {
         address: e => this.setF('address', e.target.value),
         phone: e => this.setF('phone', e.target.value.replace(/\D/g, '').slice(0, 10)),
         search: e => this.setState({ search: e.target.value }),
+        csvPw: e => this.setState({ csvPw: e.target.value, csvErr: false }),
         pickerQ: e => this.setState({ pickerQ: e.target.value }),
         scriptUrl: setS('scriptUrl', v => v.trim()), token: setS('token'), pin: setS('pin', v => v.replace(/\D/g, '').slice(0, 4))
       },
@@ -789,7 +813,10 @@ class Component extends DCLogic {
       formTitle: s.editing ? 'แก้ไขข้อมูลผู้ลงทะเบียน' : 'แบบฟอร์มลงทะเบียน', submitLabel: s.editing ? 'บันทึกการแก้ไข' : 'บันทึกการลงทะเบียน',
       cancelEdit: () => this.setState({ form: blank(), touched: false, editing: null, screen: 'list' }),
       submitApp: () => { const e = this.validate(f); const c = Object.keys(e).length; if (c) { this.setState({ touched: true }); this.showToast('ยังมีข้อมูลที่ต้องแก้ไข ' + c + ' รายการ'); return; } this.save(); },
-      listRows, listCount: listAll.length, listEmpty: listAll.length === 0, search: s.search, exportCsv: () => this.exportCsv(),
+      listRows, listCount: listAll.length, listEmpty: listAll.length === 0, search: s.search, exportCsv: () => this.setState({ csvOpen: true, csvPw: '', csvErr: false }),
+      csvOpen: !!s.csvOpen, csvPw: s.csvPw || '', csvErr: !!s.csvErr, csvBd: s.csvErr ? '#B3261E' : '#E6D8C3',
+      csvClose: () => this.setState({ csvOpen: false, csvPw: '', csvErr: false }),
+      csvConfirm: () => this.csvConfirm(), csvKey: e => { if (e.key === 'Enter') this.csvConfirm(); },
       settings: s.settings, connBg: connected ? '#E1EEE6' : '#FBE9D2', connFg: connected ? '#2F6B4F' : '#6E3A08', connLabel: connected ? 'ซิงก์อัตโนมัติทุก 30 วินาที' : 'ยังไม่ตั้งค่า',
       pull: () => this.pull(false), pullLabel: s.pulling ? 'กำลังดึงข้อมูล…' : 'ดึงข้อมูลจาก Sheet',
       pushPending: () => { if (!connected) return this.showToast('กรุณาใส่ Apps Script URL ก่อน'); const p = s.records.filter(r => r.sync !== 'synced'); if (!p.length) return this.showToast('ไม่มีข้อมูลค้างส่ง'); this.push(p); this.showToast('กำลังส่ง ' + p.length + ' รายการ'); },
@@ -821,6 +848,9 @@ class Component extends DCLogic {
       successOpen: !!s.success && !s.kiosk,
       successDash: () => this.setState({ success: null, screen: 'dash' }), successNext: () => this.setState({ success: null, screen: 'form' }),
       toastOn: !!s.toast, toast: s.toast,
+      seniorOnly: !!s.seniorOnly, clearSenior: () => this.setState({ seniorOnly: false }),
+      kpiAll: () => { this.setState({ screen: 'list', seniorOnly: false, search: '' }); window.scrollTo(0, 0); },
+      kpiSenior: () => { this.setState({ screen: 'list', seniorOnly: true, search: '' }); window.scrollTo(0, 0); },
       writeWarnOn: !connected || (!!s.pushErr && pending > 0),
       writeWarn: !connected ? 'ยังไม่ได้ใส่ Apps Script URL (DEFAULT_SCRIPT_URL) ในไฟล์ index.dc.html' : s.pushErr
     };
