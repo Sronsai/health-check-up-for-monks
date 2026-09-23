@@ -35,6 +35,12 @@ a{color:#9A520F}a:hover{color:#6E3A08}
 
   <sc-if value="{{ isDash }}" hint-placeholder-val="{{ true }}">
     <div style="padding:12px 20px 0;display:flex;flex-direction:column;gap:14px">
+      <sc-if value="{{ writeWarnOn }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#FDECEA;border:1.5px solid #B3261E;border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:2px">
+          <div style="font:700 14px 'Anuphan',sans-serif;color:#8C1D18">ข้อมูลยังไม่ถูกบันทึกเข้า Google Sheet</div>
+          <div style="font:500 13px/1.5 'IBM Plex Sans Thai',sans-serif;color:#5E1411">{{ writeWarn }} · ค้างในเครื่องนี้ {{ kpi.pending }} รายการ</div>
+        </div>
+      </sc-if>
 
       <div style="background:#2B1D12;color:#F7F1E6;border-radius:24px;padding:20px;display:flex;gap:16px;align-items:stretch">
         <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px">
@@ -349,7 +355,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
 <script type="text/x-dc" data-dc-script data-props="{&quot;useDemoData&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;ข้อมูล&quot;},&quot;requireIdChecksum&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;ข้อมูล&quot;}}">
 const LS = 'pakchom-hc-v1';
 // วาง Apps Script Web App URL (ลงท้าย /exec) และ Token ที่นี่ เพื่อให้ทุกเครื่องเชื่อมต่อ Google Sheet อัตโนมัติ
-const DEFAULT_SCRIPT_URL = '';
+const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbymHzhKrvOun1rR3IMwRXWWPCNP_jl5V8qmgzGQQAg_4xGvtGwPGv8O0qxeffYWwyNZeQ/exec';
 const DEFAULT_TOKEN = 'pakchom2569';
 const AUTO_SYNC_MS = 30000;
 // ลิงก์ Google Sheet ที่เผยแพร่ทางเว็บ (ไฟล์ → แชร์ → เผยแพร่ทางเว็บ) ใช้ดึงข้อมูลแสดงผลแบบ CSV
@@ -544,9 +550,13 @@ class Component extends DCLogic {
   push(recs) {
     const { scriptUrl, token } = this.state.settings; if (!scriptUrl || !recs.length) return;
     recs.forEach(rec => {
-      fetch(scriptUrl, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(toRow(rec, token)) })
-        .then(() => this.setState(s => ({ records: s.records.map(r => r.uid === rec.uid ? { ...r, sync: 'synced' } : r) })))
-        .catch(() => {});
+      fetch(scriptUrl, { method: 'POST', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(toRow(rec, token)) })
+        .then(r => r.json())
+        .then(j => {
+          if (j.ok || j.error === 'duplicate') this.setState(s => ({ records: s.records.map(r => r.uid === rec.uid ? { ...r, sync: 'synced' } : r), pushErr: '' }));
+          else this.setState({ pushErr: j.error === 'invalid token' ? 'Token ไม่ตรงกับใน Apps Script' : (j.error || 'Apps Script ตอบกลับผิดพลาด') });
+        })
+        .catch(() => this.setState({ pushErr: 'ส่งเข้า Sheet ไม่สำเร็จ — ตรวจ URL /exec และสิทธิ์ "ทุกคน"' }));
     });
   }
   pull(silent) {
@@ -784,7 +794,9 @@ class Component extends DCLogic {
       detailOpen: !!d, detail, closeDetail: () => this.setState({ detail: null }),
       successOpen: !!s.success && !s.kiosk,
       successDash: () => this.setState({ success: null, screen: 'dash' }), successNext: () => this.setState({ success: null, screen: 'form' }),
-      toastOn: !!s.toast, toast: s.toast
+      toastOn: !!s.toast, toast: s.toast,
+      writeWarnOn: !connected || (!!s.pushErr && pending > 0),
+      writeWarn: !connected ? 'ยังไม่ได้ใส่ Apps Script URL (DEFAULT_SCRIPT_URL) ในไฟล์ index.dc.html' : s.pushErr
     };
   }
 }
