@@ -169,7 +169,13 @@ a{color:#9A520F}a:hover{color:#6E3A08}
   <sc-if value="{{ isForm }}" hint-placeholder-val="{{ false }}">
     <div style="padding:12px 20px 0;display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;flex-direction:column;gap:8px">
-        <div style="font:700 24px/1.2 'Anuphan',sans-serif">แบบฟอร์มลงทะเบียน</div>
+        <div style="font:700 24px/1.2 'Anuphan',sans-serif">{{ formTitle }}</div>
+        <sc-if value="{{ isEditing }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;align-items:center;gap:10px;background:#FBE9D2;border:1.5px solid #D9822B;border-radius:14px;padding:10px 12px">
+            <div style="flex:1;min-width:0;font:500 13px/1.5 'IBM Plex Sans Thai',sans-serif;color:#4A3322">กำลังแก้ไขข้อมูลของ <b>{{ editingName }}</b></div>
+            <button onClick="{{ cancelEdit }}" style="flex:none;height:36px;padding:0 12px;border-radius:999px;border:1.5px solid #D9822B;background:#FFFDF8;color:#6E3A08;font:600 13px 'IBM Plex Sans Thai',sans-serif">ยกเลิกการแก้ไข</button>
+          </div>
+        </sc-if>
         <div style="display:flex;align-items:center;gap:10px"><div style="flex:1;height:6px;border-radius:999px;background:#E6D8C3;overflow:hidden"><div style="height:100%;width:{{ progress }}%;background:#D9822B;border-radius:999px;transition:width .3s"></div></div><div style="font:600 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ progress }}%</div></div>
       </div>
 
@@ -262,7 +268,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
 
       <div style="display:flex;gap:10px">
         <button onClick="{{ resetForm }}" style="height:56px;padding:0 20px;border-radius:16px;border:1.5px solid #E6D8C3;background:#FFFDF8;color:#6F5A4A;font:600 15px 'IBM Plex Sans Thai',sans-serif">ล้างข้อมูล</button>
-        <button onClick="{{ submitApp }}" style="flex:1;height:56px;border-radius:16px;border:none;background:#D9822B;color:#fff;font:700 17px 'Anuphan',sans-serif" style-hover="background:#C4721F">บันทึกการลงทะเบียน</button>
+        <button onClick="{{ submitApp }}" style="flex:1;height:56px;border-radius:16px;border:none;background:#D9822B;color:#fff;font:700 17px 'Anuphan',sans-serif" style-hover="background:#C4721F">{{ submitLabel }}</button>
       </div>
     </div>
   </sc-if>
@@ -273,7 +279,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
         <div style="font:700 24px/1.2 'Anuphan',sans-serif">รายชื่อผู้ลงทะเบียน</div>
         <button onClick="{{ exportCsv }}" style="height:38px;padding:0 14px;border-radius:999px;border:1.5px solid #E6D8C3;background:#FFFDF8;font:600 13px 'IBM Plex Sans Thai',sans-serif;color:#2B1D12">ส่งออก CSV</button>
       </div>
-      <input value="{{ search }}" onChange="{{ on.search }}" placeholder="ค้นหาชื่อ, เลขบัตร, ตำบล" style="height:48px;padding:0 16px;border-radius:14px;border:1.5px solid #E6D8C3;background:#FFFDF8;font:500 15px 'IBM Plex Sans Thai',sans-serif;outline:none;color:#2B1D12">
+      <input value="{{ search }}" onChange="{{ on.search }}" placeholder="ค้นหาชื่อ, เลขบัตร, เบอร์โทร, ตำบล เพื่อแก้ไข" style="height:48px;padding:0 16px;border-radius:14px;border:1.5px solid #E6D8C3;background:#FFFDF8;font:500 15px 'IBM Plex Sans Thai',sans-serif;outline:none;color:#2B1D12">
       <div style="display:flex;gap:8px;overflow-x:auto;margin:0 -20px;padding:0 20px">
         <sc-for list="{{ catChips }}" as="c" hint-placeholder-count="5">
           <button onClick="{{ c.on }}" style="flex:none;height:36px;padding:0 12px;border-radius:999px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:600 13px 'IBM Plex Sans Thai',sans-serif">{{ c.label }}</button>
@@ -284,7 +290,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
         <sc-for list="{{ listRows }}" as="r" hint-placeholder-count="8">
           <div onClick="{{ r.on }}" style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #F0E6D6;cursor:pointer" style-hover="background:#FBF5EA">
             <div style="width:40px;height:40px;flex:none;border-radius:12px;background:{{ r.color }};color:#fff;display:grid;place-items:center;font:700 11px 'Anuphan',sans-serif">{{ r.q }}</div>
-            <div style="flex:1;min-width:0"><div style="font:600 14px 'IBM Plex Sans Thai',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</div><div style="font:400 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ r.meta }}</div></div>
+            <div style="flex:1;min-width:0"><div style="font:600 14px 'IBM Plex Sans Thai',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</div><div style="font:400 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ r.meta }}</div><div style="font:600 12px 'IBM Plex Sans Thai',sans-serif;color:#C4661A;margin-top:2px">กดเพื่อแก้ไข</div></div>
             <div style="flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:4px"><span style="font:500 11px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ r.time }}</span><span style="font:600 11px 'IBM Plex Sans Thai',sans-serif;padding:2px 8px;border-radius:999px;background:{{ r.syncBg }};color:{{ r.syncFg }}">{{ r.syncLabel }}</span></div>
           </div>
         </sc-for>
@@ -334,6 +340,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
           <div style="display:flex;gap:12px;padding:11px 14px;border-bottom:1px solid #F0E6D6"><div style="width:120px;flex:none;font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ r.k }}</div><div style="flex:1;font:600 14px/1.5 'IBM Plex Sans Thai',sans-serif">{{ r.v }}</div></div>
         </sc-for>
       </div>
+      <button onClick="{{ detail.edit }}" style="height:54px;border-radius:16px;border:none;background:#D9822B;color:#fff;font:700 16px 'Anuphan',sans-serif" style-hover="background:#C4721F">แก้ไขข้อมูล</button>
     </div>
   </div>
 </sc-if>
@@ -462,7 +469,7 @@ function makeDemo() {
 }
 function loadSaved() { try { if (/[?&]reset=1/.test(location.search)) { localStorage.removeItem(LS); history.replaceState(null, '', location.pathname); } } catch (e) {} try { return JSON.parse(localStorage.getItem(LS) || '{}'); } catch (e) { return {}; } }
 function toRow(r, token) {
-  return { token, timestamp: r.ts, queue: r.queue, idCard: r.idCard, fullName: fullName(r), gender: r.gender, dob: dobStr(r), nationality: r.nationality, blood: r.blood, address: r.address, province: r.province, amphoe: r.amphoe, tambon: r.tambon, phone: r.phone };
+  return { token, action: r.editOf ? 'update' : 'add', originalId: r.editOf || '', timestamp: r.ts, queue: r.queue, idCard: r.idCard, fullName: fullName(r), gender: r.gender, dob: dobStr(r), nationality: r.nationality, blood: r.blood, address: r.address, province: r.province, amphoe: r.amphoe, tambon: r.tambon, phone: r.phone };
 }
 function fromRow(x) {
   const fn = x.fullName || ''; let title = 'อื่น ๆ', name = fn;
@@ -510,8 +517,10 @@ class Component extends DCLogic {
   useDemo() { return this.props.useDemoData === true; }
   all() {
     const s = this.state; const rids = new Set(s.remote.map(r => r.idCard));
-    const local = s.records.filter(r => !(r.sync === 'synced' && rids.has(r.idCard)));
-    return [...(this.useDemo() ? this.demo : []), ...s.remote, ...local];
+    const fresh = Date.now() - 10 * 60 * 1000;
+    const local = s.records.filter(r => !(r.sync === 'synced' && rids.has(r.idCard) && !(r.editOf && new Date(r.updatedAt).getTime() > fresh)));
+    const hide = new Set(); local.forEach(r => { if (r.editOf) { hide.add(r.editOf); hide.add(r.idCard); } });
+    return [...(this.useDemo() ? this.demo : []), ...s.remote.filter(r => !hide.has(r.idCard)), ...local];
   }
   setF(k, v) { this.setState(s => ({ form: { ...s.form, [k]: v } })); }
 
@@ -519,7 +528,7 @@ class Component extends DCLogic {
     const e = {}; const all = this.all();
     if (!f.idCard) e.idCard = 'กรุณากรอกเลขประจำตัวประชาชน';
     else if (f.idCard.length !== 13) e.idCard = 'ต้องมี 13 หลัก (กรอกแล้ว ' + f.idCard.length + ' หลัก)';
-    else if (all.some(r => r.idCard === f.idCard)) e.idCard = 'เลขประจำตัวนี้ลงทะเบียนไว้แล้ว';
+    else if (all.some(r => r.idCard === f.idCard && !(this.state.editing && r.idCard === this.state.editing.origId))) e.idCard = 'เลขประจำตัวนี้ลงทะเบียนไว้แล้ว';
     if (!f.title) e.title = 'กรุณาเลือกสถานะ / คำนำหน้า';
     const nm = (f.name || '').trim();
     if (!nm) e.name = 'กรุณากรอกชื่อ-นามสกุล'; else if (!/\S+\s+\S+/.test(nm)) e.name = 'กรุณากรอกทั้งชื่อและนามสกุล โดยเว้นวรรคระหว่างกัน';
@@ -536,7 +545,24 @@ class Component extends DCLogic {
     return e;
   }
 
+  startEdit(r) {
+    const keys = ['idCard', 'title', 'name', 'gender', 'dobD', 'dobM', 'dobY', 'nationality', 'blood', 'address', 'province', 'amphoe', 'tambon', 'phone'];
+    const form = blank(); keys.forEach(k => { if (r[k] != null && r[k] !== '') form[k] = r[k]; });
+    form.province = 'เลย';
+    this.setState({ form, touched: false, detail: null, screen: 'form', editing: { origId: r.editOf || r.idCard, ts: r.ts, queue: r.queue, demo: !!r.demo, uid: r.uid, name: maskName(r) } });
+    window.scrollTo(0, 0);
+  }
+  saveEdit() {
+    const s = this.state; const ed = s.editing; const f = s.form;
+    const rec = { ...f, name: f.name.trim(), address: f.address.trim(), ts: ed.ts, queue: ed.queue, sync: 'pending', uid: 'e' + Date.now(), editOf: ed.origId, updatedAt: new Date().toISOString() };
+    if (ed.demo) { const i = this.demo.findIndex(r => r.uid === ed.uid); if (i >= 0) this.demo[i] = { ...this.demo[i], ...rec, uid: ed.uid, demo: true, sync: 'synced', editOf: undefined }; }
+    this.setState(st => ({
+      records: ed.demo ? st.records : [...st.records.filter(r => r.uid !== ed.uid && r.editOf !== ed.origId && !(r.idCard === ed.origId && !r.editOf && r.sync !== 'synced')), rec],
+      form: blank(), touched: false, editing: null, screen: 'list'
+    }), () => { if (!ed.demo) this.push([rec]); window.scrollTo(0, 0); this.showToast('แก้ไขข้อมูลเรียบร้อย · ' + maskName(rec), 4000); });
+  }
   save() {
+    if (this.state.editing) return this.saveEdit();
     const all = this.all(); const f = this.state.form;
     const rec = { ...f, name: f.name.trim(), address: f.address.trim(), ts: new Date().toISOString(), queue: 'PC-' + String(all.length + 1).padStart(4, '0'), sync: 'pending', uid: 'u' + Date.now() };
     this.setState(s => ({ records: [...s.records, rec], form: blank(), touched: false, screen: 'dash', catFilter: 'all' }), () => { this.push([rec]); window.scrollTo(0, 0); this.showToast('ลงทะเบียนเรียบร้อย · ' + maskName(rec), 4000); });
@@ -548,7 +574,7 @@ class Component extends DCLogic {
       fetch(scriptUrl, { method: 'POST', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(toRow(rec, token)) })
         .then(r => r.json())
         .then(j => {
-          if (j.ok || j.error === 'duplicate') this.setState(s => ({ records: s.records.map(r => r.uid === rec.uid ? { ...r, sync: 'synced' } : r), pushErr: '' }));
+          if (j.ok || (j.error === 'duplicate' && !rec.editOf)) this.setState(s => ({ records: s.records.map(r => r.uid === rec.uid ? { ...r, sync: 'synced' } : r), pushErr: '' }));
           else this.setState({ pushErr: j.error === 'invalid token' ? 'Token ไม่ตรงกับใน Apps Script' : (j.error || 'Apps Script ตอบกลับผิดพลาด') });
         })
         .catch(() => this.setState({ pushErr: 'ส่งเข้า Sheet ไม่สำเร็จ — ตรวจ URL /exec และสิทธิ์ "ทุกคน"' }));
@@ -563,7 +589,7 @@ class Component extends DCLogic {
         const remote = csvToRows(text).map(fromRow).map((x, k) => ({ ...x, queue: x.queue || 'PC-' + String(k + 1).padStart(4, '0') }));
         const ids = new Set(remote.map(r => r.idCard)); const fresh = Date.now() - 10 * 60 * 1000;
         this.setState(s => ({ remote, pulling: false, lastSync: new Date().toISOString(), pullErr: false,
-          records: s.records.filter(r => r.sync !== 'synced' || (!ids.has(r.idCard) && new Date(r.ts).getTime() > fresh)) }));
+          records: s.records.filter(r => r.sync !== 'synced' || (r.editOf ? new Date(r.updatedAt).getTime() > fresh : (!ids.has(r.idCard) && new Date(r.ts).getTime() > fresh))) }));
         if (!silent) this.showToast('ดึงข้อมูลสำเร็จ ' + remote.length + ' รายการ');
       })
       .catch(err => { this.setState({ pulling: false, pullErr: true }); if (!silent) this.showToast('ดึงข้อมูลไม่สำเร็จ: ' + (err.message || '')); });
@@ -696,7 +722,7 @@ class Component extends DCLogic {
     const listRows = listAll.slice(0, 200).map(r => this.rowView(r));
 
     const tabsDef = [['dash', 'ภาพรวม'], ['form', 'ลงทะเบียน'], ['list', 'รายชื่อ']];
-    const tabs = tabsDef.map(([k, l]) => ({ label: l, on: () => { this.setState({ screen: k }); window.scrollTo(0, 0); }, bg: s.screen === k ? '#2B1D12' : 'transparent', fg: s.screen === k ? '#F7F1E6' : '#6F5A4A', bar: s.screen === k ? '#D9822B' : 'transparent' }));
+    const tabs = tabsDef.map(([k, l]) => ({ label: l, on: () => { this.setState(k === 'form' && s.editing ? { screen: k, editing: null, form: blank(), touched: false } : { screen: k }); window.scrollTo(0, 0); }, bg: s.screen === k ? '#2B1D12' : 'transparent', fg: s.screen === k ? '#F7F1E6' : '#6F5A4A', bar: s.screen === k ? '#D9822B' : 'transparent' }));
 
     const titleChips = TITLES.map(t => this.chip(f.title === t.label, t.label, () => this.pickTitle(t)));
     const genderChips = ['ชาย', 'หญิง'].map(g => this.chip(f.gender === g, g, () => this.setF('gender', g)));
@@ -731,7 +757,7 @@ class Component extends DCLogic {
 
     const d = s.detail;
     const detail = d ? {
-      ...this.rowView(d), cat: catOf(d), sync: d.demo ? 'ข้อมูลตัวอย่าง' : d.sync === 'synced' ? 'บันทึกใน Google Sheet แล้ว' : 'รอส่งเข้า Google Sheet',
+      ...this.rowView(d), edit: () => this.startEdit(d), cat: catOf(d), sync: d.demo ? 'ข้อมูลตัวอย่าง' : d.sync === 'synced' ? 'บันทึกใน Google Sheet แล้ว' : 'รอส่งเข้า Google Sheet',
       rows: [['Timestamp', new Date(d.ts).toLocaleString('th-TH')], ['เลขประจำตัวประชาชน', fmtId(d.idCard)], ['เพศ', d.gender], ['วัน/เดือน/ปี เกิด', dobStr(d) + (ageOf(d) != null ? ' (อายุ ' + ageOf(d) + ' ปี)' : '')], ['สัญชาติ', d.nationality], ['หมู่เลือด', d.blood], ['ที่อยู่ปัจจุบัน', d.address], ['ตำบล', d.tambon], ['อำเภอ', d.amphoe], ['จังหวัด', d.province], ['โทรศัพท์', fmtPhone(d.phone || '')]].map(([k, v]) => ({ k, v: v || '—' }))
     } : { rows: [] };
 
@@ -758,7 +784,10 @@ class Component extends DCLogic {
         pickerQ: e => this.setState({ pickerQ: e.target.value }),
         scriptUrl: setS('scriptUrl', v => v.trim()), token: setS('token'), pin: setS('pin', v => v.replace(/\D/g, '').slice(0, 4))
       },
-      resetForm: () => this.setState({ form: blank(), touched: false }),
+      resetForm: () => this.setState({ form: blank(), touched: false, editing: null }),
+      isEditing: !!s.editing, editingName: s.editing ? s.editing.name : '',
+      formTitle: s.editing ? 'แก้ไขข้อมูลผู้ลงทะเบียน' : 'แบบฟอร์มลงทะเบียน', submitLabel: s.editing ? 'บันทึกการแก้ไข' : 'บันทึกการลงทะเบียน',
+      cancelEdit: () => this.setState({ form: blank(), touched: false, editing: null, screen: 'list' }),
       submitApp: () => { const e = this.validate(f); const c = Object.keys(e).length; if (c) { this.setState({ touched: true }); this.showToast('ยังมีข้อมูลที่ต้องแก้ไข ' + c + ' รายการ'); return; } this.save(); },
       listRows, listCount: listAll.length, listEmpty: listAll.length === 0, search: s.search, exportCsv: () => this.exportCsv(),
       settings: s.settings, connBg: connected ? '#E1EEE6' : '#FBE9D2', connFg: connected ? '#2F6B4F' : '#6E3A08', connLabel: connected ? 'ซิงก์อัตโนมัติทุก 30 วินาที' : 'ยังไม่ตั้งค่า',
@@ -767,7 +796,7 @@ class Component extends DCLogic {
       lastSyncText: s.lastSync ? 'ซิงก์ล่าสุด ' + new Date(s.lastSync).toLocaleString('th-TH') : 'ยังไม่เคยซิงก์',
       toggleDemo: () => this.setState({ hideDemo: !s.hideDemo }), demoTrack: this.useDemo() ? '#2F6B4F' : '#D5C6B0', demoKnob: this.useDemo() ? 25 : 3,
 
-      goForm: () => { this.setState({ screen: 'form' }); window.scrollTo(0, 0); },
+      goForm: () => { this.setState(s.editing ? { screen: 'form', editing: null, form: blank(), touched: false } : { screen: 'form' }); window.scrollTo(0, 0); },
       openKiosk: () => { this.setState({ kiosk: true, kStep: 0, form: blank(), kTouched: false, success: null }); try { document.documentElement.requestFullscreen && document.documentElement.requestFullscreen().catch(() => {}); } catch (e) {} },
       inKiosk: s.kiosk, ks, kShowProgress: s.kStep >= 1 && s.kStep <= 7, kShowTitle: s.kStep >= 1 && s.kStep <= 7, kShowNav: s.kStep >= 1 && s.kStep <= 7,
       kDots: [1, 2, 3, 4, 5, 6, 7].map(i => ({ bg: i < s.kStep ? '#2F6B4F' : i === s.kStep ? '#D9822B' : '#E6D8C3' })),
