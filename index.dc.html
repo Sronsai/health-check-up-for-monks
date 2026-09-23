@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ลงทะเบียนตรวจสุขภาพพระสงฆ์ สามเณร แม่ชี · รพ.ปากชม</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EDE3D2;font-family:'IBM Plex Sans Thai',sans-serif;color:#2B1D12;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box}
+button{font-family:inherit;cursor:pointer}
+input,textarea{font-family:inherit}
+a{color:#9A520F}a:hover{color:#6E3A08}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+</style>
+</helmet>
+
+<div style="max-width:480px;margin:0 auto;min-height:100vh;background:#F7F1E6;position:relative;padding-bottom:96px">
+
+  <div style="padding:18px 20px 6px;display:flex;align-items:center;gap:12px">
+    <div style="width:46px;height:46px;flex:none;border-radius:14px;background:#D9822B;color:#fff;display:grid;place-items:center;font:700 13px/1 'Anuphan',sans-serif;letter-spacing:.02em">รพ.ปช</div>
+    <div style="flex:1;min-width:0">
+      <div style="font:500 12px/1.4 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">โรงพยาบาลปากชม · จังหวัดเลย</div>
+      <div style="font:700 16px/1.3 'Anuphan',sans-serif;color:#2B1D12;text-wrap:pretty">ตรวจสุขภาพพระสงฆ์ สามเณร แม่ชี</div>
+    </div>
+    <button onClick="{{ goForm }}" style="flex:none;height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #2B1D12;background:#2B1D12;color:#F7F1E6;font:600 14px 'Anuphan',sans-serif" style-hover="background:#4A3322">ลงทะเบียน</button>
+  </div>
+
+  <sc-if value="{{ isDash }}" hint-placeholder-val="{{ true }}">
+    <div style="padding:12px 20px 0;display:flex;flex-direction:column;gap:14px">
+
+      <div style="background:#2B1D12;color:#F7F1E6;border-radius:24px;padding:20px;display:flex;gap:16px;align-items:stretch">
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#E8C9A3;letter-spacing:.04em">วันตรวจสุขภาพ</div>
+          <div style="font:700 26px/1.15 'Anuphan',sans-serif">12 ธันวาคม 2569</div>
+          <div style="font:400 13px/1.5 'IBM Plex Sans Thai',sans-serif;color:#E6D8C3">ณ โรงพยาบาลปากชม อ.ปากชม จ.เลย</div>
+          <div style="margin-top:6px;display:flex;align-items:center;gap:8px;font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#E6D8C3">
+            <span style="width:8px;height:8px;border-radius:50%;background:{{ sheetDot }}"></span>{{ sheetStatus }}
+          </div>
+        </div>
+        <div style="flex:none;width:92px;border-radius:18px;background:#D9822B;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#fff">
+          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif">อีก</div>
+          <div style="font:700 36px/1 'Anuphan',sans-serif">{{ daysLeft }}</div>
+          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif">วัน</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:8px;overflow-x:auto;margin:0 -20px;padding:2px 20px">
+        <sc-for list="{{ catChips }}" as="c" hint-placeholder-count="5">
+          <button onClick="{{ c.on }}" style="flex:none;height:38px;padding:0 14px;border-radius:999px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:600 14px 'IBM Plex Sans Thai',sans-serif;display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:{{ c.dot }}"></span>{{ c.label }}</button>
+        </sc-for>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:10px">
+        <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:14px">
+          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">ลงทะเบียนแล้ว</div>
+          <div style="font:700 34px/1.1 'Anuphan',sans-serif;color:#2B1D12;margin-top:4px">{{ kpi.total }}</div>
+          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#2F6B4F;margin-top:2px">+{{ kpi.today }} วันนี้</div>
+        </div>
+        <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:14px">
+          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">อายุ 60+</div>
+          <div style="font:700 28px/1.2 'Anuphan',sans-serif;color:#2B1D12;margin-top:4px">{{ kpi.senior }}</div>
+          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ kpi.seniorPct }}% ของทั้งหมด</div>
+        </div>
+        <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:14px">
+          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">รอส่ง Sheet</div>
+          <div style="font:700 28px/1.2 'Anuphan',sans-serif;color:{{ kpi.pendingColor }};margin-top:4px">{{ kpi.pending }}</div>
+          <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">รายการ</div>
+        </div>
+      </div>
+
+      <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:600 16px 'Anuphan',sans-serif">สัดส่วนผู้ลงทะเบียน</div><div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">ทั้งหมด {{ allTotal }} รูป/คน</div></div>
+        <div style="display:flex;height:16px;border-radius:999px;overflow:hidden;background:#EFE6D6;gap:2px">
+          <sc-for list="{{ cats }}" as="c" hint-placeholder-count="4">
+            <div onClick="{{ c.on }}" style="width:{{ c.pct }}%;background:{{ c.color }};cursor:pointer;opacity:{{ c.op }}"></div>
+          </sc-for>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px 14px">
+          <sc-for list="{{ cats }}" as="c" hint-placeholder-count="4">
+            <button onClick="{{ c.on }}" style="display:flex;align-items:center;gap:8px;background:none;border:none;padding:0;text-align:left;opacity:{{ c.op }}">
+              <span style="width:10px;height:10px;border-radius:3px;background:{{ c.color }};flex:none"></span>
+              <span style="flex:1;font:500 14px 'IBM Plex Sans Thai',sans-serif;color:#2B1D12">{{ c.label }}</span>
+              <span style="font:700 15px 'Anuphan',sans-serif;color:#2B1D12">{{ c.count }}</span>
+              <span style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A;width:34px;text-align:right">{{ c.pct }}%</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:600 16px 'Anuphan',sans-serif">ลงทะเบียนรายวัน</div><div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">14 วันล่าสุด</div></div>
+        <div style="display:flex;align-items:flex-end;gap:5px;height:130px;padding-top:16px">
+          <sc-for list="{{ trend }}" as="t" hint-placeholder-count="14">
+            <div style="flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px">
+              <div style="font:600 11px 'Anuphan',sans-serif;color:#6F5A4A">{{ t.cnt }}</div>
+              <div style="width:100%;height:{{ t.h }}%;min-height:3px;border-radius:6px 6px 2px 2px;background:{{ t.color }}"></div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;gap:5px;margin-top:-4px">
+          <sc-for list="{{ trend }}" as="t" hint-placeholder-count="14">
+            <div style="flex:1;text-align:center;font:500 11px 'IBM Plex Sans Thai',sans-serif;color:{{ t.lc }}">{{ t.label }}</div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:12px">
+        <div style="font:600 16px 'Anuphan',sans-serif">ช่วงอายุ</div>
+        <sc-for list="{{ ages }}" as="a" hint-placeholder-count="5">
+          <div style="display:grid;grid-template-columns:64px minmax(0,1fr) 30px;align-items:center;gap:10px">
+            <div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ a.label }}</div>
+            <div style="height:12px;border-radius:999px;background:#EFE6D6;overflow:hidden"><div style="height:100%;width:{{ a.w }}%;border-radius:999px;background:{{ a.color }}"></div></div>
+            <div style="font:700 14px 'Anuphan',sans-serif;text-align:right">{{ a.count }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:10px">
+        <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px">
+          <div style="font:600 15px 'Anuphan',sans-serif">หมู่เลือด</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+            <sc-for list="{{ blood }}" as="b" hint-placeholder-count="5">
+              <div style="border-radius:12px;background:{{ b.bg }};padding:8px 6px;text-align:center">
+                <div style="font:700 16px 'Anuphan',sans-serif;color:{{ b.fg }}">{{ b.label }}</div>
+                <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:{{ b.fg }}">{{ b.count }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px">
+          <div style="font:600 15px 'Anuphan',sans-serif">เพศ</div>
+          <div style="width:96px;height:96px;border-radius:50%;margin:0 auto;background:{{ genderRing }};display:grid;place-items:center">
+            <div style="width:64px;height:64px;border-radius:50%;background:#FFFDF8;display:grid;place-items:center;font:700 16px 'Anuphan',sans-serif">{{ gender.malePct }}%</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">
+            <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:2px;background:#D9822B"></span>ชาย {{ gender.male }}</span>
+            <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:2px;background:#A8998A"></span>หญิง {{ gender.female }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:12px">
+        <div style="font:600 16px 'Anuphan',sans-serif">พื้นที่ (ตำบล) สูงสุด</div>
+        <sc-for list="{{ areas }}" as="a" hint-placeholder-count="5">
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="display:flex;justify-content:space-between;gap:8px"><span style="font:500 14px 'IBM Plex Sans Thai',sans-serif">{{ a.label }} <span style="color:#6F5A4A;font-size:12px">{{ a.sub }}</span></span><span style="font:700 14px 'Anuphan',sans-serif">{{ a.count }}</span></div>
+            <div style="height:8px;border-radius:999px;background:#EFE6D6;overflow:hidden"><div style="height:100%;width:{{ a.w }}%;background:#2F6B4F;border-radius:999px"></div></div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:8px 0">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 18px"><div style="font:600 16px 'Anuphan',sans-serif">ลงทะเบียนล่าสุด</div><button onClick="{{ goList }}" style="background:none;border:none;font:600 13px 'IBM Plex Sans Thai',sans-serif;color:#9A520F">ดูทั้งหมด</button></div>
+        <sc-for list="{{ recent }}" as="r" hint-placeholder-count="5">
+          <div onClick="{{ r.on }}" style="display:flex;align-items:center;gap:12px;padding:10px 18px;border-top:1px solid #F0E6D6;cursor:pointer" style-hover="background:#FBF5EA">
+            <div style="width:40px;height:40px;flex:none;border-radius:12px;background:{{ r.color }};color:#fff;display:grid;place-items:center;font:700 11px 'Anuphan',sans-serif">{{ r.q }}</div>
+            <div style="flex:1;min-width:0"><div style="font:600 14px 'IBM Plex Sans Thai',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</div><div style="font:400 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ r.meta }}</div></div>
+            <div style="font:500 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A;text-align:right;flex:none">{{ r.time }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isForm }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:12px 20px 0;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="font:700 24px/1.2 'Anuphan',sans-serif">แบบฟอร์มลงทะเบียน</div>
+        <div style="display:flex;align-items:center;gap:10px"><div style="flex:1;height:6px;border-radius:999px;background:#E6D8C3;overflow:hidden"><div style="height:100%;width:{{ progress }}%;background:#D9822B;border-radius:999px;transition:width .3s"></div></div><div style="font:600 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ progress }}%</div></div>
+      </div>
+
+      <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:16px">
+        <div style="font:600 13px 'IBM Plex Sans Thai',sans-serif;color:#9A520F;letter-spacing:.04em">1 · ข้อมูลส่วนตัว</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">เลขประจำตัวประชาชน <span style="color:#B3261E">*</span></label>
+          <input inputMode="numeric" value="{{ fv.idCard }}" onChange="{{ on.idCard }}" placeholder="X-XXXX-XXXXX-XX-X" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid {{ bc.idCard }};background:#fff;font:600 18px 'Anuphan',sans-serif;letter-spacing:.06em;color:#2B1D12;outline:none">
+          <sc-if value="{{ has.idCard }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">{{ err.idCard }}</div></sc-if>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">สถานะ / คำนำหน้า <span style="color:#B3261E">*</span></label>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+            <sc-for list="{{ titleChips }}" as="c" hint-placeholder-count="4">
+              <button onClick="{{ c.on }}" style="height:44px;border-radius:12px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:600 14px 'IBM Plex Sans Thai',sans-serif">{{ c.label }}</button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ has.title }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">{{ err.title }}</div></sc-if>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">ชื่อ-นามสกุล <span style="color:#B3261E">*</span></label>
+          <div style="display:flex;align-items:center;height:52px;border-radius:14px;border:1.5px solid {{ bc.name }};background:#fff;overflow:hidden">
+            <sc-if value="{{ hasPrefix }}" hint-placeholder-val="{{ false }}"><span style="padding:0 4px 0 16px;font:600 16px 'IBM Plex Sans Thai',sans-serif;color:#9A520F">{{ prefix }}</span></sc-if>
+            <input value="{{ f.name }}" onChange="{{ on.name }}" placeholder="ชื่อ นามสกุล" style="flex:1;min-width:0;height:100%;padding:0 16px 0 8px;border:none;outline:none;background:transparent;font:500 16px 'IBM Plex Sans Thai',sans-serif;color:#2B1D12">
+          </div>
+          <sc-if value="{{ has.name }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">{{ err.name }}</div></sc-if>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">เพศ <span style="color:#B3261E">*</span></label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <sc-for list="{{ genderChips }}" as="c" hint-placeholder-count="2">
+              <button onClick="{{ c.on }}" style="height:48px;border-radius:12px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:600 15px 'IBM Plex Sans Thai',sans-serif">{{ c.label }}</button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ has.gender }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">{{ err.gender }}</div></sc-if>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">วัน / เดือน / ปี เกิด (พ.ศ.) <span style="color:#B3261E">*</span></label>
+          <div style="display:grid;grid-template-columns:0.8fr 1.6fr 1fr;gap:8px">
+            <sc-for list="{{ dobPickers }}" as="p" hint-placeholder-count="3">
+              <button onClick="{{ p.on }}" style="height:52px;padding:0 12px;border-radius:14px;border:1.5px solid {{ p.bd }};background:#fff;color:{{ p.fg }};font:500 15px 'IBM Plex Sans Thai',sans-serif;display:flex;align-items:center;justify-content:space-between;gap:4px;min-width:0"><span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.display }}</span><span style="color:#9A520F;font-size:11px">▼</span></button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ hasAge }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#2F6B4F">อายุ {{ ageText }}</div></sc-if>
+          <sc-if value="{{ has.dob }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">{{ err.dob }}</div></sc-if>
+        </div>
+      </div>
+
+      <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:16px">
+        <div style="font:600 13px 'IBM Plex Sans Thai',sans-serif;color:#9A520F;letter-spacing:.04em">2 · สัญชาติและหมู่เลือด</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">สัญชาติ <span style="color:#B3261E">*</span></label>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ natChips }}" as="c" hint-placeholder-count="5">
+              <button onClick="{{ c.on }}" style="height:42px;padding:0 16px;border-radius:999px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:600 14px 'IBM Plex Sans Thai',sans-serif">{{ c.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">หมู่เลือด <span style="color:#B3261E">*</span></label>
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px">
+            <sc-for list="{{ bloodChips }}" as="c" hint-placeholder-count="5">
+              <button onClick="{{ c.on }}" style="height:48px;border-radius:12px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:700 15px 'Anuphan',sans-serif">{{ c.label }}</button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ has.blood }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">{{ err.blood }}</div></sc-if>
+        </div>
+      </div>
+
+      <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:16px">
+        <div style="font:600 13px 'IBM Plex Sans Thai',sans-serif;color:#9A520F;letter-spacing:.04em">3 · ที่อยู่ปัจจุบันและการติดต่อ</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">ที่อยู่ (บ้านเลขที่ / หมู่ / วัด / สำนักสงฆ์) <span style="color:#B3261E">*</span></label>
+          <textarea value="{{ f.address }}" onChange="{{ on.address }}" rows="2" placeholder="เช่น วัดศรีสุทธาวาส 12 หมู่ 3" style="padding:14px 16px;border-radius:14px;border:1.5px solid {{ bc.address }};background:#fff;font:500 16px/1.5 'IBM Plex Sans Thai',sans-serif;color:#2B1D12;outline:none;resize:none"></textarea>
+          <sc-if value="{{ has.address }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">{{ err.address }}</div></sc-if>
+        </div>
+        <sc-for list="{{ geoPickers }}" as="p" hint-placeholder-count="3">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">{{ p.label }} <span style="color:#B3261E">*</span></label>
+            <button onClick="{{ p.on }}" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid {{ p.bd }};background:#fff;color:{{ p.fg }};opacity:{{ p.op }};font:500 16px 'IBM Plex Sans Thai',sans-serif;display:flex;align-items:center;justify-content:space-between;text-align:left"><span>{{ p.display }}</span><span style="color:#9A520F;font-size:11px;opacity:{{ p.arrow }}">▼</span></button>
+            <sc-if value="{{ p.hasErr }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">{{ p.err }}</div></sc-if>
+          </div>
+        </sc-for>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label style="font:600 14px 'IBM Plex Sans Thai',sans-serif">หมายเลขโทรศัพท์ <span style="color:#B3261E">*</span></label>
+          <input inputMode="tel" value="{{ fv.phone }}" onChange="{{ on.phone }}" placeholder="08X-XXX-XXXX" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid {{ bc.phone }};background:#fff;font:600 18px 'Anuphan',sans-serif;letter-spacing:.04em;color:#2B1D12;outline:none">
+          <sc-if value="{{ has.phone }}" hint-placeholder-val="{{ false }}"><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#B3261E">{{ err.phone }}</div></sc-if>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px">
+        <button onClick="{{ resetForm }}" style="height:56px;padding:0 20px;border-radius:16px;border:1.5px solid #E6D8C3;background:#FFFDF8;color:#6F5A4A;font:600 15px 'IBM Plex Sans Thai',sans-serif">ล้างข้อมูล</button>
+        <button onClick="{{ submitApp }}" style="flex:1;height:56px;border-radius:16px;border:none;background:#D9822B;color:#fff;font:700 17px 'Anuphan',sans-serif" style-hover="background:#C4721F">บันทึกการลงทะเบียน</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isList }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:12px 20px 0;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+        <div style="font:700 24px/1.2 'Anuphan',sans-serif">รายชื่อผู้ลงทะเบียน</div>
+        <button onClick="{{ exportCsv }}" style="height:38px;padding:0 14px;border-radius:999px;border:1.5px solid #E6D8C3;background:#FFFDF8;font:600 13px 'IBM Plex Sans Thai',sans-serif;color:#2B1D12">ส่งออก CSV</button>
+      </div>
+      <input value="{{ search }}" onChange="{{ on.search }}" placeholder="ค้นหาชื่อ, เลขบัตร, เลขคิว, ตำบล" style="height:48px;padding:0 16px;border-radius:14px;border:1.5px solid #E6D8C3;background:#FFFDF8;font:500 15px 'IBM Plex Sans Thai',sans-serif;outline:none;color:#2B1D12">
+      <div style="display:flex;gap:8px;overflow-x:auto;margin:0 -20px;padding:0 20px">
+        <sc-for list="{{ catChips }}" as="c" hint-placeholder-count="5">
+          <button onClick="{{ c.on }}" style="flex:none;height:36px;padding:0 12px;border-radius:999px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:600 13px 'IBM Plex Sans Thai',sans-serif">{{ c.label }}</button>
+        </sc-for>
+      </div>
+      <div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">พบ {{ listCount }} รายการ</div>
+      <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;overflow:hidden">
+        <sc-for list="{{ listRows }}" as="r" hint-placeholder-count="8">
+          <div onClick="{{ r.on }}" style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #F0E6D6;cursor:pointer" style-hover="background:#FBF5EA">
+            <div style="width:40px;height:40px;flex:none;border-radius:12px;background:{{ r.color }};color:#fff;display:grid;place-items:center;font:700 11px 'Anuphan',sans-serif">{{ r.q }}</div>
+            <div style="flex:1;min-width:0"><div style="font:600 14px 'IBM Plex Sans Thai',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</div><div style="font:400 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ r.meta }}</div></div>
+            <div style="flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:4px"><span style="font:500 11px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ r.time }}</span><span style="font:600 11px 'IBM Plex Sans Thai',sans-serif;padding:2px 8px;border-radius:999px;background:{{ r.syncBg }};color:{{ r.syncFg }}">{{ r.syncLabel }}</span></div>
+          </div>
+        </sc-for>
+        <sc-if value="{{ listEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding:32px;text-align:center;font:500 14px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">ไม่พบรายการที่ค้นหา</div></sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isSettings }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:12px 20px 0;display:flex;flex-direction:column;gap:14px">
+      <div style="font:700 24px/1.2 'Anuphan',sans-serif">ตั้งค่าระบบ</div>
+      <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between"><div style="font:600 16px 'Anuphan',sans-serif">เชื่อมต่อ Google Sheet</div><span style="font:600 12px 'IBM Plex Sans Thai',sans-serif;padding:3px 10px;border-radius:999px;background:{{ connBg }};color:{{ connFg }}">{{ connLabel }}</span></div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label style="font:600 13px 'IBM Plex Sans Thai',sans-serif">Apps Script Web App URL</label>
+          <input value="{{ settings.scriptUrl }}" onChange="{{ on.scriptUrl }}" placeholder="https://script.google.com/macros/s/…/exec" style="height:48px;padding:0 14px;border-radius:12px;border:1.5px solid #E6D8C3;background:#fff;font:500 13px ui-monospace,Menlo,monospace;outline:none;color:#2B1D12">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label style="font:600 13px 'IBM Plex Sans Thai',sans-serif">รหัสลับ (Token) — ต้องตรงกับใน Apps Script</label>
+          <input value="{{ settings.token }}" onChange="{{ on.token }}" placeholder="เช่น pakchom2569" style="height:48px;padding:0 14px;border-radius:12px;border:1.5px solid #E6D8C3;background:#fff;font:500 14px ui-monospace,Menlo,monospace;outline:none;color:#2B1D12">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <button onClick="{{ pull }}" style="height:46px;border-radius:12px;border:none;background:#2B1D12;color:#F7F1E6;font:600 14px 'IBM Plex Sans Thai',sans-serif">{{ pullLabel }}</button>
+          <button onClick="{{ pushPending }}" style="height:46px;border-radius:12px;border:1.5px solid #D9822B;background:#FBE9D2;color:#6E3A08;font:600 14px 'IBM Plex Sans Thai',sans-serif">ส่งข้อมูลค้าง ({{ kpi.pending }})</button>
+        </div>
+        <div style="font:400 12px/1.5 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ lastSyncText }} · <a href="https://docs.google.com/spreadsheets/d/1iyxRCc532s3NlFGmMoEkWqnautD9RrXQz4nvPUEY9pc/edit" target="_blank">เปิด Google Sheet</a></div>
+      </div>
+
+      <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;align-items:center;gap:12px">
+        <div style="flex:1"><div style="font:600 15px 'Anuphan',sans-serif">แสดงข้อมูลตัวอย่าง</div><div style="font:400 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">ข้อมูลจำลอง 64 รายการ ไม่ถูกส่งเข้า Sheet</div></div>
+        <button onClick="{{ toggleDemo }}" style="width:52px;height:30px;border-radius:999px;border:none;background:{{ demoTrack }};position:relative;padding:0"><span style="position:absolute;top:3px;left:{{ demoKnob }}px;width:24px;height:24px;border-radius:50%;background:#fff;transition:left .2s"></span></button>
+      </div>
+
+      <div style="background:#FBE9D2;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:8px;font:400 13px/1.6 'IBM Plex Sans Thai',sans-serif;color:#4A3322">
+        <div style="font:600 15px 'Anuphan',sans-serif;color:#2B1D12">วิธีตั้งค่าครั้งแรก</div>
+        <div>1. เปิด Google Sheet → ส่วนขยาย → Apps Script แล้ววางโค้ดจากไฟล์ <b>apps-script/Code.gs</b></div>
+        <div>2. แก้ค่า TOKEN ในโค้ด แล้วกด ทำให้ใช้งานได้ → เว็บแอป (สิทธิ์: ทุกคน)</div>
+        <div>3. คัดลอก URL ที่ลงท้ายด้วย /exec มาวางด้านบน พร้อม Token เดียวกัน</div>
+        <div>4. กด "ดึงข้อมูลจาก Sheet" เพื่อทดสอบการเชื่อมต่อ</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;z-index:20;padding:8px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(247,241,230,.94);backdrop-filter:blur(12px);border-top:1px solid #E6D8C3;display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+      <button onClick="{{ t.on }}" style="height:54px;border-radius:16px;border:none;background:{{ t.bg }};color:{{ t.fg }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:600 12px 'IBM Plex Sans Thai',sans-serif">
+        <span style="width:22px;height:4px;border-radius:999px;background:{{ t.bar }}"></span>{{ t.label }}
+      </button>
+    </sc-for>
+  </div>
+</div>
+
+<sc-if value="{{ pickerOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closePicker }}" style="position:fixed;inset:0;z-index:60;background:rgba(43,29,18,.5);display:flex;align-items:flex-end;justify-content:center">
+    <div onClick="{{ stop }}" style="width:100%;max-width:{{ sheetW }}px;max-height:80vh;background:#FFFDF8;border-radius:28px 28px 0 0;display:flex;flex-direction:column;overflow:hidden;animation:pop .2s ease-out">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px 10px">
+        <div style="font:700 20px 'Anuphan',sans-serif">{{ pickerTitle }}</div>
+        <button onClick="{{ closePicker }}" style="height:40px;padding:0 14px;border-radius:999px;border:1.5px solid #E6D8C3;background:transparent;font:600 14px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">ปิด</button>
+      </div>
+      <sc-if value="{{ pickerSearchable }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:0 20px 8px"><input value="{{ pickerQ }}" onChange="{{ on.pickerQ }}" placeholder="พิมพ์เพื่อค้นหา" style="width:100%;height:48px;padding:0 16px;border-radius:14px;border:1.5px solid #E6D8C3;background:#fff;font:500 16px 'IBM Plex Sans Thai',sans-serif;outline:none;color:#2B1D12"></div>
+      </sc-if>
+      <div style="overflow:auto;padding:8px 20px 28px;display:grid;grid-template-columns:{{ pickerCols }};gap:8px">
+        <sc-for list="{{ pickerOpts }}" as="o" hint-placeholder-count="8">
+          <button onClick="{{ o.on }}" style="min-height:{{ optH }}px;padding:6px 10px;border-radius:14px;border:1.5px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font:600 {{ optFs }}px 'IBM Plex Sans Thai',sans-serif">{{ o.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ detailOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeDetail }}" style="position:fixed;inset:0;z-index:55;background:rgba(43,29,18,.5);display:flex;align-items:flex-end;justify-content:center">
+    <div onClick="{{ stop }}" style="width:100%;max-width:480px;max-height:85vh;overflow:auto;background:#FFFDF8;border-radius:28px 28px 0 0;padding:20px;display:flex;flex-direction:column;gap:14px;animation:pop .2s ease-out">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="width:52px;height:52px;border-radius:16px;background:{{ detail.color }};color:#fff;display:grid;place-items:center;font:700 13px 'Anuphan',sans-serif">{{ detail.q }}</div>
+        <div style="flex:1;min-width:0"><div style="font:700 19px/1.3 'Anuphan',sans-serif">{{ detail.name }}</div><div style="font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ detail.cat }} · {{ detail.sync }}</div></div>
+        <button onClick="{{ closeDetail }}" style="height:40px;padding:0 14px;border-radius:999px;border:1.5px solid #E6D8C3;background:transparent;font:600 14px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">ปิด</button>
+      </div>
+      <div style="border:1px solid #E6D8C3;border-radius:18px;overflow:hidden">
+        <sc-for list="{{ detail.rows }}" as="r" hint-placeholder-count="10">
+          <div style="display:flex;gap:12px;padding:11px 14px;border-bottom:1px solid #F0E6D6"><div style="width:120px;flex:none;font:500 13px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ r.k }}</div><div style="flex:1;font:600 14px/1.5 'IBM Plex Sans Thai',sans-serif">{{ r.v }}</div></div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:80;max-width:calc(100% - 32px);padding:12px 18px;border-radius:14px;background:#2B1D12;color:#F7F1E6;font:500 14px 'IBM Plex Sans Thai',sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.4);animation:pop .2s ease-out">{{ toast }}</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;useDemoData&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;ข้อมูล&quot;},&quot;requireIdChecksum&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;ข้อมูล&quot;}}">
+const LS = 'pakchom-hc-v1';
+// วาง Apps Script Web App URL (ลงท้าย /exec) และ Token ที่นี่ เพื่อให้ทุกเครื่องเชื่อมต่อ Google Sheet อัตโนมัติ
+const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbymHzhKrvOun1rR3IMwRXWWPCNP_jl5V8qmgzGQQAg_4xGvtGwPGv8O0qxeffYWwyNZeQ/exec';
+const DEFAULT_TOKEN = '11032';
+const AUTO_SYNC_MS = 30000;
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1iyxRCc532s3NlFGmMoEkWqnautD9RrXQz4nvPUEY9pc/edit';
+const EVENT = new Date(2026, 11, 12);
+const MONTHS = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+const TITLES = [
+  { label: 'พระภิกษุ', prefix: 'พระ', gender: 'ชาย' },
+  { label: 'สามเณร', prefix: 'สามเณร', gender: 'ชาย' },
+  { label: 'แม่ชี', prefix: 'แม่ชี', gender: 'หญิง' },
+  { label: 'อื่น ๆ', prefix: '', gender: '' }
+];
+const CAT_COLORS = { 'พระภิกษุ': '#D9822B', 'สามเณร': '#E8B44E', 'แม่ชี': '#A8998A', 'อื่น ๆ': '#2F6B4F' };
+const NATS = ['ไทย', 'ลาว', 'เมียนมา', 'กัมพูชา', 'อื่น ๆ'];
+const BLOODS = ['A', 'B', 'AB', 'O', 'ไม่ทราบ'];
+const LOCAL_GEO = {
+  'เลย': {
+    'ปากชม': ['ปากชม','เชียงกลม','หาดคัมภีร์','ห้วยบ่อซืน','ห้วยพิชัย','ชมเจริญ'],
+    'เชียงคาน': ['เชียงคาน','ธาตุ','นาซ่าว','เขาแก้ว','ปากตม','บุฮม','จอมศรี','หาดทรายขาว'],
+    'เมืองเลย': ['กุดป่อง','เมือง','นาอ้อ','กกดู่','น้ำหมาน','เสี้ยว','นาอาน','นาแขม','นาโป่ง','นาดินดำ','น้ำสวย','ชัยพฤกษ์','ศรีสองรัก','กกทอง'],
+    'นาด้วง': ['นาด้วง','นาดอกคำ','ท่าสะอาด','ท่าสวรรค์'],
+    'ด่านซ้าย': ['ด่านซ้าย','ปากหมัน','นาดี','โคกงาม','โพนสูง','อิปุ่ม','กกสะทอน','โป่ง','วังยาว','นาหอ'],
+    'นาแห้ว': ['นาแห้ว','แสงภา','นาพึง','นามาลา','เหล่ากอหก'],
+    'ภูเรือ': ['หนองบัว','ร่องจิก','ปลาบ่า','ลาดค่าง','สานตม','ท่าศาลา'],
+    'ท่าลี่': ['ท่าลี่','หนองผือ','อาฮี','น้ำแคม','โคกใหญ่','น้ำทูน'],
+    'วังสะพุง': ['วังสะพุง','ทรายขาว','หนองหญ้าปล้อง','หนองงิ้ว','ปากปวน','ผาน้อย','ผาบิ้ง','เขาหลวง','โคกขมิ้น','ศรีสงคราม'],
+    'ภูกระดึง': ['ภูกระดึง','ผานกเค้า','ศรีฐาน','ห้วยส้ม'],
+    'ภูหลวง': ['ภูหอ','หนองคัน','ห้วยสีเสียด','เลยวังไสย์','แก่งศรีภูมิ'],
+    'ผาขาว': ['ผาขาว','ท่าช้างคล้อง','โนนปอแดง','โนนป่าซาง','บ้านเพิ่ม'],
+    'เอราวัณ': ['เอราวัณ','ผาอินทร์แปลง','ผาสามยอด','ทรัพย์ไพวัลย์'],
+    'หนองหิน': ['หนองหิน','ตาดข่า','ปวนพุ']
+  }
+};
+
+function checksumOK(id) { if (!/^\d{13}$/.test(id)) return false; let s = 0; for (let i = 0; i < 12; i++) s += +id[i] * (13 - i); return (11 - s % 11) % 10 === +id[12]; }
+function fmtId(id) { const m = [1, 4, 5, 2, 1]; const out = []; let p = 0; for (const n of m) { if (p >= id.length) break; out.push(id.slice(p, p + n)); p += n; } return out.join('-'); }
+function fmtPhone(p) { if (p.length <= 3) return p; if (p.length <= 6) return p.slice(0, 3) + '-' + p.slice(3); return p.slice(0, 3) + '-' + p.slice(3, 6) + '-' + p.slice(6); }
+function maskSplit(v, mask) { let a = '', i = 0, k = 0; for (; k < mask.length; k++) { if (i >= v.length) break; if (mask[k] === 'X') a += v[i++]; else a += mask[k]; } return { a, b: mask.slice(k).replace(/X/g, '○') }; }
+function catOf(r) { return CAT_COLORS[r.title] && r.title !== 'อื่น ๆ' ? r.title : 'อื่น ๆ'; }
+function prefixOf(t) { const x = TITLES.find(y => y.label === t); return x ? x.prefix : ''; }
+function fullName(r) { return prefixOf(r.title) + (r.name || ''); }
+function ageOf(r) { if (!r.dobY || !r.dobM || !r.dobD) return null; const b = new Date(r.dobY - 543, r.dobM - 1, r.dobD); const n = new Date(); let a = n.getFullYear() - b.getFullYear(); if (n < new Date(n.getFullYear(), b.getMonth(), b.getDate())) a--; return a; }
+function dobStr(r) { return r.dobD ? String(r.dobD).padStart(2, '0') + '/' + String(r.dobM).padStart(2, '0') + '/' + r.dobY : ''; }
+function blank() { return { idCard: '', title: '', name: '', gender: '', dobD: '', dobM: '', dobY: '', nationality: 'ไทย', blood: '', address: '', province: 'เลย', amphoe: '', tambon: '', phone: '' }; }
+function rng(seed) { return () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }; }
+function makeId(r) { const d = [r() < .6 ? 3 : 1]; for (let i = 1; i < 12; i++) d.push(Math.floor(r() * 10)); let s = 0; for (let i = 0; i < 12; i++) s += d[i] * (13 - i); d.push((11 - s % 11) % 10); return d.join(''); }
+function makeDemo() {
+  const r = rng(20261212); const pick = a => a[Math.floor(r() * a.length)];
+  const mF = ['สมชาย','ประเสริฐ','บุญมี','สมศักดิ์','วิชัย','ทองดี','สุริยา','อำนาจ','คำพันธ์','ประยูร','บุญเลิศ','สมพงษ์','ธนากร','ณัฐวุฒิ','กิตติ','บุญส่ง'];
+  const nF = ['คำปุ่น','บัวผัน','สมจิต','ทองใบ','จันทร์เพ็ญ','สายทอง','บุญเรือน','มาลี'];
+  const sF = ['ธนวัฒน์','ภาคิน','ปิยะพงษ์','อนุชา','ศุภชัย','กฤษดา','วีรภัทร','ชยพล'];
+  const oF = ['สมหญิง','ประภา','วันชัย','สุนทร'];
+  const last = ['ใจดี','ศรีสุข','แก้วมณี','บุญมา','พรหมวงศ์','สีหาบุตร','จันทร์แก้ว','ทองคำ','วงศ์ใหญ่','แสนสุข','คำภู','ชมภูทอง'];
+  const wats = ['วัดศรีสุทธาวาส','วัดโพธิ์ชัย','วัดป่าปากชม','วัดศรีบุญเรือง','วัดท่าแขก','วัดห้วยพิชัย','สำนักชีบ้านเชียงกลม'];
+  const out = []; const now = Date.now();
+  for (let i = 0; i < 64; i++) {
+    const x = r(); const title = x < .5 ? 'พระภิกษุ' : x < .7 ? 'สามเณร' : x < .92 ? 'แม่ชี' : 'อื่น ๆ';
+    const age = title === 'สามเณร' ? 9 + Math.floor(r() * 10) : title === 'อื่น ๆ' ? 25 + Math.floor(r() * 45) : 22 + Math.floor(Math.pow(r(), .7) * 62);
+    const gender = title === 'แม่ชี' ? 'หญิง' : title === 'อื่น ๆ' ? (r() < .5 ? 'ชาย' : 'หญิง') : 'ชาย';
+    const first = title === 'แม่ชี' ? pick(nF) : title === 'สามเณร' ? pick(sF) : title === 'อื่น ๆ' ? (gender === 'ชาย' ? 'นาย' : 'นาง') + pick(oF) : pick(mF);
+    const y = r(); const amph = y < .6 ? 'ปากชม' : y < .82 ? 'เชียงคาน' : 'เมืองเลย';
+    const b = r(); const blood = b < .36 ? 'O' : b < .67 ? 'B' : b < .86 ? 'A' : b < .93 ? 'AB' : 'ไม่ทราบ';
+    const daysAgo = Math.floor(Math.pow(r(), 1.5) * 14);
+    const ts = new Date(now - daysAgo * 864e5 - Math.floor(r() * 8) * 36e5 - Math.floor(r() * 60) * 6e4);
+    out.push({
+      uid: 'demo' + i, demo: true, sync: 'synced', ts: ts.toISOString(), idCard: makeId(r), title, name: first + ' ' + pick(last), gender,
+      dobD: 1 + Math.floor(r() * 28), dobM: 1 + Math.floor(r() * 12), dobY: 2569 - age, nationality: r() < .95 ? 'ไทย' : 'ลาว', blood,
+      address: (title === 'อื่น ๆ' ? (1 + Math.floor(r() * 180)) + ' หมู่ ' + (1 + Math.floor(r() * 12)) : pick(wats) + ' หมู่ ' + (1 + Math.floor(r() * 12))),
+      province: 'เลย', amphoe: amph, tambon: pick(LOCAL_GEO['เลย'][amph]), phone: '08' + String(Math.floor(r() * 1e8)).padStart(8, '0')
+    });
+  }
+  out.sort((a, b) => a.ts.localeCompare(b.ts));
+  out.forEach((o, i) => o.queue = 'PC-' + String(i + 1).padStart(4, '0'));
+  return out;
+}
+function loadSaved() { try { return JSON.parse(localStorage.getItem(LS) || '{}'); } catch (e) { return {}; } }
+function toRow(r, token) {
+  return { token, timestamp: r.ts, queue: r.queue, idCard: r.idCard, fullName: fullName(r), gender: r.gender, dob: dobStr(r), nationality: r.nationality, blood: r.blood, address: r.address, province: r.province, amphoe: r.amphoe, tambon: r.tambon, phone: r.phone };
+}
+function fromRow(x) {
+  const fn = x.fullName || ''; let title = 'อื่น ๆ', name = fn;
+  for (const t of TITLES) if (t.prefix && fn.startsWith(t.prefix)) { title = t.label; name = fn.slice(t.prefix.length); break; }
+  const d = String(x.dob || '').split('/');
+  return { uid: 'r' + x.idCard, remote: true, sync: 'synced', ts: x.timestamp, queue: x.queue || '', idCard: String(x.idCard || '').replace(/\D/g, ''), title, name, gender: x.gender, dobD: +d[0] || '', dobM: +d[1] || '', dobY: +d[2] || '', nationality: x.nationality, blood: x.blood, address: x.address, province: x.province, amphoe: x.amphoe, tambon: x.tambon, phone: String(x.phone || '').replace(/\D/g, '') };
+}
+const saved = loadSaved();
+
+class Component extends DCLogic {
+  demo = makeDemo();
+  state = {
+    screen: 'dash', records: saved.records || [], remote: saved.remote || [],
+    settings: (() => { const x = Object.assign({ scriptUrl: '', token: '', pin: '1234' }, saved.settings || {}); if (!x.scriptUrl) x.scriptUrl = DEFAULT_SCRIPT_URL; if (!x.token) x.token = DEFAULT_TOKEN; return x; })(),
+    hideDemo: !!saved.hideDemo, lastSync: saved.lastSync || '',
+    form: blank(), touched: false, catFilter: 'all', search: '', detail: null, picker: null, pickerQ: '',
+    toast: '', geo: LOCAL_GEO, kiosk: false, kStep: 0, kTouched: false, countdown: 0, pinOpen: false, pinVal: '', pinErr: false, success: null, pulling: false
+  };
+
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      const s = this.state;
+      if (s.kiosk && s.kStep === 8 && s.countdown > 0) {
+        if (s.countdown === 1) this.setState({ countdown: 0, kStep: 0, form: blank(), success: null });
+        else this.setState({ countdown: s.countdown - 1 });
+      }
+    }, 1000);
+    this.autoSync();
+    this.syncTimer = setInterval(() => this.autoSync(), AUTO_SYNC_MS);
+    this.onOnline = () => this.autoSync(); window.addEventListener('online', this.onOnline);
+    this.onVis = () => { if (!document.hidden) this.autoSync(); }; document.addEventListener('visibilitychange', this.onVis);
+  }
+  componentWillUnmount() { clearInterval(this.timer); clearInterval(this.syncTimer); clearTimeout(this.tt); window.removeEventListener('online', this.onOnline); document.removeEventListener('visibilitychange', this.onVis); }
+  autoSync() {
+    const s = this.state; if (!s.settings.scriptUrl || s.pulling) return;
+    const p = s.records.filter(r => r.sync !== 'synced'); if (p.length) this.push(p);
+    this.pull(true);
+  }
+  componentDidUpdate() {
+    const s = this.state;
+    try { localStorage.setItem(LS, JSON.stringify({ records: s.records, remote: s.remote, settings: s.settings, hideDemo: s.hideDemo, lastSync: s.lastSync })); } catch (e) {}
+  }
+
+  showToast(t, ms) { clearTimeout(this.tt); this.setState({ toast: t }); this.tt = setTimeout(() => this.setState({ toast: '' }), ms || 2800); }
+  useDemo() { return this.props.useDemoData !== false && !this.state.hideDemo; }
+  all() {
+    const s = this.state; const rids = new Set(s.remote.map(r => r.idCard));
+    const local = s.records.filter(r => !(r.sync === 'synced' && rids.has(r.idCard)));
+    return [...(this.useDemo() ? this.demo : []), ...s.remote, ...local];
+  }
+  setF(k, v) { this.setState(s => ({ form: { ...s.form, [k]: v } })); }
+
+  validate(f) {
+    const e = {}; const all = this.all();
+    if (!f.idCard) e.idCard = 'กรุณากรอกเลขประจำตัวประชาชน';
+    else if (f.idCard.length !== 13) e.idCard = 'ต้องมี 13 หลัก (กรอกแล้ว ' + f.idCard.length + ' หลัก)';
+    else if (this.props.requireIdChecksum !== false && !checksumOK(f.idCard)) e.idCard = 'เลขประจำตัวไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง';
+    else if (all.some(r => r.idCard === f.idCard)) e.idCard = 'เลขประจำตัวนี้ลงทะเบียนไว้แล้ว';
+    if (!f.title) e.title = 'กรุณาเลือกสถานะ / คำนำหน้า';
+    const nm = (f.name || '').trim();
+    if (!nm) e.name = 'กรุณากรอกชื่อ-นามสกุล'; else if (!/\S+\s+\S+/.test(nm)) e.name = 'กรุณากรอกทั้งชื่อและนามสกุล โดยเว้นวรรคระหว่างกัน';
+    if (!f.gender) e.gender = 'กรุณาเลือกเพศ';
+    if (!f.dobD || !f.dobM || !f.dobY) e.dob = 'กรุณาเลือกวัน เดือน และปีเกิดให้ครบ';
+    else { const d = new Date(f.dobY - 543, f.dobM - 1, f.dobD); if (d.getDate() !== +f.dobD) e.dob = 'ไม่มีวันที่นี้ในเดือนที่เลือก'; else if (d > new Date()) e.dob = 'วันเกิดต้องไม่เป็นวันในอนาคต'; }
+    if (!f.nationality) e.nationality = 'กรุณาเลือกสัญชาติ';
+    if (!f.blood) e.blood = 'กรุณาเลือกหมู่เลือด (เลือก "ไม่ทราบ" ได้)';
+    if (!f.address.trim()) e.address = 'กรุณากรอกบ้านเลขที่ / หมู่ / วัด';
+    if (!f.province) e.province = 'กรุณาเลือกจังหวัด';
+    if (!f.amphoe) e.amphoe = 'กรุณาเลือกอำเภอ';
+    if (!f.tambon) e.tambon = 'กรุณาเลือกตำบล';
+    if (!f.phone) e.phone = 'กรุณากรอกหมายเลขโทรศัพท์'; else if (!/^0\d{8,9}$/.test(f.phone)) e.phone = 'ต้องขึ้นต้นด้วย 0 และมี 9–10 หลัก';
+    return e;
+  }
+
+  save() {
+    const all = this.all(); const f = this.state.form;
+    const rec = { ...f, name: f.name.trim(), address: f.address.trim(), ts: new Date().toISOString(), queue: 'PC-' + String(all.length + 1).padStart(4, '0'), sync: 'pending', uid: 'u' + Date.now() };
+    this.setState(s => ({ records: [...s.records, rec], form: blank(), touched: false, screen: 'dash', catFilter: 'all' }), () => { this.push([rec]); window.scrollTo(0, 0); this.showToast('ลงทะเบียนเรียบร้อย · ' + fullName(rec) + ' · เลขคิว ' + rec.queue, 5000); });
+    return rec;
+  }
+  push(recs) {
+    const { scriptUrl, token } = this.state.settings; if (!scriptUrl || !recs.length) return;
+    recs.forEach(rec => {
+      fetch(scriptUrl, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(toRow(rec, token)) })
+        .then(() => this.setState(s => ({ records: s.records.map(r => r.uid === rec.uid ? { ...r, sync: 'synced' } : r) })))
+        .catch(() => {});
+    });
+  }
+  pull(silent) {
+    const { scriptUrl, token } = this.state.settings;
+    if (!scriptUrl) { this.showToast('กรุณาใส่ Apps Script URL ก่อน'); return; }
+    this.setState({ pulling: true });
+    fetch(scriptUrl + (scriptUrl.includes('?') ? '&' : '?') + 'action=list&token=' + encodeURIComponent(token))
+      .then(r => r.json()).then(j => {
+        if (!j.ok) throw new Error(j.error || 'error');
+        const remote = (j.rows || []).map(fromRow);
+        this.setState({ remote, pulling: false, lastSync: new Date().toISOString() });
+        if (!silent) this.showToast('ดึงข้อมูลสำเร็จ ' + remote.length + ' รายการ');
+      }).catch(err => { this.setState({ pulling: false }); if (!silent) this.showToast('เชื่อมต่อไม่สำเร็จ: ' + (err.message || 'ตรวจสอบ URL / Token')); });
+  }
+
+  openPicker(field) {
+    const f = this.state.form;
+    if (field === 'province') return;
+    if (field === 'amphoe' && !f.province) return this.showToast('กรุณาเลือกจังหวัดก่อน');
+    if (field === 'tambon' && !f.amphoe) return this.showToast('กรุณาเลือกอำเภอก่อน');
+    this.setState({ picker: field, pickerQ: '' });
+  }
+  pickerOptions(field) {
+    const f = this.state.form; const g = this.state.geo;
+    if (field === 'dobD') return Array.from({ length: 31 }, (_, i) => ({ v: i + 1, l: String(i + 1) }));
+    if (field === 'dobM') return MONTHS.map((m, i) => ({ v: i + 1, l: m }));
+    if (field === 'dobY') return Array.from({ length: 101 }, (_, i) => ({ v: 2569 - i, l: String(2569 - i) }));
+    if (field === 'province') return Object.keys(g).sort((a, b) => a.localeCompare(b, 'th')).map(x => ({ v: x, l: x }));
+    if (field === 'amphoe') return Object.keys(g[f.province] || {}).map(x => ({ v: x, l: x }));
+    if (field === 'tambon') return ((g[f.province] || {})[f.amphoe] || []).map(x => ({ v: x, l: x }));
+    return [];
+  }
+  choose(field, v) {
+    const s = this.state; const f = { ...s.form, [field]: v };
+    let next = null;
+    if (field === 'amphoe') { f.tambon = ''; next = 'tambon'; }
+    if (field === 'dobD' && !f.dobM) next = 'dobM';
+    if (field === 'dobM' && !f.dobY) next = 'dobY';
+    this.setState({ form: f, picker: next, pickerQ: '' });
+  }
+  pickTitle(t) {
+    this.setState(s => ({ form: { ...s.form, title: t.label, gender: t.gender || s.form.gender } }));
+  }
+
+  kFields(step) { return [[], ['idCard'], ['title', 'name'], ['gender', 'dob'], ['nationality', 'blood'], ['address', 'province', 'amphoe', 'tambon'], ['phone'], [], []][step] || []; }
+  kNext() {
+    const s = this.state;
+    if (s.kStep === 7) {
+      const e = this.validate(s.form);
+      if (Object.keys(e).length) { const bad = [1, 2, 3, 4, 5, 6].find(st => this.kFields(st).some(k => e[k])); this.setState({ kStep: bad, kTouched: true }); return; }
+      this.save(); this.setState({ kStep: 8, countdown: this.props.kioskResetSeconds ?? 15 }); return;
+    }
+    const e = this.validate(s.form); const bad = this.kFields(s.kStep).filter(k => e[k]);
+    if (bad.length) { this.setState({ kTouched: true }); return; }
+    this.setState({ kStep: s.kStep + 1, kTouched: false });
+  }
+  pad(field, max) {
+    const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'ล้าง', '0', 'ลบ'];
+    return keys.map(k => ({
+      label: k, fs: k.length > 1 ? 20 : 30, bg: k.length > 1 ? '#F7F1E6' : '#FFFDF8', fg: k.length > 1 ? '#6F5A4A' : '#2B1D12',
+      on: () => {
+        if (field === 'pin') {
+          const s = this.state; let v = s.pinVal;
+          if (k === 'ลบ') v = v.slice(0, -1); else if (k === 'ล้าง') v = ''; else if (v.length < 4) v += k;
+          if (v.length === 4) {
+            if (v === (s.settings.pin || '1234')) { this.setState({ pinOpen: false, pinVal: '', pinErr: false, kiosk: false, form: blank(), success: null }); try { document.fullscreenElement && document.exitFullscreen(); } catch (e) {} }
+            else this.setState({ pinVal: '', pinErr: true });
+          } else this.setState({ pinVal: v, pinErr: false });
+          return;
+        }
+        this.setState(s => { let v = s.form[field] || ''; if (k === 'ลบ') v = v.slice(0, -1); else if (k === 'ล้าง') v = ''; else if (v.length < max) v += k; return { form: { ...s.form, [field]: v } }; });
+      }
+    }));
+  }
+  exportCsv() {
+    const H = ['Timestamp','เลขคิว','เลขประจำตัวประชาชน','ชื่อ-นามสกุล','เพศ','วัน/เดือน/ปี เกิด','สัญชาติ','หมู่เลือด','ที่อยู่ปัจจุบัน','จังหวัด','อำเภอ','ตำบล','หมายเลขโทรศัพท์'];
+    const esc = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
+    const rows = this.all().map(r => [new Date(r.ts).toLocaleString('th-TH'), r.queue, "'" + r.idCard, fullName(r), r.gender, dobStr(r), r.nationality, r.blood, r.address, r.province, r.amphoe, r.tambon, "'" + r.phone].map(esc).join(','));
+    const blob = new Blob(['\ufeff' + [H.map(esc).join(','), ...rows].join('\n')], { type: 'text/csv;charset=utf-8' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'pakchom-health-2569.csv'; a.click();
+  }
+
+  chip(active, label, on, strong) {
+    return { label, on, bg: active ? (strong ? '#2B1D12' : '#FBE9D2') : '#FFFDF8', fg: active ? (strong ? '#F7F1E6' : '#6E3A08') : '#2B1D12', bd: active ? (strong ? '#2B1D12' : '#D9822B') : '#E6D8C3' };
+  }
+  rowView(r) {
+    const a = ageOf(r); const cat = catOf(r);
+    return {
+      q: (r.queue || '').replace('PC-', ''), color: CAT_COLORS[cat], name: fullName(r),
+      meta: [a != null ? 'อายุ ' + a : null, r.blood ? 'หมู่เลือด ' + r.blood : null, r.tambon ? 'ต.' + r.tambon : null].filter(Boolean).join(' · '),
+      time: r.ts ? new Date(r.ts).toLocaleString('th-TH', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '',
+      syncLabel: r.demo ? 'ตัวอย่าง' : r.sync === 'synced' ? 'ส่งแล้ว' : 'รอส่ง',
+      syncBg: r.demo ? '#EFE6D6' : r.sync === 'synced' ? '#E1EEE6' : '#FBE9D2', syncFg: r.demo ? '#6F5A4A' : r.sync === 'synced' ? '#2F6B4F' : '#6E3A08',
+      on: () => this.setState({ detail: r })
+    };
+  }
+
+  renderVals() {
+    const s = this.state; const f = s.form; const all = this.all();
+    const errs = s.touched ? this.validate(f) : {};
+    const kErrsAll = s.kTouched ? this.validate(f) : {};
+    const kErr = {}; this.kFields(s.kStep).forEach(k => { if (kErrsAll[k]) kErr[k] = kErrsAll[k]; });
+    const keys = ['idCard', 'title', 'name', 'gender', 'dob', 'nationality', 'blood', 'address', 'province', 'amphoe', 'tambon', 'phone'];
+    const has = {}, bc = {}, kHas = {}, kbc = {};
+    keys.forEach(k => { has[k] = !!errs[k]; bc[k] = errs[k] ? '#B3261E' : '#E6D8C3'; kHas[k] = !!kErr[k]; kbc[k] = kErr[k] ? '#B3261E' : '#E6D8C3'; });
+
+    const filtered = s.catFilter === 'all' ? all : all.filter(r => catOf(r) === s.catFilter);
+    const n = filtered.length || 1;
+    const todayStr = new Date().toDateString();
+    const ages = filtered.map(ageOf);
+    const senior = ages.filter(a => a >= 60).length;
+    const pending = s.records.filter(r => r.sync !== 'synced').length;
+
+    const catNames = Object.keys(CAT_COLORS);
+    const cats = catNames.map(c => { const cnt = all.filter(r => catOf(r) === c).length; return { label: c, count: cnt, pct: all.length ? Math.round(cnt / all.length * 100) : 0, color: CAT_COLORS[c], op: s.catFilter === 'all' || s.catFilter === c ? 1 : .35, on: () => this.setState({ catFilter: s.catFilter === c ? 'all' : c }) }; });
+    const catChips = [{ k: 'all', label: 'ทั้งหมด', dot: '#2B1D12' }, ...catNames.map(c => ({ k: c, label: c, dot: CAT_COLORS[c] }))].map(c => ({ ...this.chip(s.catFilter === c.k, c.label, () => this.setState({ catFilter: c.k }), true), dot: s.catFilter === c.k ? '#F7F1E6' : c.dot }));
+
+    const days = []; const base = new Date(); base.setHours(0, 0, 0, 0);
+    for (let i = 13; i >= 0; i--) { const d = new Date(base - i * 864e5); days.push({ d, cnt: filtered.filter(r => new Date(r.ts).toDateString() === d.toDateString()).length }); }
+    const maxD = Math.max(1, ...days.map(x => x.cnt));
+    const trend = days.map((x, i) => ({ label: String(x.d.getDate()), cnt: x.cnt || '', h: Math.round(x.cnt / maxD * 100), color: i === 13 ? '#D9822B' : '#E8C9A3', lc: i === 13 ? '#9A520F' : '#6F5A4A' }));
+
+    const groups = [['< 20 ปี', a => a < 20], ['20–39 ปี', a => a >= 20 && a < 40], ['40–59 ปี', a => a >= 40 && a < 60], ['60–69 ปี', a => a >= 60 && a < 70], ['70 ปีขึ้นไป', a => a >= 70]];
+    const gc = groups.map(g => ages.filter(a => a != null && g[1](a)).length); const maxG = Math.max(1, ...gc);
+    const agesV = groups.map((g, i) => ({ label: g[0], count: gc[i], w: Math.round(gc[i] / maxG * 100), color: i >= 3 ? '#D9822B' : '#E8C9A3' }));
+
+    const bc2 = BLOODS.map(b => filtered.filter(r => r.blood === b).length); const maxB = Math.max(...bc2);
+    const blood = BLOODS.map((b, i) => ({ label: b === 'ไม่ทราบ' ? '?' : b, count: bc2[i], bg: bc2[i] === maxB && maxB > 0 ? '#D9822B' : '#F7F1E6', fg: bc2[i] === maxB && maxB > 0 ? '#fff' : '#2B1D12' }));
+
+    const male = filtered.filter(r => r.gender === 'ชาย').length, female = filtered.filter(r => r.gender === 'หญิง').length;
+    const mp = male + female ? Math.round(male / (male + female) * 100) : 0;
+
+    const areaMap = {}; filtered.forEach(r => { if (!r.tambon) return; const k = r.tambon + '|' + r.amphoe; areaMap[k] = (areaMap[k] || 0) + 1; });
+    const areaArr = Object.entries(areaMap).sort((a, b) => b[1] - a[1]).slice(0, 5); const maxA = areaArr.length ? areaArr[0][1] : 1;
+    const areas = areaArr.map(([k, c]) => { const [t, a] = k.split('|'); return { label: 'ต.' + t, sub: 'อ.' + a, count: c, w: Math.round(c / maxA * 100) }; });
+
+    const recent = [...filtered].sort((a, b) => String(b.ts).localeCompare(String(a.ts))).slice(0, 5).map(r => this.rowView(r));
+
+    const q = s.search.trim().toLowerCase();
+    const listAll = [...filtered].sort((a, b) => String(b.ts).localeCompare(String(a.ts))).filter(r => !q || [fullName(r), r.idCard, r.queue, r.tambon, r.amphoe, r.phone].join(' ').toLowerCase().includes(q.replace(/-/g, '')) || fullName(r).includes(s.search.trim()));
+    const listRows = listAll.slice(0, 200).map(r => this.rowView(r));
+
+    const tabsDef = [['dash', 'ภาพรวม'], ['form', 'ลงทะเบียน'], ['list', 'รายชื่อ'], ['settings', 'ตั้งค่า']];
+    const tabs = tabsDef.map(([k, l]) => ({ label: l, on: () => { this.setState({ screen: k }); window.scrollTo(0, 0); }, bg: s.screen === k ? '#2B1D12' : 'transparent', fg: s.screen === k ? '#F7F1E6' : '#6F5A4A', bar: s.screen === k ? '#D9822B' : 'transparent' }));
+
+    const titleChips = TITLES.map(t => this.chip(f.title === t.label, t.label, () => this.pickTitle(t)));
+    const genderChips = ['ชาย', 'หญิง'].map(g => this.chip(f.gender === g, g, () => this.setF('gender', g)));
+    const natChips = NATS.map(x => this.chip(f.nationality === x, x, () => this.setF('nationality', x)));
+    const bloodChips = BLOODS.map(x => this.chip(f.blood === x, x, () => this.setF('blood', x)));
+
+    const pk = (field, label, ph, display, enabled, err) => ({ label, display: display || ph, fg: display ? '#2B1D12' : '#9C8878', op: enabled ? 1 : .5, on: () => this.openPicker(field), bd: err ? '#B3261E' : (display ? '#D9C3A3' : '#E6D8C3'), hasErr: !!err, err: err || '', arrow: 1 });
+    const dobPickers = [pk('dobD', 'วัน', 'วัน', f.dobD ? String(f.dobD) : '', true, (s.kiosk ? kErr.dob : errs.dob) && !f.dobD), pk('dobM', 'เดือน', 'เดือน', f.dobM ? MONTHS[f.dobM - 1] : '', true, (s.kiosk ? kErr.dob : errs.dob) && !f.dobM), pk('dobY', 'ปี พ.ศ.', 'ปี พ.ศ.', f.dobY ? String(f.dobY) : '', true, (s.kiosk ? kErr.dob : errs.dob) && !f.dobY)];
+    const geoPickers = [{ ...pk('province', 'จังหวัด', 'เลย', 'เลย', true, null), bd: '#E6D8C3', fg: '#6F5A4A', arrow: 0 }, pk('amphoe', 'อำเภอ', 'เลือกอำเภอ', f.amphoe, !!f.province, errs.amphoe), pk('tambon', 'ตำบล', 'เลือกตำบล', f.tambon, !!f.amphoe, errs.tambon)];
+    const kGeoPickers = [pk('province', 'จังหวัด', 'แตะเพื่อเลือก', f.province, true, kErr.province), pk('amphoe', 'อำเภอ', 'แตะเพื่อเลือก', f.amphoe, !!f.province, kErr.amphoe), pk('tambon', 'ตำบล', 'แตะเพื่อเลือก', f.tambon, !!f.amphoe, kErr.tambon)];
+    const age = ageOf(f);
+
+    const filled = ['idCard', 'title', 'name', 'gender', 'dobD', 'dobM', 'dobY', 'nationality', 'blood', 'address', 'province', 'amphoe', 'tambon', 'phone'].filter(k => String(f[k] || '').trim()).length;
+
+    let pickerOpts = [], pickerTitle = '', pickerCols = '1fr 1fr', searchable = false;
+    if (s.picker) {
+      const opts = this.pickerOptions(s.picker);
+      searchable = opts.length > 14 && s.picker !== 'dobD';
+      const pq = s.pickerQ.trim();
+      pickerOpts = opts.filter(o => !pq || o.l.includes(pq)).map(o => { const act = String(f[s.picker]) === String(o.v); return { label: o.l, on: () => this.choose(s.picker, o.v), bg: act ? '#2B1D12' : '#fff', fg: act ? '#F7F1E6' : '#2B1D12', bd: act ? '#2B1D12' : '#E6D8C3' }; });
+      pickerTitle = { dobD: 'วันเกิด', dobM: 'เดือนเกิด', dobY: 'ปีเกิด (พ.ศ.)', province: 'เลือกจังหวัด', amphoe: 'เลือกอำเภอ · จ.' + f.province, tambon: 'เลือกตำบล · อ.' + f.amphoe }[s.picker];
+      pickerCols = s.picker === 'dobD' ? 'repeat(7,1fr)' : s.picker === 'dobY' ? 'repeat(4,1fr)' : s.picker === 'dobM' ? 'repeat(3,1fr)' : (s.kiosk ? 'repeat(3,1fr)' : '1fr 1fr');
+    }
+
+    const kSteps = [null, ['เลขประจำตัวประชาชน', 'แตะตัวเลข 13 หลักตามบัตรประชาชน'], ['สถานะและชื่อ-นามสกุล', 'เลือกสถานะ แล้วพิมพ์ชื่อและนามสกุล'], ['เพศ และวันเกิด', 'แตะเพื่อเลือก'], ['สัญชาติและหมู่เลือด', 'หากไม่ทราบหมู่เลือด เลือก "ไม่ทราบ"'], ['ที่อยู่ปัจจุบัน', 'วัด / สำนักสงฆ์ หรือบ้านเลขที่ที่พักอาศัย'], ['หมายเลขโทรศัพท์', 'สำหรับติดต่อกลับและแจ้งผลตรวจ'], ['ตรวจสอบข้อมูล', 'กรุณาตรวจสอบก่อนยืนยัน แตะ "แก้ไข" หากไม่ถูกต้อง']];
+    const ks = { welcome: s.kStep === 0, id: s.kStep === 1, name: s.kStep === 2, gender: s.kStep === 3, health: s.kStep === 4, address: s.kStep === 5, phone: s.kStep === 6, review: s.kStep === 7, done: s.kStep === 8 };
+    const go = st => () => this.setState({ kStep: st, kTouched: false });
+    const reviewRows = [
+      ['เลขประจำตัวประชาชน', fmtId(f.idCard), 1], ['ชื่อ-นามสกุล', fullName(f), 2], ['เพศ', f.gender, 3], ['วันเกิด', f.dobD ? f.dobD + ' ' + MONTHS[f.dobM - 1] + ' ' + f.dobY + (age != null ? ' (อายุ ' + age + ' ปี)' : '') : '', 3],
+      ['สัญชาติ', f.nationality, 4], ['หมู่เลือด', f.blood, 4], ['ที่อยู่', f.address, 5], ['ตำบล / อำเภอ', (f.tambon ? 'ต.' + f.tambon : '') + ' ' + (f.amphoe ? 'อ.' + f.amphoe : ''), 5], ['จังหวัด', f.province, 5], ['โทรศัพท์', fmtPhone(f.phone), 6]
+    ].map(([k, v, st]) => ({ k, v: v || '—', on: go(st) }));
+
+    const d = s.detail;
+    const detail = d ? {
+      ...this.rowView(d), cat: catOf(d), sync: d.demo ? 'ข้อมูลตัวอย่าง' : d.sync === 'synced' ? 'บันทึกใน Google Sheet แล้ว' : 'รอส่งเข้า Google Sheet',
+      rows: [['Timestamp', new Date(d.ts).toLocaleString('th-TH')], ['เลขคิว', d.queue], ['เลขประจำตัวประชาชน', fmtId(d.idCard)], ['เพศ', d.gender], ['วัน/เดือน/ปี เกิด', dobStr(d) + (ageOf(d) != null ? ' (อายุ ' + ageOf(d) + ' ปี)' : '')], ['สัญชาติ', d.nationality], ['หมู่เลือด', d.blood], ['ที่อยู่ปัจจุบัน', d.address], ['ตำบล', d.tambon], ['อำเภอ', d.amphoe], ['จังหวัด', d.province], ['โทรศัพท์', fmtPhone(d.phone || '')]].map(([k, v]) => ({ k, v: v || '—' }))
+    } : { rows: [] };
+
+    const connected = !!s.settings.scriptUrl;
+    const setS = (k, fn) => e => { const v = fn ? fn(e.target.value) : e.target.value; this.setState(st => ({ settings: { ...st.settings, [k]: v } })); };
+
+    return {
+      isDash: s.screen === 'dash', isForm: s.screen === 'form', isList: s.screen === 'list', isSettings: s.screen === 'settings',
+      tabs, catChips, cats, trend, ages: agesV, blood, areas, recent, allTotal: all.length,
+      gender: { male, female, malePct: mp }, genderRing: 'conic-gradient(#D9822B 0 ' + mp + '%, #A8998A ' + mp + '% 100%)',
+      kpi: { total: filtered.length, today: filtered.filter(r => new Date(r.ts).toDateString() === todayStr).length, senior, seniorPct: filtered.length ? Math.round(senior / n * 100) : 0, pending, pendingColor: pending ? '#9A520F' : '#2B1D12' },
+      daysLeft: Math.max(0, Math.ceil((EVENT - base) / 864e5)),
+      sheetDot: connected ? '#6FCF97' : '#E8B44E', sheetStatus: connected ? (s.pulling ? 'กำลังซิงก์กับ Google Sheet…' : 'เชื่อมต่อ Google Sheet อัตโนมัติ' + (s.lastSync ? ' · ' + new Date(s.lastSync).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) : '')) : 'ยังไม่เชื่อมต่อ Google Sheet — บันทึกในเครื่อง',
+      goList: () => this.setState({ screen: 'list' }),
+      f, fv: { idCard: fmtId(f.idCard), phone: fmtPhone(f.phone) }, err: errs, has, bc,
+      progress: Math.round(filled / 14 * 100), titleChips, genderChips, natChips, bloodChips, dobPickers, geoPickers, kGeoPickers,
+      prefix: prefixOf(f.title), hasPrefix: !!prefixOf(f.title), hasAge: age != null && age >= 0, ageText: age + ' ปี',
+      on: {
+        idCard: e => this.setF('idCard', e.target.value.replace(/\D/g, '').slice(0, 13)),
+        name: e => this.setF('name', e.target.value),
+        address: e => this.setF('address', e.target.value),
+        phone: e => this.setF('phone', e.target.value.replace(/\D/g, '').slice(0, 10)),
+        search: e => this.setState({ search: e.target.value }),
+        pickerQ: e => this.setState({ pickerQ: e.target.value }),
+        scriptUrl: setS('scriptUrl', v => v.trim()), token: setS('token'), pin: setS('pin', v => v.replace(/\D/g, '').slice(0, 4))
+      },
+      resetForm: () => this.setState({ form: blank(), touched: false }),
+      submitApp: () => { const e = this.validate(f); const c = Object.keys(e).length; if (c) { this.setState({ touched: true }); this.showToast('ยังมีข้อมูลที่ต้องแก้ไข ' + c + ' รายการ'); return; } this.save(); },
+      listRows, listCount: listAll.length, listEmpty: listAll.length === 0, search: s.search, exportCsv: () => this.exportCsv(),
+      settings: s.settings, connBg: connected ? '#E1EEE6' : '#FBE9D2', connFg: connected ? '#2F6B4F' : '#6E3A08', connLabel: connected ? 'ซิงก์อัตโนมัติทุก 30 วินาที' : 'ยังไม่ตั้งค่า',
+      pull: () => this.pull(false), pullLabel: s.pulling ? 'กำลังดึงข้อมูล…' : 'ดึงข้อมูลจาก Sheet',
+      pushPending: () => { if (!connected) return this.showToast('กรุณาใส่ Apps Script URL ก่อน'); const p = s.records.filter(r => r.sync !== 'synced'); if (!p.length) return this.showToast('ไม่มีข้อมูลค้างส่ง'); this.push(p); this.showToast('กำลังส่ง ' + p.length + ' รายการ'); },
+      lastSyncText: s.lastSync ? 'ซิงก์ล่าสุด ' + new Date(s.lastSync).toLocaleString('th-TH') : 'ยังไม่เคยซิงก์',
+      toggleDemo: () => this.setState({ hideDemo: !s.hideDemo }), demoTrack: this.useDemo() ? '#2F6B4F' : '#D5C6B0', demoKnob: this.useDemo() ? 25 : 3,
+
+      goForm: () => { this.setState({ screen: 'form' }); window.scrollTo(0, 0); },
+      openKiosk: () => { this.setState({ kiosk: true, kStep: 0, form: blank(), kTouched: false, success: null }); try { document.documentElement.requestFullscreen && document.documentElement.requestFullscreen().catch(() => {}); } catch (e) {} },
+      inKiosk: s.kiosk, ks, kShowProgress: s.kStep >= 1 && s.kStep <= 7, kShowTitle: s.kStep >= 1 && s.kStep <= 7, kShowNav: s.kStep >= 1 && s.kStep <= 7,
+      kDots: [1, 2, 3, 4, 5, 6, 7].map(i => ({ bg: i < s.kStep ? '#2F6B4F' : i === s.kStep ? '#D9822B' : '#E6D8C3' })),
+      kStepNo: s.kStep, kTitle: kSteps[s.kStep] ? kSteps[s.kStep][0] : '', kSub: kSteps[s.kStep] ? kSteps[s.kStep][1] : '',
+      kStart: () => this.setState({ kStep: 1, form: blank(), kTouched: false }),
+      kBack: () => this.setState({ kStep: Math.max(0, s.kStep - 1), kTouched: false }),
+      kNext: () => this.kNext(), kNextLabel: s.kStep === 7 ? 'ยืนยันการลงทะเบียน' : 'ถัดไป', kNextBg: s.kStep === 7 ? '#2F6B4F' : '#D9822B',
+      kErr, kHas, kbc, idMask: maskSplit(f.idCard, 'X-XXXX-XXXXX-XX-X'), phMask: maskSplit(f.phone, 'XXX-XXX-XXXX'),
+      padId: this.pad('idCard', 13), padPhone: this.pad('phone', 10), padPin: this.pad('pin', 4), reviewRows,
+      doneName: s.success ? fullName(s.success) : '', doneQueue: s.success ? s.success.queue : '', countdown: s.countdown,
+      doneSync: connected ? 'กำลังบันทึกเข้า Google Sheet' : 'บันทึกในเครื่องแล้ว — จะส่งเข้า Sheet เมื่อเชื่อมต่อ',
+      kRestart: () => this.setState({ kStep: 0, form: blank(), success: null, countdown: 0 }),
+      askExit: () => this.setState({ pinOpen: true, pinVal: '', pinErr: false }), pinOpen: s.pinOpen,
+      cancelPin: () => this.setState({ pinOpen: false, pinVal: '' }),
+      pinDots: [0, 1, 2, 3].map(i => ({ bg: i < s.pinVal.length ? '#2B1D12' : 'transparent' })),
+      pinMsg: s.pinErr ? 'รหัสไม่ถูกต้อง ลองอีกครั้ง' : 'กรอกรหัส PIN เพื่อออกจากโหมด KIOSK', pinMsgColor: s.pinErr ? '#B3261E' : '#6F5A4A',
+
+      pickerOpen: !!s.picker, pickerOpts, pickerTitle, pickerCols, pickerSearchable: searchable, pickerQ: s.pickerQ,
+      sheetW: s.kiosk ? 760 : 480, optH: s.kiosk ? 64 : 48, optFs: s.kiosk ? 19 : 15,
+      closePicker: () => this.setState({ picker: null }), stop: e => e.stopPropagation(),
+      detailOpen: !!d, detail, closeDetail: () => this.setState({ detail: null }),
+      successOpen: !!s.success && !s.kiosk,
+      successDash: () => this.setState({ success: null, screen: 'dash' }), successNext: () => this.setState({ success: null, screen: 'form' }),
+      toastOn: !!s.toast, toast: s.toast
+    };
+  }
+}
+</script>
+</body>
+</html>
