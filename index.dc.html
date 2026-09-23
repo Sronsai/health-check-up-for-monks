@@ -297,43 +297,8 @@ a{color:#9A520F}a:hover{color:#6E3A08}
     </div>
   </sc-if>
 
-  <sc-if value="{{ isSettings }}" hint-placeholder-val="{{ false }}">
-    <div style="padding:12px 20px 0;display:flex;flex-direction:column;gap:14px">
-      <div style="font:700 24px/1.2 'Anuphan',sans-serif">ตั้งค่าระบบ</div>
-      <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:center;justify-content:space-between"><div style="font:600 16px 'Anuphan',sans-serif">เชื่อมต่อ Google Sheet</div><span style="font:600 12px 'IBM Plex Sans Thai',sans-serif;padding:3px 10px;border-radius:999px;background:{{ connBg }};color:{{ connFg }}">{{ connLabel }}</span></div>
-        <div style="display:flex;flex-direction:column;gap:6px">
-          <label style="font:600 13px 'IBM Plex Sans Thai',sans-serif">Apps Script Web App URL</label>
-          <input value="{{ settings.scriptUrl }}" onChange="{{ on.scriptUrl }}" placeholder="https://script.google.com/macros/s/…/exec" style="height:48px;padding:0 14px;border-radius:12px;border:1.5px solid #E6D8C3;background:#fff;font:500 13px ui-monospace,Menlo,monospace;outline:none;color:#2B1D12">
-        </div>
-        <div style="display:flex;flex-direction:column;gap:6px">
-          <label style="font:600 13px 'IBM Plex Sans Thai',sans-serif">รหัสลับ (Token) — ต้องตรงกับใน Apps Script</label>
-          <input value="{{ settings.token }}" onChange="{{ on.token }}" placeholder="เช่น pakchom2569" style="height:48px;padding:0 14px;border-radius:12px;border:1.5px solid #E6D8C3;background:#fff;font:500 14px ui-monospace,Menlo,monospace;outline:none;color:#2B1D12">
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <button onClick="{{ pull }}" style="height:46px;border-radius:12px;border:none;background:#2B1D12;color:#F7F1E6;font:600 14px 'IBM Plex Sans Thai',sans-serif">{{ pullLabel }}</button>
-          <button onClick="{{ pushPending }}" style="height:46px;border-radius:12px;border:1.5px solid #D9822B;background:#FBE9D2;color:#6E3A08;font:600 14px 'IBM Plex Sans Thai',sans-serif">ส่งข้อมูลค้าง ({{ kpi.pending }})</button>
-        </div>
-        <div style="font:400 12px/1.5 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">{{ lastSyncText }} · <a href="https://docs.google.com/spreadsheets/d/1iyxRCc532s3NlFGmMoEkWqnautD9RrXQz4nvPUEY9pc/edit" target="_blank">เปิด Google Sheet</a></div>
-      </div>
-
-      <div style="background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:18px;display:flex;align-items:center;gap:12px">
-        <div style="flex:1"><div style="font:600 15px 'Anuphan',sans-serif">แสดงข้อมูลตัวอย่าง</div><div style="font:400 12px 'IBM Plex Sans Thai',sans-serif;color:#6F5A4A">ข้อมูลจำลอง 64 รายการ ไม่ถูกส่งเข้า Sheet</div></div>
-        <button onClick="{{ toggleDemo }}" style="width:52px;height:30px;border-radius:999px;border:none;background:{{ demoTrack }};position:relative;padding:0"><span style="position:absolute;top:3px;left:{{ demoKnob }}px;width:24px;height:24px;border-radius:50%;background:#fff;transition:left .2s"></span></button>
-      </div>
-
-      <div style="background:#FBE9D2;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:8px;font:400 13px/1.6 'IBM Plex Sans Thai',sans-serif;color:#4A3322">
-        <div style="font:600 15px 'Anuphan',sans-serif;color:#2B1D12">วิธีตั้งค่าครั้งแรก</div>
-        <div>1. เปิด Google Sheet → ส่วนขยาย → Apps Script แล้ววางโค้ดจากไฟล์ <b>apps-script/Code.gs</b></div>
-        <div>2. แก้ค่า TOKEN ในโค้ด แล้วกด ทำให้ใช้งานได้ → เว็บแอป (สิทธิ์: ทุกคน)</div>
-        <div>3. คัดลอก URL ที่ลงท้ายด้วย /exec มาวางด้านบน พร้อม Token เดียวกัน</div>
-        <div>4. กด "ดึงข้อมูลจาก Sheet" เพื่อทดสอบการเชื่อมต่อ</div>
-      </div>
-    </div>
-  </sc-if>
-
-  <div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;z-index:20;padding:8px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(247,241,230,.94);backdrop-filter:blur(12px);border-top:1px solid #E6D8C3;display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
-    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+  <div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;z-index:20;padding:8px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(247,241,230,.94);backdrop-filter:blur(12px);border-top:1px solid #E6D8C3;display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
       <button onClick="{{ t.on }}" style="height:54px;border-radius:16px;border:none;background:{{ t.bg }};color:{{ t.fg }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:600 12px 'IBM Plex Sans Thai',sans-serif">
         <span style="width:22px;height:4px;border-radius:999px;background:{{ t.bar }}"></span>{{ t.label }}
       </button>
@@ -381,12 +346,46 @@ a{color:#9A520F}a:hover{color:#6E3A08}
   <div style="position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:80;max-width:calc(100% - 32px);padding:12px 18px;border-radius:14px;background:#2B1D12;color:#F7F1E6;font:500 14px 'IBM Plex Sans Thai',sans-serif;box-shadow:0 10px 30px -10px rgba(0,0,0,.4);animation:pop .2s ease-out">{{ toast }}</div>
 </sc-if>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;useDemoData&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;ข้อมูล&quot;},&quot;requireIdChecksum&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;ข้อมูล&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;useDemoData&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;ข้อมูล&quot;},&quot;requireIdChecksum&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;ข้อมูล&quot;}}">
 const LS = 'pakchom-hc-v1';
 // วาง Apps Script Web App URL (ลงท้าย /exec) และ Token ที่นี่ เพื่อให้ทุกเครื่องเชื่อมต่อ Google Sheet อัตโนมัติ
-const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbymHzhKrvOun1rR3IMwRXWWPCNP_jl5V8qmgzGQQAg_4xGvtGwPGv8O0qxeffYWwyNZeQ/exec';
-const DEFAULT_TOKEN = '11032';
+const DEFAULT_SCRIPT_URL = '';
+const DEFAULT_TOKEN = 'pakchom2569';
 const AUTO_SYNC_MS = 30000;
+// ลิงก์ Google Sheet ที่เผยแพร่ทางเว็บ (ไฟล์ → แชร์ → เผยแพร่ทางเว็บ) ใช้ดึงข้อมูลแสดงผลแบบ CSV
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTAW-i0KiYamtB6joElxBQFZReqBGi0hwnmJsXbLHkW73s8h9ZccKc7d9NWx9wF81UQNFUBdA_hnJjJ/pub?output=csv';
+function parseCsv(text) {
+  const rows = []; let row = [], cur = '', q = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) { if (c === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += c; }
+    else if (c === '"') q = true;
+    else if (c === ',') { row.push(cur); cur = ''; }
+    else if (c === '\n' || c === '\r') { if (c === '\r' && text[i + 1] === '\n') i++; row.push(cur); rows.push(row); row = []; cur = ''; }
+    else cur += c;
+  }
+  if (cur || row.length) { row.push(cur); rows.push(row); }
+  return rows.filter(r => r.some(x => x.trim()));
+}
+function parseTs(v) {
+  v = String(v || '').trim(); if (!v) return '';
+  if (/^\d{4}-\d{2}-\d{2}/.test(v)) { const d = new Date(v); return isNaN(d) ? '' : d.toISOString(); }
+  const m = v.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:[ ,T]+(\d{1,2}):(\d{2})(?::(\d{2}))?)?/);
+  if (m) {
+    let a = +m[1], b = +m[2], y = +m[3]; if (y > 2400) y -= 543;
+    let d = a, mo = b; if (b > 12 && a <= 12) { d = b; mo = a; }
+    return new Date(y, mo - 1, d, +(m[4] || 0), +(m[5] || 0), +(m[6] || 0)).toISOString();
+  }
+  const d = new Date(v); return isNaN(d) ? '' : d.toISOString();
+}
+function csvToRows(text) {
+  const t = parseCsv(text.replace(/^\ufeff/, '')); if (t.length < 2) return [];
+  const H = t[0].map(x => x.trim());
+  const col = (names, fb) => { for (const n of names) { const i = H.indexOf(n); if (i >= 0) return i; } return fb; };
+  const c = { ts: col(['Timestamp'], 0), queue: col(['เลขคิว'], -1), id: col(['เลขประจำตัวประชาชน'], 2), name: col(['ชื่อ-นามสกุล'], 3), gender: col(['เพศ'], 4), dob: col(['วัน/เดือน/ปี เกิด', 'วัน/เดือน/ปีเกิด'], 5), nat: col(['สัญชาติ'], 6), blood: col(['หมู่เลือด'], 7), addr: col(['ข้อมูลที่อยู่(ปัจจุบัน)', 'ที่อยู่ปัจจุบัน', 'ข้อมูลที่อยู่'], 8), prov: col(['จังหวัด'], 9), amph: col(['อำเภอ'], 10), tam: col(['ตำบล'], 11), phone: col(['หมายเลขโทรศัพท์'], 12) };
+  const g = (r, i) => (i >= 0 && r[i] != null ? String(r[i]).trim().replace(/^'/, '') : '');
+  return t.slice(1).filter(r => g(r, c.id)).map(r => ({ timestamp: parseTs(g(r, c.ts)), queue: g(r, c.queue), idCard: g(r, c.id), fullName: g(r, c.name), gender: g(r, c.gender), dob: g(r, c.dob), nationality: g(r, c.nat), blood: g(r, c.blood), address: g(r, c.addr), province: g(r, c.prov), amphoe: g(r, c.amph), tambon: g(r, c.tam), phone: g(r, c.phone) }));
+}
 const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1iyxRCc532s3NlFGmMoEkWqnautD9RrXQz4nvPUEY9pc/edit';
 const EVENT = new Date(2026, 11, 12);
 const MONTHS = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
@@ -475,7 +474,7 @@ class Component extends DCLogic {
   demo = makeDemo();
   state = {
     screen: 'dash', records: saved.records || [], remote: saved.remote || [],
-    settings: (() => { const x = Object.assign({ scriptUrl: '', token: '', pin: '1234' }, saved.settings || {}); if (!x.scriptUrl) x.scriptUrl = DEFAULT_SCRIPT_URL; if (!x.token) x.token = DEFAULT_TOKEN; return x; })(),
+    settings: (() => { const x = Object.assign({ scriptUrl: '', token: '', pin: '1234' }, saved.settings || {}); if (DEFAULT_SCRIPT_URL) x.scriptUrl = DEFAULT_SCRIPT_URL; if (DEFAULT_TOKEN) x.token = DEFAULT_TOKEN; return x; })(),
     hideDemo: !!saved.hideDemo, lastSync: saved.lastSync || '',
     form: blank(), touched: false, catFilter: 'all', search: '', detail: null, picker: null, pickerQ: '',
     toast: '', geo: LOCAL_GEO, kiosk: false, kStep: 0, kTouched: false, countdown: 0, pinOpen: false, pinVal: '', pinErr: false, success: null, pulling: false
@@ -496,8 +495,8 @@ class Component extends DCLogic {
   }
   componentWillUnmount() { clearInterval(this.timer); clearInterval(this.syncTimer); clearTimeout(this.tt); window.removeEventListener('online', this.onOnline); document.removeEventListener('visibilitychange', this.onVis); }
   autoSync() {
-    const s = this.state; if (!s.settings.scriptUrl || s.pulling) return;
-    const p = s.records.filter(r => r.sync !== 'synced'); if (p.length) this.push(p);
+    const s = this.state;
+    if (s.settings.scriptUrl) { const p = s.records.filter(r => r.sync !== 'synced'); if (p.length) this.push(p); }
     this.pull(true);
   }
   componentDidUpdate() {
@@ -506,7 +505,7 @@ class Component extends DCLogic {
   }
 
   showToast(t, ms) { clearTimeout(this.tt); this.setState({ toast: t }); this.tt = setTimeout(() => this.setState({ toast: '' }), ms || 2800); }
-  useDemo() { return this.props.useDemoData !== false && !this.state.hideDemo; }
+  useDemo() { return this.props.useDemoData === true; }
   all() {
     const s = this.state; const rids = new Set(s.remote.map(r => r.idCard));
     const local = s.records.filter(r => !(r.sync === 'synced' && rids.has(r.idCard)));
@@ -551,18 +550,17 @@ class Component extends DCLogic {
     });
   }
   pull(silent) {
-    const { scriptUrl, token } = this.state.settings;
-    if (!scriptUrl) { this.showToast('กรุณาใส่ Apps Script URL ก่อน'); return; }
+    if (this.state.pulling) return;
     this.setState({ pulling: true });
-    fetch(scriptUrl + (scriptUrl.includes('?') ? '&' : '?') + 'action=list&token=' + encodeURIComponent(token))
-      .then(r => r.json()).then(j => {
-        if (!j.ok) throw new Error(j.error || 'error');
-        const remote = (j.rows || []).map(fromRow);
-        this.setState({ remote, pulling: false, lastSync: new Date().toISOString() });
+    fetch(CSV_URL + '&t=' + Date.now(), { cache: 'no-store' })
+      .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+      .then(text => {
+        const remote = csvToRows(text).map(fromRow).map((x, k) => ({ ...x, queue: x.queue || 'PC-' + String(k + 1).padStart(4, '0') }));
+        this.setState({ remote, pulling: false, lastSync: new Date().toISOString(), pullErr: false });
         if (!silent) this.showToast('ดึงข้อมูลสำเร็จ ' + remote.length + ' รายการ');
-      }).catch(err => { this.setState({ pulling: false }); if (!silent) this.showToast('เชื่อมต่อไม่สำเร็จ: ' + (err.message || 'ตรวจสอบ URL / Token')); });
+      })
+      .catch(err => { this.setState({ pulling: false, pullErr: true }); if (!silent) this.showToast('ดึงข้อมูลไม่สำเร็จ: ' + (err.message || '')); });
   }
-
   openPicker(field) {
     const f = this.state.form;
     if (field === 'province') return;
@@ -690,7 +688,7 @@ class Component extends DCLogic {
     const listAll = [...filtered].sort((a, b) => String(b.ts).localeCompare(String(a.ts))).filter(r => !q || [fullName(r), r.idCard, r.queue, r.tambon, r.amphoe, r.phone].join(' ').toLowerCase().includes(q.replace(/-/g, '')) || fullName(r).includes(s.search.trim()));
     const listRows = listAll.slice(0, 200).map(r => this.rowView(r));
 
-    const tabsDef = [['dash', 'ภาพรวม'], ['form', 'ลงทะเบียน'], ['list', 'รายชื่อ'], ['settings', 'ตั้งค่า']];
+    const tabsDef = [['dash', 'ภาพรวม'], ['form', 'ลงทะเบียน'], ['list', 'รายชื่อ']];
     const tabs = tabsDef.map(([k, l]) => ({ label: l, on: () => { this.setState({ screen: k }); window.scrollTo(0, 0); }, bg: s.screen === k ? '#2B1D12' : 'transparent', fg: s.screen === k ? '#F7F1E6' : '#6F5A4A', bar: s.screen === k ? '#D9822B' : 'transparent' }));
 
     const titleChips = TITLES.map(t => this.chip(f.title === t.label, t.label, () => this.pickTitle(t)));
@@ -739,7 +737,7 @@ class Component extends DCLogic {
       gender: { male, female, malePct: mp }, genderRing: 'conic-gradient(#D9822B 0 ' + mp + '%, #A8998A ' + mp + '% 100%)',
       kpi: { total: filtered.length, today: filtered.filter(r => new Date(r.ts).toDateString() === todayStr).length, senior, seniorPct: filtered.length ? Math.round(senior / n * 100) : 0, pending, pendingColor: pending ? '#9A520F' : '#2B1D12' },
       daysLeft: Math.max(0, Math.ceil((EVENT - base) / 864e5)),
-      sheetDot: connected ? '#6FCF97' : '#E8B44E', sheetStatus: connected ? (s.pulling ? 'กำลังซิงก์กับ Google Sheet…' : 'เชื่อมต่อ Google Sheet อัตโนมัติ' + (s.lastSync ? ' · ' + new Date(s.lastSync).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) : '')) : 'ยังไม่เชื่อมต่อ Google Sheet — บันทึกในเครื่อง',
+      sheetDot: s.pullErr ? '#E57373' : s.lastSync ? '#6FCF97' : '#E8B44E', sheetStatus: s.pulling && !s.lastSync ? 'กำลังดึงข้อมูลจาก Google Sheet…' : s.pullErr ? 'ดึงข้อมูลไม่สำเร็จ — แสดงข้อมูลล่าสุดในเครื่อง' : s.lastSync ? 'ข้อมูลจาก Google Sheet · อัปเดต ' + new Date(s.lastSync).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) + ' น.' : 'กำลังเชื่อมต่อ Google Sheet…',
       goList: () => this.setState({ screen: 'list' }),
       f, fv: { idCard: fmtId(f.idCard), phone: fmtPhone(f.phone) }, err: errs, has, bc,
       progress: Math.round(filled / 14 * 100), titleChips, genderChips, natChips, bloodChips, dobPickers, geoPickers, kGeoPickers,
