@@ -74,7 +74,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
           <div style="font:600 12px 'Sarabun',sans-serif;color:#C4661A;margin-top:6px">ดูรายชื่อ ›</div>
         </button>
         <button onClick="{{ kpiSenior }}" style="text-align:left;background:#FFFDF8;border:1px solid #E6D8C3;border-radius:20px;padding:14px;display:flex;flex-direction:column" style-hover="border-color:#D9822B">
-          <div style="font:500 12px 'Sarabun',sans-serif;color:#6F5A4A"><svg width="16" height="16" viewBox="0 0 24 24" style="display:inline-block;vertical-align:-3px;flex:none" aria-label="นักบวช"><circle cx="12" cy="6.5" r="4" fill="#E8C9A3" stroke="#6E3A08" stroke-width="1.2"></circle><path d="M4 22c0-6 3.6-9.5 8-9.5s8 3.5 8 9.5z" fill="#D9822B" stroke="#6E3A08" stroke-width="1.2" stroke-linejoin="round"></path><path d="M8.2 13.4L16.5 22" stroke="#9A520F" stroke-width="2.2" stroke-linecap="round"></path></svg><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">🧓</span> อายุ 60+</div>
+          <div style="font:500 12px 'Sarabun',sans-serif;color:#6F5A4A"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">🧓</span> อายุ 60+</div>
           <div style="font:700 34px/1.1 'Pridi',sans-serif;color:#2B1D12;margin-top:4px">{{ kpi.senior }}</div>
           <div style="font:500 12px 'Sarabun',sans-serif;color:#6F5A4A;margin-top:2px">{{ kpi.seniorPct }}% ของทั้งหมด</div>
           <div style="font:600 12px 'Sarabun',sans-serif;color:#C4661A;margin-top:6px">ดูรายชื่อ ›</div>
@@ -110,7 +110,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
         <div style="font:600 16px 'Pridi',sans-serif"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">📍</span> พื้นที่ (อำเภอ / ตำบล)</div>
         <sc-for list="{{ areas }}" as="a" hint-placeholder-count="3">
           <div style="display:flex;flex-direction:column;gap:8px">
-            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="display:flex;align-items:baseline;gap:8px"><span style="font:700 15px 'Pridi',sans-serif;color:#2B1D12">{{ a.label }}</span><span style="font:700 16px 'Pridi',sans-serif;color:#2F6B4F">({{ a.count }} <span style="font:700 13px 'Sarabun',sans-serif">รูป</span>)</span></span><span style="font:500 12px 'Sarabun',sans-serif;color:#6F5A4A">{{ a.pct }}%</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="display:flex;align-items:baseline;gap:8px"><span style="font:700 15px 'Pridi',sans-serif;color:#2B1D12">{{ a.label }}</span><span style="font-family:'Pridi',sans-serif;font-size:15px;font-weight:700;color:#1F4D38">{{ a.count }} <b style="font-family:'Pridi',sans-serif;font-weight:700">รูป</b></span></span><span style="font:500 12px 'Sarabun',sans-serif;color:#6F5A4A">{{ a.pct }}%</span></div>
             <div style="height:8px;border-radius:999px;background:#EFE6D6;overflow:hidden"><div style="height:100%;width:{{ a.w }}%;background:#2F6B4F;border-radius:999px"></div></div>
             <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px">
               <sc-for list="{{ a.tambons }}" as="t" hint-placeholder-count="3">
