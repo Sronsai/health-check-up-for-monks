@@ -18,6 +18,7 @@ body{margin:0;background:#EDE3D2;font-family:'Sarabun',sans-serif;color:#2B1D12;
 button{font-family:inherit;cursor:pointer}
 input,textarea{font-family:inherit}
 a{color:#9A520F}a:hover{color:#6E3A08}
+@keyframes hopChar{0%,40%,100%{transform:translateY(0)}20%{transform:translateY(-4px)}}
 @keyframes blinkNum{0%,100%{opacity:1}50%{opacity:.15}}
 @media (prefers-reduced-motion:reduce){*{animation-duration:0s!important}}
 @keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
@@ -32,7 +33,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
       <div style="font:500 12px/1.4 'Sarabun',sans-serif;color:#6F5A4A">โรงพยาบาลปากชม · จังหวัดเลย</div>
       <div style="font:700 16px/1.3 'Pridi',sans-serif;color:#2B1D12;text-wrap:pretty">ตรวจสุขภาพพระสงฆ์ สามเณร แม่ชี</div>
     </div>
-    <button onClick="{{ goForm }}" style="flex:none;height:40px;padding:0 16px 0 12px;border-radius:999px;border:1.5px solid #2B1D12;background:#2B1D12;color:#F7F1E6;font:600 14px 'Pridi',sans-serif;display:flex;align-items:center;gap:6px" style-hover="background:#4A3322"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;flex:none"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M12 18v-6M9 15h6"></path></svg><span>ลงทะเบียน</span></button>
+    <button onClick="{{ goForm }}" style="flex:none;height:40px;padding:0 16px 0 12px;border-radius:999px;border:1.5px solid #2B1D12;background:#2B1D12;color:#F7F1E6;font:600 14px 'Pridi',sans-serif;display:flex;align-items:center;gap:6px" style-hover="background:#4A3322"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;flex:none"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M12 18v-6M9 15h6"></path></svg><span style="display:inline-flex;align-items:flex-end;line-height:1.2" aria-label="ลงทะเบียน"><span style="display:inline-block;animation:hopChar 2.4s ease-in-out infinite;animation-delay:0.00s">ล</span><span style="display:inline-block;animation:hopChar 2.4s ease-in-out infinite;animation-delay:0.12s">ง</span><span style="display:inline-block;animation:hopChar 2.4s ease-in-out infinite;animation-delay:0.24s">ท</span><span style="display:inline-block;animation:hopChar 2.4s ease-in-out infinite;animation-delay:0.36s">ะ</span><span style="display:inline-block;animation:hopChar 2.4s ease-in-out infinite;animation-delay:0.48s">เ</span><span style="display:inline-block;animation:hopChar 2.4s ease-in-out infinite;animation-delay:0.60s">บี</span><span style="display:inline-block;animation:hopChar 2.4s ease-in-out infinite;animation-delay:0.72s">ย</span><span style="display:inline-block;animation:hopChar 2.4s ease-in-out infinite;animation-delay:0.84s">น</span></span></button>
   </div>
 
   <sc-if value="{{ isDash }}" hint-placeholder-val="{{ true }}">
@@ -55,7 +56,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
         </div>
         <div style="flex:none;width:92px;border-radius:18px;background:#D9822B;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#fff">
           <div style="font:500 12px 'Sarabun',sans-serif">อีก</div>
-          <div style="font:700 36px/1 'Pridi',sans-serif;animation:blinkNum 1.2s ease-in-out infinite">{{ daysLeft }}</div>
+          <div style="font:700 36px/1 'Pridi',sans-serif;animation:blinkNum 2.4s ease-in-out infinite">{{ daysLeft }}</div>
           <div style="font:500 12px 'Sarabun',sans-serif">วัน</div>
         </div>
       </div>
@@ -405,18 +406,21 @@ a{color:#9A520F}a:hover{color:#6E3A08}
 
 <sc-if value="{{ detailOpen }}" hint-placeholder-val="{{ false }}">
   <div onClick="{{ closeDetail }}" style="position:fixed;inset:0;z-index:55;background:rgba(43,29,18,.5);display:flex;align-items:flex-end;justify-content:center">
-    <div onClick="{{ stop }}" style="width:100%;max-width:480px;max-height:85vh;overflow:auto;background:#FFFDF8;border-radius:28px 28px 0 0;padding:20px;display:flex;flex-direction:column;gap:14px;animation:pop .2s ease-out">
-      <div style="display:flex;align-items:center;gap:12px">
+    <div onClick="{{ stop }}" style="width:100%;max-width:480px;max-height:92vh;max-height:92dvh;background:#FFFDF8;border-radius:28px 28px 0 0;display:flex;flex-direction:column;overflow:hidden;animation:pop .2s ease-out">
+      <div style="width:44px;height:5px;border-radius:999px;background:#D5C6B0;margin:10px auto 0;flex:none"></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:12px 20px 14px;border-bottom:1px solid #F0E6D6;flex:none">
         <div style="width:52px;height:52px;border-radius:16px;background:{{ detail.color }};color:{{ detail.fg }};border:1.5px solid {{ detail.bd }};display:grid;place-items:center;font:700 13px 'Pridi',sans-serif">{{ detail.q }}</div>
         <div style="flex:1;min-width:0"><div style="font:700 19px/1.3 'Pridi',sans-serif">{{ detail.name }}</div><div style="font:500 13px 'Sarabun',sans-serif;color:#6F5A4A">{{ detail.cat }} · {{ detail.sync }}</div></div>
         <button onClick="{{ closeDetail }}" style="height:40px;padding:0 14px;border-radius:999px;border:1.5px solid #E6D8C3;background:transparent;font:600 14px 'Sarabun',sans-serif;color:#6F5A4A">ปิด</button>
       </div>
-      <div style="border:1px solid #E6D8C3;border-radius:18px;overflow:hidden">
+      <div style="flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none;padding:14px 20px calc(24px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:14px">
+      <div style="border:1px solid #E6D8C3;border-radius:18px;overflow:hidden;flex:none">
         <sc-for list="{{ detail.rows }}" as="r" hint-placeholder-count="10">
-          <div style="display:flex;gap:12px;padding:11px 14px;border-bottom:1px solid #F0E6D6"><div style="width:120px;flex:none;font:500 13px 'Sarabun',sans-serif;color:#6F5A4A">{{ r.k }}</div><div style="flex:1;font:600 14px/1.5 'Sarabun',sans-serif">{{ r.v }}</div></div>
+          <div style="display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:12px;align-items:baseline;padding:12px 16px;border-bottom:1px solid #F0E6D6"><div style="font:500 13.5px/1.5 'Sarabun',sans-serif;color:#6F5A4A;text-wrap:pretty">{{ r.k }}</div><div style="font:600 15px/1.5 'Sarabun',sans-serif;color:#2B1D12;word-break:break-word;text-wrap:pretty">{{ r.v }}</div></div>
         </sc-for>
       </div>
-      <button onClick="{{ detail.edit }}" style="height:54px;border-radius:16px;border:none;background:#D9822B;color:#fff;font:700 16px 'Pridi',sans-serif" style-hover="background:#C4721F">แก้ไขข้อมูล</button>
+      <button onClick="{{ detail.edit }}" style="height:54px;flex:none;border-radius:16px;border:none;background:#D9822B;color:#fff;font:700 16px 'Pridi',sans-serif" style-hover="background:#C4721F">แก้ไขข้อมูล</button>
+      </div>
     </div>
   </div>
 </sc-if>
@@ -783,7 +787,7 @@ class Component extends DCLogic {
     const a = ageOf(r); const cat = catOf(r);
     return {
       q: CAT_SHORT[cat], color: cat === 'แม่ชี' ? '#FFFFFF' : CAT_COLORS[cat], bd: cat === 'แม่ชี' ? '#A8998A' : 'transparent', fg: cat === 'อื่น ๆ' ? '#FFFFFF' : '#5A3515', name: maskName(r),
-      meta: [a != null ? 'อายุ ' + a : null, r.blood ? 'หมู่เลือด ' + r.blood : null, r.tambon ? 'ต.' + r.tambon : null].filter(Boolean).join(' · '),
+      meta: [a != null ? 'อายุ ' + a : null, r.blood ? 'หมู่เลือด ' + r.blood : null, [r.tambon ? 'ต.' + r.tambon : '', r.amphoe ? 'อ.' + r.amphoe : '', r.province ? 'จ.' + r.province : ''].filter(Boolean).join(' ') || null].filter(Boolean).join(' · '),
       time: r.ts ? new Date(r.ts).toLocaleString('th-TH', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '',
       syncLabel: r.demo ? 'ตัวอย่าง' : r.sync === 'synced' ? 'ส่งแล้ว' : 'รอส่ง',
       syncBg: r.demo ? '#EFE6D6' : r.sync === 'synced' ? '#E1EEE6' : '#FBE9D2', syncFg: r.demo ? '#6F5A4A' : r.sync === 'synced' ? '#2F6B4F' : '#6E3A08',
@@ -875,7 +879,7 @@ class Component extends DCLogic {
     const d = s.detail;
     const detail = d ? {
       ...this.rowView(d), edit: () => this.startEdit(d), cat: catOf(d), sync: d.demo ? 'ข้อมูลตัวอย่าง' : d.sync === 'synced' ? 'บันทึกใน Google Sheet แล้ว' : 'รอส่งเข้า Google Sheet',
-      rows: [['วันที่ลงทะเบียน', new Date(d.ts).toLocaleString('th-TH')], ['เลขประจำตัวประชาชน', fmtId(String(d.idCard || '').slice(0, -3) + 'xxx')], ['เพศ', d.gender], ['ชื่อบิดา', maskPlain(d.fatherName)], ['ชื่อมารดา', maskPlain(d.motherName)], ['วัน/เดือน/ปี เกิด', dobStr(d) + (ageOf(d) != null ? ' (อายุ ' + ageOf(d) + ' ปี)' : '')], ['สัญชาติ', d.nationality], ['หมู่เลือด', d.blood], ['ที่อยู่ปัจจุบัน', d.address], ['ตำบล', d.tambon], ['อำเภอ', d.amphoe], ['จังหวัด', d.province], ['โทรศัพท์', d.phone ? fmtPhone(String(d.phone).slice(0, -3) + 'xxx') : '']].map(([k, v]) => ({ k, v: v || '—' }))
+      rows: [['วันที่ลงทะเบียน', new Date(d.ts).toLocaleString('th-TH')], ['เลขประจำตัวประชาชน', fmtId(String(d.idCard || '').slice(0, -3) + 'xxx')], ['เพศ', d.gender], ['วัน/เดือน/ปี เกิด', dobStr(d) + (ageOf(d) != null ? ' (อายุ ' + ageOf(d) + ' ปี)' : '')], ['สัญชาติ', d.nationality], ['หมู่เลือด', d.blood], ['ที่อยู่ปัจจุบัน', d.address], ['ตำบล / อำเภอ / จังหวัด', [d.tambon ? 'ต.' + d.tambon : '', d.amphoe ? 'อ.' + d.amphoe : '', d.province ? 'จ.' + d.province : ''].filter(Boolean).join(' ')], ['โทรศัพท์', d.phone ? fmtPhone(String(d.phone).slice(0, -3) + 'xxx') : '']].map(([k, v]) => ({ k, v: v || '—' }))
     } : { rows: [] };
 
     const connected = !!s.settings.scriptUrl;
