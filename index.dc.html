@@ -18,6 +18,8 @@ body{margin:0;background:#EDE3D2;font-family:'Sarabun',sans-serif;color:#2B1D12;
 button{font-family:inherit;cursor:pointer}
 input,textarea{font-family:inherit}
 a{color:#9A520F}a:hover{color:#6E3A08}
+@keyframes blinkNum{0%,100%{opacity:1}50%{opacity:.15}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:0s!important}}
 @keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
 </style>
 </helmet>
@@ -30,7 +32,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
       <div style="font:500 12px/1.4 'Sarabun',sans-serif;color:#6F5A4A">โรงพยาบาลปากชม · จังหวัดเลย</div>
       <div style="font:700 16px/1.3 'Pridi',sans-serif;color:#2B1D12;text-wrap:pretty">ตรวจสุขภาพพระสงฆ์ สามเณร แม่ชี</div>
     </div>
-    <button onClick="{{ goForm }}" style="flex:none;height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #2B1D12;background:#2B1D12;color:#F7F1E6;font:600 14px 'Pridi',sans-serif" style-hover="background:#4A3322">ลงทะเบียน</button>
+    <button onClick="{{ goForm }}" style="flex:none;height:40px;padding:0 16px 0 12px;border-radius:999px;border:1.5px solid #2B1D12;background:#2B1D12;color:#F7F1E6;font:600 14px 'Pridi',sans-serif;display:flex;align-items:center;gap:6px" style-hover="background:#4A3322"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;flex:none"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M12 18v-6M9 15h6"></path></svg><span>ลงทะเบียน</span></button>
   </div>
 
   <sc-if value="{{ isDash }}" hint-placeholder-val="{{ true }}">
@@ -53,7 +55,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
         </div>
         <div style="flex:none;width:92px;border-radius:18px;background:#D9822B;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#fff">
           <div style="font:500 12px 'Sarabun',sans-serif">อีก</div>
-          <div style="font:700 36px/1 'Pridi',sans-serif">{{ daysLeft }}</div>
+          <div style="font:700 36px/1 'Pridi',sans-serif;animation:blinkNum 1.2s ease-in-out infinite">{{ daysLeft }}</div>
           <div style="font:500 12px 'Sarabun',sans-serif">วัน</div>
         </div>
       </div>
@@ -108,7 +110,7 @@ a{color:#9A520F}a:hover{color:#6E3A08}
         <div style="font:600 16px 'Pridi',sans-serif"><span style="font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-weight:400">📍</span> พื้นที่ (อำเภอ / ตำบล)</div>
         <sc-for list="{{ areas }}" as="a" hint-placeholder-count="3">
           <div style="display:flex;flex-direction:column;gap:8px">
-            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font:700 15px 'Pridi',sans-serif;color:#2B1D12">{{ a.label }}</span><span style="font:700 16px 'Pridi',sans-serif;color:#2B1D12">{{ a.count }} <span style="font:500 12px 'Sarabun',sans-serif;color:#6F5A4A">{{ a.pct }}%</span></span></div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="display:flex;align-items:baseline;gap:8px"><span style="font:700 15px 'Pridi',sans-serif;color:#2B1D12">{{ a.label }}</span><span style="font:700 16px 'Pridi',sans-serif;color:#2F6B4F">({{ a.count }} <span style="font:700 13px 'Sarabun',sans-serif">รูป</span>)</span></span><span style="font:500 12px 'Sarabun',sans-serif;color:#6F5A4A">{{ a.pct }}%</span></div>
             <div style="height:8px;border-radius:999px;background:#EFE6D6;overflow:hidden"><div style="height:100%;width:{{ a.w }}%;background:#2F6B4F;border-radius:999px"></div></div>
             <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px">
               <sc-for list="{{ a.tambons }}" as="t" hint-placeholder-count="3">
